@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Casalty Website — Case Study · Ana K.</title>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --cream: #f4f1eb;
+    --black: #0e0e0e;
+    --forest: #2c4a35;
+    --serif: 'Instrument Serif', Georgia, serif;
+    --sans: 'DM Sans', sans-serif;
+  }
+  html { scroll-behavior: smooth; }
+  body { font-family: var(--sans); background: var(--cream); color: var(--black); overflow-x: hidden; }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: var(--cream); border-bottom: 1px solid rgba(0,0,0,0.07);
+    padding: 0 48px; display: flex; justify-content: center;
+  }
+  .nav-inner {
+    width: 100%; max-width: 1200px;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 18px 0;
+  }
+  .logo { font-family: var(--serif); font-size: 1.5rem; letter-spacing: 0.04em; text-decoration: none; color: var(--black); }
+  .nav-links { display: flex; gap: 28px; list-style: none; }
+  .nav-links a { font-size: 0.8rem; text-decoration: none; color: var(--black); opacity: 0.55; letter-spacing: 0.04em; transition: opacity 0.2s; }
+  .nav-links a:hover { opacity: 1; }
+
+  /* HERO TEXT */
+  .hero-text { padding: 140px 48px 48px; text-align: center; max-width: 1200px; margin: 0 auto; }
+  .hero-text h1 { font-family: var(--serif); font-size: clamp(2rem, 4vw, 3.2rem); font-weight: 400; line-height: 1.15; margin-bottom: 20px; letter-spacing: -0.01em; }
+  .hero-text p { font-size: 0.85rem; line-height: 1.7; opacity: 0.55; max-width: 520px; margin: 0 auto 32px; }
+  .hero-btns { display: flex; gap: 12px; justify-content: center; }
+  .hero-pills { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
+  .pill { padding: 8px 22px; border: 1px solid rgba(0,0,0,0.15); border-radius: 100px; font-size: 0.8rem; color: var(--black); font-family: var(--sans); letter-spacing: 0.01em; }
+
+  /* HERO IMAGE */
+  .hero-single-img {
+    width: 1100px; max-width: calc(100% - 96px); height: 662px;
+    margin: 40px auto 0; border-radius: 10px; overflow: hidden;
+    background: #c8d4cc; display: flex;
+  }
+  .hero-single-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+  /* WRAP */
+  .wrap { max-width: 1200px; margin: 0 auto; padding: 0 48px; }
+  .divider { border: none; border-top: 1px solid rgba(0,0,0,0.09); margin: 0; }
+
+  /* CARD */
+  .cs-card {
+    background: rgba(255,255,255,0.4);
+    border: 1px solid rgba(0,0,0,0.08);
+    border-radius: 10px;
+    padding: 56px;
+    margin-bottom: 48px;
+  }
+
+  /* CARD TEXT BLOCKS */
+  .logo-typo-block { padding: 40px 0; }
+  .logo-typo-block:first-child { border-bottom: 1px solid rgba(0,0,0,0.08); }
+  .logo-typo-block h2 { font-family: var(--serif); font-size: 1.9rem; font-weight: 400; margin-bottom: 16px; }
+  .logo-typo-block h2 em { font-style: italic; color: #c5bff5; }
+  .logo-typo-block p { font-size: 0.92rem; line-height: 1.8; max-width: 860px; }
+
+  /* SECTION TITLES */
+  .section-title {
+    font-family: var(--serif);
+    font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+    font-weight: 400;
+    text-align: center;
+    margin-bottom: 16px;
+  }
+  .section-title em { font-style: italic; color: #c5bff5; }
+  .section-intro {
+    font-size: 0.9rem; line-height: 1.8; opacity: 0.6;
+    max-width: 580px; margin: 0 auto 48px;
+    text-align: center;
+  }
+
+  /* CHALLENGE CARD */
+  .challenge-card h2 { font-family: var(--serif); font-size: 2rem; font-weight: 400; margin-bottom: 20px; }
+  .challenge-card h2 em { font-style: italic; color: #c5bff5; }
+  .challenge-card p { font-size: 0.92rem; line-height: 1.85; opacity: 0.8; margin-bottom: 10px; }
+
+  /* OBJECTIVE CARD */
+  .obj-card h2 { font-family: var(--serif); font-size: 2rem; font-weight: 400; margin-bottom: 20px; }
+  .obj-list { list-style: none; display: flex; flex-direction: column; gap: 10px; margin-top: 8px; }
+  .obj-list li { font-size: 0.92rem; line-height: 1.6; padding-left: 18px; position: relative; opacity: 0.8; }
+  .obj-list li::before { content: '•'; position: absolute; left: 0; opacity: 0.5; }
+
+  /* RESULTS CARD — 2 columns */
+  .results-card h2 { font-family: var(--serif); font-size: 2rem; font-weight: 400; margin-bottom: 8px; }
+  .results-intro { font-size: 0.92rem; line-height: 1.7; opacity: 0.7; margin-bottom: 32px; }
+  .results-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
+  .results-col h3 { font-size: 0.68rem; letter-spacing: 0.12em; text-transform: uppercase; opacity: 0.35; font-weight: 500; margin-bottom: 16px; }
+  .results-col ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+  .results-col ul li { font-size: 0.9rem; line-height: 1.6; padding-left: 18px; position: relative; opacity: 0.75; }
+  .results-col ul li::before { content: '•'; position: absolute; left: 0; opacity: 0.4; }
+
+  /* IMAGE SLOTS */
+  .img-slot {
+    width: 100%; border-radius: 10px; overflow: hidden;
+    background: #c8d4cc; display: flex; margin-bottom: 48px;
+  }
+  .img-slot img { width: 100%; height: auto; display: block; }
+
+  /* IMAGE GRID */
+  .img-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 16px; }
+  .img-grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; margin-bottom: 16px; }
+  .img-grid-4 { display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 12px; margin-bottom: 16px; }
+
+  /* PLACEHOLDER */
+  .ph { width: 100%; flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px; }
+  .ph svg { opacity: 0.2; }
+  .ph span { font-size: 0.6rem; letter-spacing: 0.1em; text-transform: uppercase; opacity: 0.35; font-weight: 500; }
+
+  /* COPYWRITING LIST */
+  .copy-list { list-style: none; display: flex; flex-direction: column; gap: 8px; margin-top: 16px; }
+  .copy-list li { font-size: 0.9rem; line-height: 1.6; padding-left: 18px; position: relative; opacity: 0.75; }
+  .copy-list li::before { content: '•'; position: absolute; left: 0; opacity: 0.4; }
+  .num-list { list-style: none; display: flex; flex-direction: column; gap: 10px; margin-top: 16px; }
+  .num-list li { font-size: 0.9rem; line-height: 1.6; padding-left: 28px; position: relative; opacity: 0.75; counter-increment: num; }
+  .num-list li::before { content: counter(num) '.'; position: absolute; left: 0; opacity: 0.4; font-size: 0.85rem; }
+  .num-list { counter-reset: num; }
+
+  /* BRAND 2x2 GRID */
+  .brand-grid-2x2 { display: grid; grid-template-columns: 1fr 1fr; gap: 0; border: 1px solid rgba(0,0,0,0.1); border-radius: 10px; overflow: hidden; }
+  .brand-card { background: rgba(255,255,255,0.4); padding: 40px 48px; display: flex; flex-direction: column; gap: 16px; min-height: 180px; }
+  .brand-card:nth-child(1) { border-right: 1px solid rgba(0,0,0,0.1); border-bottom: 1px solid rgba(0,0,0,0.1); }
+  .brand-card:nth-child(2) { border-bottom: 1px solid rgba(0,0,0,0.1); }
+  .brand-card:nth-child(3) { border-right: 1px solid rgba(0,0,0,0.1); }
+  .brand-card h3 { font-family: var(--serif); font-size: 1.3rem; font-weight: 400; }
+  .brand-card p, .brand-card ul { font-size: 0.9rem; line-height: 1.7; opacity: 0.7; }
+  .brand-card ul { list-style: none; display: flex; flex-direction: column; gap: 6px; padding: 0; }
+  .brand-card ul li { padding-left: 14px; position: relative; }
+  .brand-card ul li::before { content: '•'; position: absolute; left: 0; opacity: 0.4; }
+
+  /* NEXT */
+  .cs-next { background: var(--cream); padding: 96px 48px; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 20px; }
+  .cs-next .eyebrow { font-size: 0.65rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--black); opacity: 0.4; }
+  .cs-next h2 { font-family: var(--serif); font-size: clamp(2rem,4vw,3.2rem); color: var(--black); font-weight: 400; }
+  .cs-next h2 em { font-style: italic; color: #c5bff5; }
+  .btn-next { display: inline-flex; align-items: center; gap: 10px; padding: 12px 28px; border: 1px solid rgba(0,0,0,0.2); border-radius: 100px; font-size: 0.82rem; color: var(--black); text-decoration: none; transition: background 0.2s, gap 0.2s; margin-top: 8px; }
+  .btn-next:hover { background: rgba(0,0,0,0.07); gap: 16px; }
+
+  /* FADE */
+  .fade-up { opacity:0; transform:translateY(20px); transition:opacity 0.65s ease, transform 0.65s ease; }
+  .fade-up.visible { opacity:1; transform:translateY(0); }
+
+  /* HAMBURGER */
+  .hamburger {
+    display: none; flex-direction: column; justify-content: center; gap: 5px;
+    background: none; border: none; cursor: pointer; padding: 4px; position: relative;
+  }
+  .hamburger span {
+    display: block; width: 22px; height: 2px; background: var(--black);
+    border-radius: 2px; transition: transform 0.3s ease, opacity 0.3s ease; transform-origin: center;
+  }
+  .hamburger.open span:first-child { transform: translateY(7px) rotate(45deg); }
+  .hamburger.open span:nth-child(2) { opacity: 0; }
+  .hamburger.open span:last-child { transform: translateY(-7px) rotate(-45deg); }
+  .mobile-menu {
+    display: none; position: fixed; inset: 0; background: var(--cream); z-index: 99;
+    flex-direction: column; align-items: center; justify-content: center; gap: 8px;
+  }
+  .mobile-menu.open { display: flex; }
+  .mob-link {
+    font-family: var(--serif); font-size: 2.8rem; color: var(--black);
+    text-decoration: none; font-weight: 400; line-height: 1.4;
+    opacity: 0; transform: translateY(16px);
+    transition: opacity 0.35s ease, transform 0.35s ease; letter-spacing: -0.01em;
+  }
+  .mobile-menu.open .mob-link { opacity: 1; transform: translateY(0); }
+  .mobile-menu.open .mob-link:nth-child(1) { transition-delay: 0.06s; }
+  .mobile-menu.open .mob-link:nth-child(2) { transition-delay: 0.12s; }
+  .mobile-menu.open .mob-link:nth-child(3) { transition-delay: 0.18s; }
+  .mobile-menu.open .mob-link:nth-child(4) { transition-delay: 0.24s; }
+  .mob-link:hover { color: #c5bff5; }
+  @media (max-width: 768px) {
+    .hamburger { display: flex; }
+    .nav-links { display: none; }
+  }
+
+  /* Next case study */
+  .cs-next { background: var(--cream); padding: 96px 48px; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 20px; }
+  .cs-next .eyebrow { font-size: 0.65rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--black); opacity: 0.4; }
+  .cs-next h2 { font-family: var(--serif); font-size: clamp(2rem,4vw,3.2rem); color: var(--black); font-weight: 400; }
+  .cs-next h2 em { font-style: italic; color: #c5bff5; }
+  .btn-next { display: inline-flex; align-items: center; gap: 10px; padding: 12px 28px; border: 1px solid rgba(0,0,0,0.2); border-radius: 100px; font-size: 0.82rem; color: var(--black); text-decoration: none; transition: background 0.2s, gap 0.2s; margin-top: 8px; }
+  .btn-next:hover { background: rgba(0,0,0,0.07); gap: 16px; }
+
+  /* Footer */
+  .footer-editorial { background: var(--black); color: white; padding: 72px 48px 48px; }
+  .footer-top-bar { display: flex; justify-content: space-between; align-items: center; max-width: 1200px; margin: 0 auto 80px; }
+  .footer-logo { font-family: var(--serif); font-size: 1.65rem; letter-spacing: 0.06em; opacity: 0.5; }
+  .footer-cta-link { font-size: 0.85rem; font-weight: 500; color: #EAF58D; text-decoration: none; letter-spacing: 0.02em; display: flex; align-items: center; gap: 8px; transition: gap 0.2s ease; }
+  .footer-cta-link:hover { gap: 14px; }
+  .footer-big-phrase { max-width: 1200px; margin: 0 auto 80px; }
+  .footer-big-phrase h2 { font-family: var(--serif); font-size: clamp(3.5rem, 8vw, 7rem); line-height: 1.0; color: white; font-weight: 400; margin: 0; }
+  .footer-big-phrase h2 em { color: #c5bff5; font-style: italic; }
+  .footer-divider { max-width: 1200px; margin: 0 auto 48px; height: 1px; background: rgba(255,255,255,0.1); }
+  .footer-bottom-row { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(3, 1fr) auto; gap: 48px; align-items: start; }
+  .footer-nav-group { display: flex; flex-direction: column; gap: 12px; }
+  .footer-nav-label { font-size: 0.68rem; letter-spacing: 0.14em; text-transform: uppercase; opacity: 0.3; margin-bottom: 4px; }
+  .footer-nav-group a { font-size: 0.85rem; color: white; text-decoration: none; opacity: 0.5; transition: opacity 0.2s; }
+  .footer-nav-group a:hover { opacity: 1; }
+  .footer-copy { display: flex; flex-direction: column; gap: 6px; font-size: 0.72rem; opacity: 0.25; text-align: right; align-self: end; }
+
+  @media (max-width: 900px) {
+    nav, .hero-text { padding-left: 24px; padding-right: 24px; }
+    .hero-single-img { max-width: calc(100% - 48px); height: 400px; }
+    .wrap { padding: 0 24px; }
+    .results-cols, .img-grid-2, .img-grid-3, .img-grid-4, .brand-grid-2x2 { grid-template-columns: 1fr; }
+    .cs-next { padding: 64px 24px; }
+    .cs-card { padding: 32px; }
+  }
+  @media (max-width: 540px) {
+    .hero-single-img { height: auto; aspect-ratio: 16/9; }
+    .img-slot { height: auto !important; aspect-ratio: 16/9; overflow: hidden; }
+    .img-slot img { height: 100%; object-fit: cover; }
+    .cs-card { padding: 20px; }
+    .hero-text { padding: 80px 24px 32px; }
+    .wrap { padding: 0 20px; padding-top: 32px !important; }
+    .pill { padding: 5px 14px; font-size: 0.68rem; }
+    .section-title { font-size: 1.5rem; }
+    .cs-card h2, .logo-typo-block h2 { font-size: 1.2rem; }
+    .wrap p, .cs-card p, .logo-typo-block p { font-size: 1rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <a href="ana-k-landing (1).html" class="logo"><img src="Ana K. Logo-dark.svg" alt="Ana K." style="height:26px;display:block;"></a>
+    <ul class="nav-links">
+      <li><a href="ana-k-landing (1).html#about">About</a></li>
+      <li><a href="ana-k-landing (1).html#work">Work</a></li>
+      <li><a href="blog.html">Blog</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+    <button class="hamburger" id="hamburger" aria-label="Open menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<div class="mobile-menu" id="mobile-menu">
+  <a href="ana-k-landing (1).html#about" class="mob-link">About</a>
+  <a href="ana-k-landing (1).html#work" class="mob-link">Work</a>
+  <a href="blog.html" class="mob-link">Blog</a>
+  <a href="contact.html" class="mob-link">Contact</a>
+</div>
+
+<!-- HERO TEXT -->
+<div class="hero-text fade-up">
+  <h1>Casalty Luxury Real Estate Website<br>Designed for Conversion</h1>
+  <p>A full website design system built to convert premium buyers — from landing page to property detail, optimized for trust and clarity.</p>
+  <div class="hero-pills">
+    <span class="pill">UX Strategy</span>
+    <span class="pill">Website Design</span>
+    <span class="pill">UI Design</span>
+  </div>
+</div>
+
+<!-- HERO IMAGE -->
+<div class="hero-single-img fade-up" style="transition-delay:0.1s;">
+  <img src="Images-case-study-2/cs2-hero.png" alt="Casalty Website Hero">
+</div>
+
+<!-- CONTENT -->
+<div class="wrap" style="padding-top:72px;">
+
+  <!-- THE CHALLENGE -->
+  <div class="cs-card challenge-card fade-up">
+    <h2>The <em>Challenge</em></h2>
+    <p>Casalty needed more than a beautiful website. It required a structured digital system capable of positioning the brand as premium while guiding users toward inquiry and property exploration.</p>
+    <p>Most real estate websites focus only on listings. This project focused on experience, clarity, and segmentation.</p>
+    <p style="font-size:0.78rem;letter-spacing:0.1em;text-transform:uppercase;opacity:0.35;font-weight:500;margin-top:28px;margin-bottom:12px;">Key issues to solve</p>
+    <ul class="obj-list">
+      <li>No clear location-based funnel</li>
+      <li>Overwhelming listing presentation</li>
+      <li>Lack of emotional storytelling</li>
+      <li>No structured lead capture strategy</li>
+    </ul>
+  </div>
+
+  <!-- OBJECTIVE -->
+  <div class="cs-card obj-card fade-up">
+    <h2>Objective</h2>
+    <p style="font-size:0.92rem;line-height:1.7;opacity:0.8;margin-bottom:16px;">Design a strategic, high-converting website that:</p>
+    <ul class="obj-list">
+      <li>Elevates brand perception</li>
+      <li>Organizes properties by lifestyle and destination</li>
+      <li>Guides users through a structured journey</li>
+      <li>Captures qualified leads through location pages</li>
+    </ul>
+  </div>
+
+  <!-- RESULTS -->
+  <div class="cs-card fade-up">
+    <h2 style="font-family:var(--serif);font-size:2rem;font-weight:400;margin-bottom:8px;">Results</h2>
+    <p class="results-intro">The website launched as a complete digital ecosystem — adaptable, scalable, and conversion-focused throughout.</p>
+    <div class="results-cols">
+      <div class="results-col">
+        <h3>Design</h3>
+        <ul>
+          <li>Full design system with 40+ components</li>
+          <li>Property listing template</li>
+          <li>Location landing pages</li>
+          <li>Agent profile pages</li>
+          <li>Blog and editorial templates</li>
+        </ul>
+      </div>
+      <div class="results-col">
+        <h3>Strategy</h3>
+        <ul>
+          <li>Conversion-optimized user flows</li>
+          <li>Mobile-first responsive layouts</li>
+          <li>SEO-structured page architecture</li>
+          <li>Micro-interaction specifications</li>
+          <li>Full handoff documentation</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /wrap -->
+
+<!-- FULL WIDTH IMAGE -->
+<div style="margin:0 0 16px; display:flex; justify-content:center; padding: 0 48px;">
+  <div class="img-slot" style="width:1200px; max-width:100%; border-radius:10px;">
+    <img src="Images-case-study-2/cs2-overview.jpg" alt="Casalty Website Overview">
+  </div>
+</div>
+
+<!-- DESIGN SYSTEM -->
+<div class="wrap">
+
+  <div class="fade-up" style="text-align:center; margin-bottom:48px;">
+    <h2 class="section-title">Design <em>System & Components</em></h2>
+    <p class="section-intro">A modular component library built for scale — every element designed to work independently and together.</p>
+  </div>
+
+  <!-- Image placeholder — you'll tell me the size -->
+  <div class="img-slot fade-up" style="width:1200px; max-width:100%; margin: 0 auto 48px;">
+    <img src="Images-case-study-2/cs2-design-system.jpg" alt="Design System">
+  </div>
+
+  <!-- COMPONENT STRATEGY -->
+  <div class="cs-card fade-up">
+    <div class="logo-typo-block" style="border-bottom:none;padding-bottom:0;">
+      <h2>Component Strategy</h2>
+      <ul class="copy-list">
+        <li>Reusable navigation with dropdown variations</li>
+        <li>Location hero component (dynamic title + background image)</li>
+        <li>Listing card system (image, tag, price, CTA)</li>
+        <li>Testimonial module</li>
+        <li>CTA blocks (primary / secondary variations)</li>
+        <li>Section containers with predefined spacing rules</li>
+      </ul>
+      <p style="font-size:0.92rem;line-height:1.8;opacity:0.7;margin-top:24px;">Each component was designed with variants and auto layout to allow rapid iteration across location pages and future expansion.</p>
+      <p style="font-size:0.78rem;letter-spacing:0.1em;text-transform:uppercase;opacity:0.35;font-weight:500;margin-top:28px;margin-bottom:12px;">Why it matters</p>
+      <ul class="copy-list">
+        <li>Ensures visual consistency across multiple destinations</li>
+        <li>Makes the system scalable for new locations</li>
+        <li>Reduces development friction</li>
+        <li>Supports CMS-based implementation in tools like Webflow or Framer</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- PAGES & STRUCTURE -->
+  <div class="fade-up" style="text-align:center; margin: 48px 0;">
+    <h2 class="section-title">Funnel Strategy <em>in action</em></h2>
+    <p class="section-intro">Casalty is structured around destination funnels rather than generic property browsing.</p>
+  </div>
+
+  <!-- Image grid — size TBD -->
+  <div class="img-slot fade-up" style="width:1200px; max-width:100%; margin: 0 auto 48px;">
+    <img src="Images-case-study-2/cs2-funnel.jpg" alt="Funnel Strategy">
+  </div>
+
+  <!-- FUNNEL STRATEGY TEXT -->
+  <div class="cs-card fade-up">
+    <div class="logo-typo-block" style="border-bottom:none;padding-bottom:0;">
+      <h2>Funnel Strategy</h2>
+      <p style="font-size:0.92rem;line-height:1.8;opacity:0.8;margin-bottom:24px;">Each location page acts as a micro funnel:</p>
+      <ol class="num-list">
+        <li>Emotional positioning (lifestyle-driven hero)</li>
+        <li>Curated property preview</li>
+        <li>Market context (non-numerical snapshot)</li>
+        <li>Social proof</li>
+        <li>Clear CTA (Book a Call / Inquire)</li>
+      </ol>
+      <p style="font-size:0.92rem;line-height:1.8;opacity:0.7;margin-top:24px;">Instead of overwhelming users with filters immediately, the experience guides them from aspiration to action.</p>
+      <p style="font-size:0.92rem;line-height:1.8;opacity:0.7;margin-top:12px;">This structure increases clarity, reduces cognitive load, and aligns with high-intent luxury buyers.</p>
+    </div>
+  </div>
+
+  <!-- Sitemap images — size TBD -->
+  <div class="img-slot fade-up" style="width:1200px; max-width:100%; margin: 0 auto 48px;">
+    <img src="Images-case-study-2/cs2-funnel-detail.jpg" alt="Funnel Detail">
+  </div>
+
+  <!-- UX DECISIONS -->
+  <div class="cs-card fade-up">
+    <div class="logo-typo-block" style="border-bottom:none;padding-bottom:0;">
+      <h2>UX Decisions</h2>
+      <ul class="copy-list">
+        <li>Reduced navigation complexity</li>
+        <li>Clear segmentation by geography</li>
+        <li>Limited property display per section (curated, not crowded)</li>
+        <li>Strong visual hierarchy</li>
+        <li>High-contrast CTAs placed after emotional engagement</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="img-slot fade-up" style="width:1200px; max-width:100%; margin: 16px auto 16px;">
+    <img src="Images-case-study-2/cs2-ux.jpg" alt="UX Decisions">
+  </div>
+
+  <!-- OUTCOME -->
+  <div class="cs-card fade-up" style="margin-top:16px; margin-bottom:120px;">
+    <div class="logo-typo-block" style="border-bottom:none;padding-bottom:0;">
+      <h2>Outcome</h2>
+      <p>The final result is a structured luxury real estate platform designed to guide, not overwhelm.</p>
+      <p style="margin-top:12px;">Instead of functioning as a generic property catalog, the website operates as a destination-driven system that segments buyers by intent and geography. Each location page works as a focused micro-funnel, aligning lifestyle storytelling with clear calls to action.</p>
+      <p style="margin-top:12px;">The project demonstrates how strategic architecture, reusable components, and controlled visual hierarchy can elevate brand perception while supporting lead generation.</p>
+      <p style="margin-top:12px;">Casalty is positioned not simply as a listing platform, but as a curated Caribbean luxury experience built to convert.</p>
+    </div>
+  </div>
+
+</div><!-- /wrap -->
+
+
+
+<script>
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.06 });
+  document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
+  window.addEventListener('load', () => {
+    document.querySelectorAll('.fade-up').forEach(el => {
+      if (el.getBoundingClientRect().top < window.innerHeight) el.classList.add('visible');
+    });
+  });
+
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobile-menu');
+  hamburger.addEventListener('click', () => {
+    const isOpen = hamburger.classList.toggle('open');
+    mobileMenu.classList.toggle('open', isOpen);
+    hamburger.setAttribute('aria-label', isOpen ? 'Close menu' : 'Open menu');
+    document.body.style.overflow = isOpen ? 'hidden' : '';
+  });
+  mobileMenu.querySelectorAll('.mob-link').forEach(link => {
+    link.addEventListener('click', () => {
+      hamburger.classList.remove('open');
+      mobileMenu.classList.remove('open');
+      document.body.style.overflow = '';
+    });
+  });
+</script>
+
+<!-- NEXT CASE STUDY -->
+<section class="cs-next">
+  <span class="eyebrow">Next project</span>
+  <h2>Vero Rosa <em>Wellness Coach</em></h2>
+  <a href="vero-rosa-case-study.html" class="btn-next">View case study →</a>
+</section>
+
+<footer class="footer-editorial">
+  <div class="footer-top-bar">
+    <span class="footer-logo"><img src="Ana K. Logo.svg" alt="Ana K." style="height:24px;display:block;"></span>
+    <a href="ana-k-landing (1).html#contact" class="footer-cta-link">Start working together <span class="arrow">→</span></a>
+  </div>
+  <div class="footer-big-phrase">
+    <h2>Good design changes<br><em>everything.</em></h2>
+  </div>
+  <div class="footer-divider"></div>
+  <div class="footer-bottom-row">
+    <div class="footer-nav-group">
+      <span class="footer-nav-label">Pages</span>
+      <a href="ana-k-landing (1).html#about">About</a>
+      <a href="ana-k-landing (1).html#work">Work</a>
+      <a href="blog.html">Blog</a>
+      <a href="ana-k-landing (1).html#contact">Contact</a>
+    </div>
+    <div class="footer-nav-group">
+      <span class="footer-nav-label">Connect</span>
+      <a href="#">Instagram</a>
+      <a href="https://www.linkedin.com/in/ana-karina-rosa-rosario-3b407199/?locale=en_US" target="_blank">LinkedIn</a>
+      <a href="https://www.behance.net/anarosa3" target="_blank">Behance</a>
+      <a href="mailto:anakarinarosa256@gmail.com">Email</a>
+    </div>
+    <div class="footer-copy">
+      <span>© 2025 Ana K.</span>
+      <span>Designed &amp; built by Ana K.</span>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

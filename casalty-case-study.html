@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Casalty — Case Study · Ana K.</title>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --cream: #f4f1eb;
+    --black: #0e0e0e;
+    --forest: #2c4a35;
+    --lavender: #9b8fe8;
+    --lime: #EAF58D;
+    --serif: 'Instrument Serif', Georgia, serif;
+    --sans: 'DM Sans', sans-serif;
+  }
+  html { scroll-behavior: smooth; }
+  body { font-family: var(--sans); background: var(--cream); color: var(--black); overflow-x: hidden; }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: var(--cream);
+    border-bottom: 1px solid rgba(0,0,0,0.07);
+    padding: 0 48px;
+    display: flex; justify-content: center;
+  }
+  .nav-inner {
+    width: 100%; max-width: 1200px;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 18px 0;
+  }
+  .logo { font-family: var(--serif); font-size: 1.5rem; letter-spacing: 0.04em; text-decoration: none; color: var(--black); }
+  .nav-links { display: flex; gap: 28px; list-style: none; }
+  .nav-links a { font-size: 0.8rem; text-decoration: none; color: var(--black); opacity: 0.55; letter-spacing: 0.04em; transition: opacity 0.2s; }
+  .nav-links a:hover { opacity: 1; }
+
+
+  /* HERO FULL IMAGE */
+  .hero-img-full {
+    max-width: 1200px;
+    margin: 40px auto 0;
+    padding: 0 48px;
+    border-radius: 12px;
+    overflow: hidden;
+  }
+  .hero-img-full img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 12px;
+  }
+
+  /* HERO TEXT */
+  .hero-text {
+    padding: 140px 48px 48px;
+    text-align: center;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .hero-text h1 {
+    font-family: var(--serif);
+    font-size: clamp(2rem, 4vw, 3.2rem);
+    font-weight: 400;
+    line-height: 1.15;
+    margin-bottom: 20px;
+    letter-spacing: -0.01em;
+  }
+  .hero-text p {
+    font-size: 0.85rem;
+    line-height: 1.7;
+    opacity: 0.55;
+    max-width: 520px;
+    margin: 0 auto 32px;
+  }
+  .hero-btns { display: flex; gap: 12px; justify-content: center; }
+  .btn-outline {
+    padding: 10px 22px;
+    border: 1px solid rgba(0,0,0,0.2);
+    border-radius: 100px;
+    font-size: 0.78rem;
+    font-family: var(--sans);
+    text-decoration: none;
+    color: var(--black);
+    font-weight: 400;
+    letter-spacing: 0.02em;
+    cursor: default;
+  }
+
+  /* HERO SINGLE IMAGE */
+  .hero-single-img {
+    width: 1100px;
+    max-width: calc(100% - 96px);
+    height: 662px;
+    margin: 40px auto 0;
+    border-radius: 10px;
+    overflow: hidden;
+    background: #c8d4cc;
+    display: flex;
+  }
+  .hero-single-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+  /* placeholder */
+  .ph {
+    width: 100%;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+  }
+  .ph svg { opacity: 0.25; }
+  .ph span { font-size: 0.6rem; letter-spacing: 0.1em; text-transform: uppercase; opacity: 0.35; font-weight: 500; }
+
+  /* WRAP */
+  .wrap { max-width: 1200px; margin: 0 auto; padding: 0 48px; }
+  .divider { border: none; border-top: 1px solid rgba(0,0,0,0.09); margin: 0; }
+
+  /* CARD STYLE — white bg 40% opacity */
+  .cs-card {
+    background: rgba(255,255,255,0.4);
+    border: 1px solid rgba(0,0,0,0.08);
+    border-radius: 10px;
+    padding: 40px 56px 56px;
+    margin-bottom: 48px;
+  }
+
+  /* THE PROJECT */
+  .the-project { padding: 72px 0 0; }
+  .the-project h2 { font-family: var(--serif); font-size: 2rem; font-weight: 400; margin-bottom: 28px; }
+  .the-project h2 em { font-style: italic; color: var(--lavender); font-family: var(--serif); }
+  .the-project p { font-size: 0.92rem; line-height: 1.85; color: var(--black); margin-bottom: 10px; }
+
+  /* OBJECTIVES */
+  .objectives { padding: 0; }
+  .objectives h2 { font-family: var(--serif); font-size: 2rem; font-weight: 400; margin-bottom: 24px; }
+  .obj-list { list-style: none; display: flex; flex-direction: column; gap: 10px; margin-top: 16px; }
+  .obj-list .obj-intro { font-size: 0.92rem; line-height: 1.7; margin-bottom: 4px; }
+  .obj-list li { font-size: 0.9rem; line-height: 1.6; padding-left: 18px; position: relative; }
+  .obj-list li::before { content: '•'; position: absolute; left: 0; opacity: 0.5; }
+
+  /* BRAND FOUNDATIONS */
+  .brand-found { padding: 0 0 72px; }
+  .brand-found-title {
+    font-family: var(--serif);
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 400;
+    text-align: center;
+    margin-top: 100px;
+    margin-bottom: 40px;
+  }
+  .brand-found-title em { font-style: italic; color: var(--lavender); }
+  .brand-grid-2x2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    border: 1px solid rgba(0,0,0,0.1);
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  .brand-card {
+    background: rgba(255,255,255,0.4);
+    border: none;
+    border-radius: 0 !important;
+    margin-bottom: 0 !important;
+    padding: 40px 48px 48px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    min-height: 220px;
+  }
+  .brand-card:nth-child(1) { border-right: 1px solid rgba(0,0,0,0.1); border-bottom: 1px solid rgba(0,0,0,0.1); }
+  .brand-card:nth-child(2) { border-bottom: 1px solid rgba(0,0,0,0.1); }
+  .brand-card:nth-child(3) { border-right: 1px solid rgba(0,0,0,0.1); }
+  .brand-card:nth-child(4) { }
+  .brand-card h3 {
+    font-family: var(--serif);
+    font-size: 1.4rem;
+    font-weight: 400;
+    color: var(--black);
+    letter-spacing: -0.01em;
+  }
+  .brand-card p { font-size: 0.92rem; line-height: 1.7; color: var(--black); opacity: 0.75; }
+  .brand-list { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+  .brand-list li { font-size: 0.92rem; padding-left: 16px; position: relative; opacity: 0.75; }
+  .brand-list li::before { content: '•'; position: absolute; left: 0; opacity: 0.5; }
+
+  /* VISUAL IDENTITY */
+  .vis-id { padding: 64px 0 72px; }
+  .vis-id-title { text-align: center; font-family: var(--serif); font-size: 3rem; font-weight: 400; margin-bottom: 40px; letter-spacing: 0.02em; }
+  .vis-img-stack { display: flex; flex-direction: column; gap: 16px; }
+  .vis-img-slot {
+    width: 1100px;
+    max-width: 100%;
+    height: auto;
+    margin: 0 auto;
+    border-radius: 10px;
+    overflow: hidden;
+    background: #c8d4cc;
+    display: flex;
+  }
+  .vis-img-slot img { width: 100%; height: auto; display: block; }
+
+  /* LOGO + TYPOGRAPHY CARD */
+  .logo-typo-card { display: flex; flex-direction: column; gap: 0; margin-top: 16px; margin-bottom: 100px; }
+  .logo-typo-block { padding: 0 0 40px; }
+  .logo-typo-block + .logo-typo-block { padding-top: 40px; }
+  .logo-typo-block:first-child { border-bottom: 1px solid rgba(0,0,0,0.08); }
+  .logo-typo-block h2 { font-family: var(--serif); font-size: 1.9rem; font-weight: 400; margin-bottom: 32px; color: var(--black); }
+  .logo-typo-block p { font-size: 0.92rem; line-height: 1.8; color: var(--black); max-width: 860px; }
+
+  /* Type specimen */
+  .type-specimen { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; margin-bottom: 6px; }
+  .spec-left {
+    background: var(--cream); border: 1px solid rgba(0,0,0,0.08);
+    border-radius: 10px 0 0 10px; padding: 48px 40px;
+    display: flex; flex-direction: column; justify-content: space-between; min-height: 280px;
+  }
+  .type-label { font-size: 0.62rem; letter-spacing: 0.14em; text-transform: uppercase; opacity: 0.3; margin-bottom: 12px; display: block; }
+  .type-name { font-family: var(--serif); font-size: 2.2rem; font-weight: 400; color: var(--forest); line-height: 1.1; margin-bottom: 6px; }
+  .type-sub { font-size: 0.68rem; letter-spacing: 0.08em; text-transform: uppercase; opacity: 0.3; }
+  .alphabet { font-size: 0.75rem; letter-spacing: 0.04em; opacity: 0.3; line-height: 1.8; margin-top: 32px; }
+  .spec-right {
+    background: var(--forest); border-radius: 0 10px 10px 0; padding: 48px 40px;
+    display: flex; align-items: center; justify-content: space-between; overflow: hidden;
+  }
+  .spec-right-info { color: white; }
+  .size-label { font-size: 0.58rem; letter-spacing: 0.12em; text-transform: uppercase; opacity: 0.4; margin-bottom: 8px; display: block; }
+  .aa-sample { font-family: var(--serif); font-size: 3.2rem; color: white; font-weight: 400; line-height: 1; }
+  .big-aa { font-family: var(--serif); font-size: 9rem; color: white; opacity: 0.1; font-weight: 400; line-height: 1; }
+
+  /* Logo row */
+  .logo-row { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 6px; margin-bottom: 6px; }
+  .logo-card { border-radius: 10px; padding: 40px 32px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 14px; min-height: 160px; }
+  .logo-card.lc-light { background: #f0ede6; }
+  .logo-card.lc-dark { background: var(--forest); }
+  .logo-card.lc-mid { background: #c8d9cc; }
+  .logo-mark { width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+  .logo-mark.dark { background: var(--forest); }
+  .logo-mark.light { background: white; }
+  .logo-word { font-family: var(--serif); font-size: 1rem; letter-spacing: 0.22em; text-transform: uppercase; font-weight: 400; }
+  .logo-word.on-dark { color: white; }
+  .logo-word.on-light { color: var(--forest); }
+
+  /* Big wordmark */
+  .wordmark-card { background: var(--cream); border: 1px solid rgba(0,0,0,0.08); border-radius: 10px; padding: 56px; text-align: center; margin-bottom: 6px; }
+  .wm { font-family: var(--serif); font-size: clamp(3rem, 7vw, 6rem); letter-spacing: 0.18em; text-transform: uppercase; color: var(--forest); font-weight: 400; }
+
+  /* Logo section */
+  .logo-section { padding: 64px 0; }
+  .logo-section h2 { font-family: var(--serif); font-size: 1.7rem; font-weight: 400; margin-bottom: 12px; }
+  .logo-section p { font-size: 0.86rem; line-height: 1.8; opacity: 0.6; max-width: 600px; margin-bottom: 40px; }
+
+  /* Typography */
+  .typo-section { padding: 64px 0; }
+  .typo-section h2 { font-family: var(--serif); font-size: 1.7rem; font-weight: 400; margin-bottom: 12px; }
+  .typo-section > p { font-size: 0.86rem; line-height: 1.8; opacity: 0.6; max-width: 600px; margin-bottom: 40px; }
+  .typo-cols { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 40px; }
+  .typo-col-label { font-size: 0.62rem; letter-spacing: 0.14em; text-transform: uppercase; opacity: 0.3; display: block; margin-bottom: 12px; }
+  .typo-display { font-family: var(--serif); font-size: 2.8rem; color: var(--forest); font-weight: 400; line-height: 1; margin-bottom: 8px; }
+  .typo-meta { font-size: 0.68rem; opacity: 0.3; font-family: monospace; }
+
+  /* Color */
+  .color-section { padding: 64px 0; }
+  .color-section h2 { font-family: var(--serif); font-size: 1.7rem; font-weight: 400; margin-bottom: 12px; }
+  .color-section > p { font-size: 0.86rem; line-height: 1.8; opacity: 0.6; max-width: 600px; margin-bottom: 40px; }
+  .swatch-row { display: flex; gap: 8px; }
+  .swatch-item { flex: 1; }
+  .swatch-color { height: 80px; border-radius: 8px; margin-bottom: 10px; }
+  .swatch-name { font-size: 0.72rem; font-weight: 500; display: block; margin-bottom: 2px; }
+  .swatch-hex { font-size: 0.65rem; opacity: 0.35; font-family: monospace; }
+
+  /* Full bleed */
+  .img-full { width: 100%; aspect-ratio: 16/7; overflow: hidden; position: relative; background: #c8d9cc; display: flex; }
+  .img-full img { width:100%;height:100%;object-fit:cover;display:block; }
+
+  /* 3 social cards */
+  .img-grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 6px; }
+  .social-card { position: relative; overflow: hidden; aspect-ratio: 3/4; background: #c8d9cc; border-radius: 10px; display: flex; }
+  .social-card img { width:100%;height:100%;object-fit:cover;display:block; }
+  .social-overlay {
+    position: absolute; bottom: 0; left: 0; right: 0;
+    background: linear-gradient(to top, rgba(14,14,14,0.88) 0%, transparent 100%);
+    padding: 24px 20px;
+  }
+  .social-tag { font-size: 0.58rem; letter-spacing: 0.14em; text-transform: uppercase; color: #EAF58D; font-weight: 500; display: block; margin-bottom: 6px; }
+  .social-title { font-family: var(--serif); font-size: 0.95rem; color: white; font-weight: 400; line-height: 1.35; }
+  .social-meta { font-size: 0.62rem; color: white; opacity: 0.4; margin-top: 8px; letter-spacing: 0.06em; }
+
+  /* Collateral */
+  .img-wide { width:100%; aspect-ratio: 16/9; overflow:hidden; background: #dce5de; border-radius: 10px; display: flex; }
+  .img-wide img { width:100%;height:100%;object-fit:cover;display:block; }
+
+  /* Text sections */
+  .text-section { padding: 72px 0 40px; }
+  .text-section h2 { font-family: var(--serif); font-size: 1.8rem; font-weight: 400; margin-bottom: 16px; }
+  .text-section p { font-size: 0.92rem; line-height: 1.85; opacity: 0.7; max-width: 720px; margin-bottom: 12px; }
+
+  /* MARKETING MATERIALS */
+  .marketing-section { padding: 72px 0 0; }
+  .marketing-title {
+    font-family: var(--serif);
+    font-size: clamp(1.8rem, 3vw, 2.6rem);
+    font-weight: 400;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  .marketing-intro {
+    font-size: 0.9rem;
+    line-height: 1.8;
+    opacity: 0.6;
+    max-width: 620px;
+    margin: 0 auto 48px;
+    text-align: center;
+  }
+  .mkt-two-col {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    margin-bottom: 12px;
+  }
+  .mkt-three-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 12px;
+    margin-bottom: 12px;
+  }
+  .mkt-social-slot {
+    background: white;
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid rgba(0,0,0,0.07);
+  }
+  .social-ui-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 14px;
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+  }
+  .social-dot { width: 24px; height: 24px; border-radius: 50%; background: #c8d4cc; display: block; }
+  .social-dots-right { font-size: 1rem; letter-spacing: 0.08em; opacity: 0.35; }
+  .social-actions { padding: 10px 14px; font-size: 0.82rem; opacity: 0.4; letter-spacing: 0.1em; }
+  .mkt-img-slot {
+    width: 100%;
+    border-radius: 8px;
+    overflow: hidden;
+    background: #c8d4cc;
+    display: flex;
+  }
+  .mkt-img-slot img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .mkt-img-slot.mkt-full { width: 100%; border-radius: 10px; }
+
+  /* Next */
+  .cs-next { background: var(--cream); padding: 96px 48px; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 20px; }
+  .cs-next .eyebrow { font-size: 0.65rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--black); opacity: 0.4; }
+  .cs-next h2 { font-family: var(--serif); font-size: clamp(2rem,4vw,3.2rem); color: var(--black); font-weight: 400; }
+  .cs-next h2 em { font-style: italic; color: #c5bff5; }
+  .btn-next { display: inline-flex; align-items: center; gap: 10px; padding: 12px 28px; border: 1px solid rgba(0,0,0,0.2); border-radius: 100px; font-size: 0.82rem; color: var(--black); text-decoration: none; transition: background 0.2s, gap 0.2s; margin-top: 8px; }
+  .btn-next:hover { background: rgba(0,0,0,0.07); gap: 16px; }
+
+  /* fade */
+  .fade-up { opacity:0; transform:translateY(20px); transition:opacity 0.65s ease, transform 0.65s ease; }
+  .fade-up.visible { opacity:1; transform:translateY(0); }
+
+  /* HAMBURGER */
+  .hamburger {
+    display: none; flex-direction: column; justify-content: center; gap: 5px;
+    background: none; border: none; cursor: pointer; padding: 4px; position: relative;
+  }
+  .hamburger span {
+    display: block; width: 22px; height: 2px; background: var(--black);
+    border-radius: 2px; transition: transform 0.3s ease, opacity 0.3s ease; transform-origin: center;
+  }
+  .hamburger.open span:first-child { transform: translateY(7px) rotate(45deg); }
+  .hamburger.open span:nth-child(2) { opacity: 0; }
+  .hamburger.open span:last-child { transform: translateY(-7px) rotate(-45deg); }
+  .mobile-menu {
+    display: none; position: fixed; inset: 0; background: var(--cream); z-index: 99;
+    flex-direction: column; align-items: center; justify-content: center; gap: 8px;
+  }
+  .mobile-menu.open { display: flex; }
+  .mob-link {
+    font-family: var(--serif); font-size: 2.8rem; color: var(--black);
+    text-decoration: none; font-weight: 400; line-height: 1.4;
+    opacity: 0; transform: translateY(16px);
+    transition: opacity 0.35s ease, transform 0.35s ease; letter-spacing: -0.01em;
+  }
+  .mobile-menu.open .mob-link { opacity: 1; transform: translateY(0); }
+  .mobile-menu.open .mob-link:nth-child(1) { transition-delay: 0.06s; }
+  .mobile-menu.open .mob-link:nth-child(2) { transition-delay: 0.12s; }
+  .mobile-menu.open .mob-link:nth-child(3) { transition-delay: 0.18s; }
+  .mobile-menu.open .mob-link:nth-child(4) { transition-delay: 0.24s; }
+  .mob-link:hover { color: var(--lavender); }
+  @media (max-width: 768px) {
+    .hamburger { display: flex; }
+    .nav-links { display: none; }
+  }
+
+  @media (max-width: 900px) {
+    nav, .hero-text { padding-left: 24px; padding-right: 24px; }
+    .hero-single-img { max-width: calc(100% - 48px); height: 400px; }
+    .wrap { padding: 0 24px; }
+    .brand-cols, .typo-cols, .logo-row, .type-specimen { grid-template-columns: 1fr; }
+    .spec-left { border-radius: 10px 10px 0 0; }
+    .spec-right { border-radius: 0 0 10px 10px; }
+    .img-grid-3 { grid-template-columns: 1fr; }
+    .swatch-row { flex-wrap: wrap; }
+    .swatch-item { min-width: calc(33% - 6px); }
+    .cs-next { padding: 64px 24px; }
+  }
+  @media (max-width: 540px) {
+    .hero-single-img { height: auto; aspect-ratio: 16/9; }
+    .vis-img-slot { height: auto; aspect-ratio: 16/9; }
+    .mkt-img-slot { width: 100% !important; height: auto !important; aspect-ratio: 4/3; }
+    .mkt-img-slot img { height: 100%; object-fit: cover; }
+    .mkt-three-col .mkt-img-slot { aspect-ratio: 2/3; }
+    .mkt-three-col .mkt-img-slot img { height: 100%; object-fit: contain; background: #c8d4cc; }
+    .cs-card { padding: 24px; }
+    .hero-text { padding: 80px 24px 32px; }
+    .wrap { padding: 0 20px; padding-top: 32px !important; }
+    .the-project h2, .objectives h2,
+    .logo-section h2, .typo-section h2, .color-section h2,
+    .text-section h2, .marketing-section h2 { font-size: 1.5rem; }
+    .logo-typo-block h2 { font-size: 1.2rem; }
+    .vis-id-title, .brand-found-title { font-size: 1.5rem; }
+    .wrap p, .cs-card p, .logo-typo-block p { font-size: 1rem; }
+  }
+
+  /* FOOTER */
+  .footer-editorial { background: var(--black); color: white; padding: 72px 48px 48px; }
+  .footer-top-bar { display: flex; justify-content: space-between; align-items: center; max-width: 1200px; margin: 0 auto 80px; }
+  .footer-logo { font-family: var(--serif); font-size: 1.65rem; letter-spacing: 0.06em; opacity: 0.5; }
+  .footer-cta-link { font-size: 0.85rem; font-weight: 500; color: var(--lime); text-decoration: none; letter-spacing: 0.02em; display: flex; align-items: center; gap: 8px; transition: gap 0.2s ease; }
+  .footer-cta-link:hover { gap: 14px; }
+  .footer-big-phrase { max-width: 1200px; margin: 0 auto 80px; }
+  .footer-big-phrase h2 { font-family: var(--serif); font-size: clamp(3.5rem, 8vw, 7rem); line-height: 1.0; color: white; font-weight: 400; margin: 0; }
+  .footer-big-phrase h2 em { color: var(--lavender); font-style: italic; }
+  .footer-divider { max-width: 1200px; margin: 0 auto 48px; height: 1px; background: rgba(255,255,255,0.1); }
+  .footer-bottom-row { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(3, 1fr) auto; gap: 48px; align-items: start; }
+  .footer-nav-group { display: flex; flex-direction: column; gap: 12px; }
+  .footer-nav-label { font-size: 0.68rem; letter-spacing: 0.14em; text-transform: uppercase; opacity: 0.3; margin-bottom: 4px; }
+  .footer-nav-group a { font-size: 0.85rem; color: white; text-decoration: none; opacity: 0.5; transition: opacity 0.2s; }
+  .footer-nav-group a:hover { opacity: 1; }
+  .footer-copy { display: flex; flex-direction: column; gap: 6px; font-size: 0.72rem; opacity: 0.25; text-align: right; align-self: end; }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <a href="ana-k-landing (1).html" class="logo"><img src="Ana K. Logo-dark.svg" alt="Ana K." style="height:26px;display:block;"></a>
+    <ul class="nav-links">
+      <li><a href="ana-k-landing (1).html#about">About</a></li>
+      <li><a href="ana-k-landing (1).html#work">Work</a></li>
+      <li><a href="blog.html">Blog</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+    <button class="hamburger" id="hamburger" aria-label="Open menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<div class="mobile-menu" id="mobile-menu">
+  <a href="ana-k-landing (1).html#about" class="mob-link">About</a>
+  <a href="ana-k-landing (1).html#work" class="mob-link">Work</a>
+  <a href="blog.html" class="mob-link">Blog</a>
+  <a href="contact.html" class="mob-link">Contact</a>
+</div>
+
+<!-- HERO TEXT -->
+<div class="hero-text fade-up">
+  <h1>Casalty Luxury Real Estate Brand<br>Identity for the Caribbean Market</h1>
+  <p>A complete brand identity system for a luxury real estate company — built to communicate prestige, trust, and a deep sense of place.</p>
+  <div class="hero-btns">
+    <span class="btn-outline">Brand Strategy</span>
+    <span class="btn-outline">Visual Identity</span>
+  </div>
+</div>
+
+<!-- HERO IMAGE -->
+<div class="hero-single-img fade-up" style="transition-delay:0.1s">
+  <img src="Portafolio images/Hero.jpg" alt="Casalty Hero" style="width:100%;height:auto;display:block;">
+</div>
+
+<!-- CONTENT -->
+<div class="wrap" style="padding-top:72px;">
+
+  <!-- THE PROJECT -->
+  <section class="the-project fade-up">
+    <div class="cs-card">
+      <h2>The <em>Challenge</em></h2>
+      <p>Casalty needed a brand that positioned it above traditional real estate agencies in the Dominican Republic. The goal was to attract premium buyers looking for curated lifestyle properties in destinations like Punta Cana, La Romana, and Cabarete.</p>
+      <p>The brand had to communicate trust, exclusivity, and modern sophistication — without feeling cold or corporate.</p>
+    </div>
+  </section>
+
+  <!-- OBJECTIVES -->
+  <section class="objectives fade-up">
+    <div class="cs-card">
+      <h2>Objective</h2>
+      <p class="obj-intro">Create a high-end, minimal, lifestyle-driven identity that:</p>
+      <ul class="obj-list">
+        <li>Appeals to international and local luxury buyers</li>
+        <li>Feels editorial and aspirational</li>
+        <li>Supports scalable digital marketing and location funnels</li>
+        <li>Works seamlessly across web, social, and print</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- BRAND FOUNDATIONS -->
+  <section class="brand-found fade-up">
+    <h2 class="brand-found-title">Brand <em>Foundation</em></h2>
+    <div class="brand-grid-2x2">
+      <div class="cs-card brand-card">
+        <h3>Positioning</h3>
+        <p>A curated luxury real estate experience focused on lifestyle, location, and long-term value.</p>
+      </div>
+      <div class="cs-card brand-card">
+        <h3>Target Audience</h3>
+        <p>Affluent buyers, investors, and families seeking premium properties in the Caribbean.</p>
+      </div>
+      <div class="cs-card brand-card">
+        <h3>Brand Personality</h3>
+        <ul class="brand-list">
+          <li>Calm</li>
+          <li>Confident</li>
+          <li>Discreet</li>
+          <li>Modern</li>
+        </ul>
+      </div>
+      <div class="cs-card brand-card">
+        <h3>Brand Promise</h3>
+        <p>More than property. A place to belong.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- VISUAL IDENTITY -->
+  <hr class="divider">
+  <section class="vis-id fade-up">
+    <div class="vis-id-title">Visual Identity <em style="font-style:italic; color:var(--lavender);">System</em></div>
+    <div class="vis-img-stack">
+      <div class="vis-img-slot">
+        <img src="Portafolio images/Visual Identity 1.jpg" alt="Visual Identity" style="width:100%;height:auto;display:block;">
+      </div>
+      <div class="vis-img-slot">
+        <img src="Portafolio images/Frame 15.jpg" alt="Visual Identity 2" style="width:100%;height:auto;display:block;">
+      </div>
+    </div>
+  </section>
+
+  <!-- LOGO + TYPOGRAPHY TEXT CARD -->
+  <div class="cs-card logo-typo-card fade-up">
+    <div class="logo-typo-block">
+      <h2>Logo</h2>
+      <p>The logo was designed to feel timeless and understated. Clean typography paired with a subtle symbol reinforces trust and elegance without unnecessary ornamentation.</p>
+    </div>
+    <div class="logo-typo-block">
+      <h2>Typography</h2>
+      <p>A refined serif for headlines paired with a clean sans-serif for structure and readability. This combination balances editorial luxury with digital clarity.</p>
+    </div>
+  </div>
+
+  <!-- IMAGE SLOT AFTER TYPOGRAPHY -->
+  <div class="vis-img-slot fade-up" style="margin-top:48px;">
+    <img src="Portafolio images/Logo + Typography.jpg" alt="Logo and Typography" style="width:100%;height:auto;display:block;">
+  </div>
+
+  <!-- COLOR PALETTE CARD -->
+  <div class="cs-card fade-up" style="margin-top:48px;">
+    <div class="logo-typo-block" style="border-bottom:none; padding-bottom:0;">
+      <h2>Color Palette</h2>
+      <p>The color system reflects warmth, sophistication, and natural materials commonly found in Caribbean luxury architecture.</p>
+    </div>
+  </div>
+
+</div><!-- /wrap -->
+
+<!-- MARKETING MATERIALS -->
+<div class="wrap">
+  <section class="marketing-section fade-up">
+    <h2 class="marketing-title">Marketing Materials</h2>
+    <p class="marketing-intro">Every touchpoint reinforces the premium positioning and supports conversion across digital channels. The social system was designed to feel consistent, elevated, and scalable. Templates allow the brand to maintain cohesion while adapting to different property types and locations.</p>
+
+    <!-- 2 images side by side 610x507 -->
+    <div class="mkt-two-col fade-up">
+      <div class="mkt-img-slot" style="width:610px;height:507px;">
+        <img src="Portafolio images/Marketing 1.jpg" alt="Marketing 1" style="width:100%;height:auto;display:block;">
+      </div>
+      <div class="mkt-img-slot" style="width:610px;height:507px;">
+        <img src="Portafolio images/Marketing 2.jpg" alt="Marketing 2" style="width:100%;height:auto;display:block;">
+      </div>
+    </div>
+
+    <!-- 3 social media posts 388x586 -->
+    <div class="mkt-three-col fade-up">
+      <div class="mkt-img-slot">
+        <img src="Portafolio images/Social 1.png" alt="Social 1" style="width:100%;height:auto;display:block;">
+      </div>
+      <div class="mkt-img-slot">
+        <img src="Portafolio images/Social 2.png" alt="Social 2" style="width:100%;height:auto;display:block;">
+      </div>
+      <div class="mkt-img-slot">
+        <img src="Portafolio images/Social 3.png" alt="Social 3" style="width:100%;height:auto;display:block;">
+      </div>
+    </div>
+
+    <!-- 1 full image 1100x850 -->
+    <div class="mkt-img-slot mkt-full fade-up" style="height:850px;">
+      <img src="Portafolio images/Collateral.jpg" alt="Collateral" style="width:100%;height:auto;display:block;">
+    </div>
+
+  </section>
+
+  <!-- FROM BRANDING TO STRATEGY -->
+  <div class="cs-card fade-up" style="margin-top:48px;">
+    <div class="logo-typo-block" style="border-bottom:none;padding-bottom:0;">
+      <h2>From Branding to Business Strategy</h2>
+      <p>The branding was built to support a location-based funnel structure. Each destination (Punta Cana, La Romana, Zona Norte) operates as a micro-brand under the main Casalty identity, allowing targeted messaging while preserving overall brand consistency.</p>
+    </div>
+  </div>
+
+  <!-- OUTCOME -->
+  <div class="cs-card fade-up" style="margin-top:16px; margin-bottom:120px;">
+    <div class="logo-typo-block" style="border-bottom:none;padding-bottom:0;">
+      <h2>Outcome</h2>
+      <p>Casalty now has a cohesive and premium visual system that supports digital growth, marketing campaigns, and scalable web implementation. The identity is adaptable, refined, and aligned with the expectations of a luxury real estate audience.</p>
+    </div>
+  </div>
+
+</div><!-- /wrap -->
+
+
+<script>
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.06 });
+  document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
+
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobile-menu');
+  hamburger.addEventListener('click', () => {
+    const isOpen = hamburger.classList.toggle('open');
+    mobileMenu.classList.toggle('open', isOpen);
+    hamburger.setAttribute('aria-label', isOpen ? 'Close menu' : 'Open menu');
+    document.body.style.overflow = isOpen ? 'hidden' : '';
+  });
+  mobileMenu.querySelectorAll('.mob-link').forEach(link => {
+    link.addEventListener('click', () => {
+      hamburger.classList.remove('open');
+      mobileMenu.classList.remove('open');
+      document.body.style.overflow = '';
+    });
+  });
+  window.addEventListener('load', () => {
+    document.querySelectorAll('.fade-up').forEach(el => {
+      if (el.getBoundingClientRect().top < window.innerHeight) el.classList.add('visible');
+    });
+  });
+</script>
+
+<!-- NEXT CASE STUDY -->
+<section class="cs-next">
+  <span class="eyebrow">Next project</span>
+  <h2>Casalty <em>Website</em></h2>
+  <a href="casalty-case-study-2.html" class="btn-next">View case study →</a>
+</section>
+
+<footer class="footer-editorial">
+  <div class="footer-top-bar">
+    <span class="footer-logo"><img src="Ana K. Logo.svg" alt="Ana K." style="height:24px;display:block;"></span>
+    <a href="ana-k-landing (1).html#contact" class="footer-cta-link">Start working together <span class="arrow">→</span></a>
+  </div>
+  <div class="footer-big-phrase">
+    <h2>Good design changes<br><em>everything.</em></h2>
+  </div>
+  <div class="footer-divider"></div>
+  <div class="footer-bottom-row">
+    <div class="footer-nav-group">
+      <span class="footer-nav-label">Pages</span>
+      <a href="ana-k-landing (1).html#about">About</a>
+      <a href="ana-k-landing (1).html#work">Work</a>
+      <a href="blog.html">Blog</a>
+      <a href="ana-k-landing (1).html#contact">Contact</a>
+    </div>
+    <div class="footer-nav-group">
+      <span class="footer-nav-label">Connect</span>
+      <a href="#">Instagram</a>
+      <a href="https://www.linkedin.com/in/ana-karina-rosa-rosario-3b407199/?locale=en_US" target="_blank">LinkedIn</a>
+      <a href="https://www.behance.net/anarosa3" target="_blank">Behance</a>
+      <a href="mailto:anakarinarosa256@gmail.com">Email</a>
+    </div>
+    <div class="footer-copy">
+      <span>© 2025 Ana K.</span>
+      <span>Designed & built by Ana K.</span>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vero Rosa Wellness Coach — Case Study · Ana K.</title>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --cream: #f4f1eb;
+    --black: #0e0e0e;
+    --serif: 'Instrument Serif', Georgia, serif;
+    --sans: 'DM Sans', sans-serif;
+  }
+  html { scroll-behavior: smooth; }
+  body { font-family: var(--sans); background: var(--cream); color: var(--black); overflow-x: hidden; }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: var(--cream); border-bottom: 1px solid rgba(0,0,0,0.07);
+    padding: 0 48px; display: flex; justify-content: center;
+  }
+  .nav-inner {
+    width: 100%; max-width: 1200px;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 18px 0;
+  }
+  .logo { text-decoration: none; }
+  .nav-links { display: flex; gap: 28px; list-style: none; }
+  .nav-links a { font-size: 0.8rem; text-decoration: none; color: var(--black); opacity: 0.55; letter-spacing: 0.04em; transition: opacity 0.2s; }
+  .nav-links a:hover { opacity: 1; }
+
+  /* HERO TEXT */
+  .hero-text { padding: 140px 48px 48px; text-align: center; max-width: 1200px; margin: 0 auto; }
+  .hero-text h1 { font-family: var(--serif); font-size: clamp(2rem, 4vw, 3.2rem); font-weight: 400; line-height: 1.15; margin-bottom: 20px; letter-spacing: -0.01em; }
+  .hero-text h1 em { font-style: italic; color: #c5bff5; }
+  .hero-text p { font-size: 0.85rem; line-height: 1.7; opacity: 0.55; max-width: 520px; margin: 0 auto 32px; }
+  .hero-pills { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
+  .pill { padding: 8px 22px; border: 1px solid rgba(0,0,0,0.15); border-radius: 100px; font-size: 0.8rem; color: var(--black); font-family: var(--sans); letter-spacing: 0.01em; }
+
+  /* HERO IMAGE */
+  .hero-single-img {
+    width: 1100px; max-width: calc(100% - 96px); height: 662px;
+    margin: 40px auto 0; border-radius: 10px; overflow: hidden;
+    background: #e8e0d5; display: flex;
+  }
+  .hero-single-img img { width: 100%; height: 100%; object-fit: cover; object-position: top; display: block; }
+
+  /* WRAP */
+  .wrap { max-width: 1200px; margin: 0 auto; padding: 0 48px; }
+
+  /* CARD */
+  .cs-card {
+    background: rgba(255,255,255,0.4);
+    border: 1px solid rgba(0,0,0,0.08);
+    border-radius: 10px;
+    padding: 56px;
+    margin-bottom: 48px;
+  }
+
+  /* CARD TEXT BLOCKS */
+  .logo-typo-block { padding: 40px 0; }
+  .logo-typo-block:first-child { border-bottom: 1px solid rgba(0,0,0,0.08); }
+  .logo-typo-block h2 { font-family: var(--serif); font-size: 1.9rem; font-weight: 400; margin-bottom: 16px; }
+  .logo-typo-block h2 em { font-style: italic; color: #c5bff5; }
+  .logo-typo-block p { font-size: 0.92rem; line-height: 1.8; max-width: 860px; }
+
+  /* SECTION TITLES */
+  .section-title {
+    font-family: var(--serif);
+    font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+    font-weight: 400;
+    text-align: center;
+    margin-bottom: 16px;
+  }
+  .section-title em { font-style: italic; color: #c5bff5; }
+  .section-intro {
+    font-size: 0.9rem; line-height: 1.8; opacity: 0.6;
+    max-width: 580px; margin: 0 auto 48px;
+    text-align: center;
+  }
+
+  /* CHALLENGE CARD */
+  .challenge-card h2 { font-family: var(--serif); font-size: 2rem; font-weight: 400; margin-bottom: 20px; }
+  .challenge-card h2 em { font-style: italic; color: #c5bff5; }
+  .challenge-card p { font-size: 0.92rem; line-height: 1.85; opacity: 0.8; margin-bottom: 10px; }
+
+  /* OBJECTIVE CARD */
+  .obj-card h2 { font-family: var(--serif); font-size: 2rem; font-weight: 400; margin-bottom: 20px; }
+  .obj-list { list-style: none; display: flex; flex-direction: column; gap: 10px; margin-top: 8px; }
+  .obj-list li { font-size: 0.92rem; line-height: 1.6; padding-left: 18px; position: relative; opacity: 0.8; }
+  .obj-list li::before { content: '•'; position: absolute; left: 0; opacity: 0.5; }
+
+  /* RESULTS CARD — 2 columns */
+  .results-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-top: 24px; }
+  .results-col h3 { font-size: 0.68rem; letter-spacing: 0.12em; text-transform: uppercase; opacity: 0.35; font-weight: 500; margin-bottom: 16px; }
+  .results-col ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+  .results-col ul li { font-size: 0.9rem; line-height: 1.6; padding-left: 18px; position: relative; opacity: 0.75; }
+  .results-col ul li::before { content: '•'; position: absolute; left: 0; opacity: 0.4; }
+
+  /* IMAGE SLOTS */
+  .img-slot {
+    width: 100%; border-radius: 10px; overflow: hidden;
+    background: #e8e0d5; display: flex; margin-bottom: 48px;
+  }
+  .img-slot img { width: 100%; height: auto; display: block; }
+
+  /* COPYWRITING LIST */
+  .copy-list { list-style: none; display: flex; flex-direction: column; gap: 8px; margin-top: 16px; }
+  .copy-list li { font-size: 0.9rem; line-height: 1.6; padding-left: 18px; position: relative; opacity: 0.75; }
+  .copy-list li::before { content: '•'; position: absolute; left: 0; opacity: 0.4; }
+
+  /* NEXT */
+  .cs-next { background: var(--cream); padding: 96px 48px; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 20px; }
+  .cs-next .eyebrow { font-size: 0.65rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--black); opacity: 0.4; }
+  .cs-next h2 { font-family: var(--serif); font-size: clamp(2rem,4vw,3.2rem); color: var(--black); font-weight: 400; }
+  .cs-next h2 em { font-style: italic; color: #c5bff5; }
+  .btn-next { display: inline-flex; align-items: center; gap: 10px; padding: 12px 28px; border: 1px solid rgba(0,0,0,0.2); border-radius: 100px; font-size: 0.82rem; color: var(--black); text-decoration: none; transition: background 0.2s, gap 0.2s; margin-top: 8px; }
+  .btn-next:hover { background: rgba(0,0,0,0.07); gap: 16px; }
+  .btn-primary { display: inline-flex; align-items: center; gap: 8px; background: #eaf58d; color: var(--black); font-family: var(--sans); font-size: 0.85rem; font-weight: 500; padding: 13px 28px; border-radius: 4px; text-decoration: none; border: none; cursor: pointer; transition: background 0.25s ease, box-shadow 0.3s ease; letter-spacing: 0.01em; }
+  .btn-primary:hover { background: #f2faaa; box-shadow: 0 0 0 7px rgba(234,245,141,0.35); }
+
+  /* FADE */
+  .fade-up { opacity:0; transform:translateY(20px); transition:opacity 0.65s ease, transform 0.65s ease; }
+  .fade-up.visible { opacity:1; transform:translateY(0); }
+
+  /* HAMBURGER */
+  .hamburger {
+    display: none; flex-direction: column; justify-content: center; gap: 5px;
+    background: none; border: none; cursor: pointer; padding: 4px; position: relative;
+  }
+  .hamburger span {
+    display: block; width: 22px; height: 2px; background: var(--black);
+    border-radius: 2px; transition: transform 0.3s ease, opacity 0.3s ease; transform-origin: center;
+  }
+  .hamburger.open span:first-child { transform: translateY(7px) rotate(45deg); }
+  .hamburger.open span:nth-child(2) { opacity: 0; }
+  .hamburger.open span:last-child { transform: translateY(-7px) rotate(-45deg); }
+  .mobile-menu {
+    display: none; position: fixed; inset: 0; background: var(--cream); z-index: 99;
+    flex-direction: column; align-items: center; justify-content: center; gap: 8px;
+  }
+  .mobile-menu.open { display: flex; }
+  .mob-link {
+    font-family: var(--serif); font-size: 2.8rem; color: var(--black);
+    text-decoration: none; font-weight: 400; line-height: 1.4;
+    opacity: 0; transform: translateY(16px);
+    transition: opacity 0.35s ease, transform 0.35s ease; letter-spacing: -0.01em;
+  }
+  .mobile-menu.open .mob-link { opacity: 1; transform: translateY(0); }
+  .mobile-menu.open .mob-link:nth-child(1) { transition-delay: 0.06s; }
+  .mobile-menu.open .mob-link:nth-child(2) { transition-delay: 0.12s; }
+  .mobile-menu.open .mob-link:nth-child(3) { transition-delay: 0.18s; }
+  .mobile-menu.open .mob-link:nth-child(4) { transition-delay: 0.24s; }
+  .mob-link:hover { color: #c5bff5; }
+
+  /* Footer */
+  .footer-editorial { background: var(--black); color: white; padding: 72px 48px 48px; }
+  .footer-top-bar { display: flex; justify-content: space-between; align-items: center; max-width: 1200px; margin: 0 auto 80px; }
+  .footer-logo { font-family: var(--serif); font-size: 1.65rem; letter-spacing: 0.06em; opacity: 0.5; }
+  .footer-cta-link { font-size: 0.85rem; font-weight: 500; color: #EAF58D; text-decoration: none; letter-spacing: 0.02em; display: flex; align-items: center; gap: 8px; transition: gap 0.2s ease; }
+  .footer-cta-link:hover { gap: 14px; }
+  .footer-big-phrase { max-width: 1200px; margin: 0 auto 80px; }
+  .footer-big-phrase h2 { font-family: var(--serif); font-size: clamp(3.5rem, 8vw, 7rem); line-height: 1.0; color: white; font-weight: 400; margin: 0; }
+  .footer-big-phrase h2 em { color: #c5bff5; font-style: italic; }
+  .footer-divider { max-width: 1200px; margin: 0 auto 48px; height: 1px; background: rgba(255,255,255,0.1); }
+  .footer-bottom-row { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(3, 1fr) auto; gap: 48px; align-items: start; }
+  .footer-nav-group { display: flex; flex-direction: column; gap: 12px; }
+  .footer-nav-label { font-size: 0.68rem; letter-spacing: 0.14em; text-transform: uppercase; opacity: 0.3; margin-bottom: 4px; }
+  .footer-nav-group a { font-size: 0.85rem; color: white; text-decoration: none; opacity: 0.5; transition: opacity 0.2s; }
+  .footer-nav-group a:hover { opacity: 1; }
+  .footer-copy { display: flex; flex-direction: column; gap: 6px; font-size: 0.72rem; opacity: 0.25; text-align: right; align-self: end; }
+
+  @media (max-width: 768px) {
+    .hamburger { display: flex; }
+    .nav-links { display: none; }
+  }
+  @media (max-width: 900px) {
+    nav, .hero-text { padding-left: 24px; padding-right: 24px; }
+    .hero-single-img { max-width: calc(100% - 48px); height: 400px; }
+    .wrap { padding: 0 24px; }
+    .results-cols { grid-template-columns: 1fr; }
+    .cs-next { padding: 64px 24px; }
+    .cs-card { padding: 32px; }
+    .footer-top-bar { flex-direction: column; align-items: flex-start; gap: 20px; margin-bottom: 56px; }
+    .footer-bottom-row { grid-template-columns: 1fr 1fr; }
+    .footer-copy { text-align: left; }
+  }
+  @media (max-width: 540px) {
+    .hero-single-img { height: auto; aspect-ratio: 16/9; }
+    .cs-card { padding: 20px; }
+    .hero-text { padding: 80px 24px 32px; }
+    .wrap { padding: 0 20px; padding-top: 32px !important; }
+    .pill { padding: 5px 14px; font-size: 0.68rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <a href="ana-k-landing (1).html" class="logo"><img src="Ana K. Logo-dark.svg" alt="Ana K." style="height:26px;display:block;"></a>
+    <ul class="nav-links">
+      <li><a href="ana-k-landing (1).html#about">About</a></li>
+      <li><a href="ana-k-landing (1).html#work">Work</a></li>
+      <li><a href="blog.html">Blog</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+    <button class="hamburger" id="hamburger" aria-label="Open menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<div class="mobile-menu" id="mobile-menu">
+  <a href="ana-k-landing (1).html#about" class="mob-link">About</a>
+  <a href="ana-k-landing (1).html#work" class="mob-link">Work</a>
+  <a href="blog.html" class="mob-link">Blog</a>
+  <a href="contact.html" class="mob-link">Contact</a>
+</div>
+
+<!-- HERO TEXT -->
+<div class="hero-text fade-up">
+  <h1>Vero Rosa <em>Wellness Coach</em></h1>
+  <p>A full website, brand identity, and content strategy for a Dominican Republic-based wellness coach — designed and developed end-to-end in Webflow.</p>
+  <div class="hero-pills">
+    <span class="pill">Web Design</span>
+    <span class="pill">Brand Identity</span>
+    <span class="pill">Webflow</span>
+    <span class="pill">Copywriting</span>
+  </div>
+  <div style="margin-top:28px;">
+    <a href="https://ana-karinas-cool-project-f94508308f1b49.webflow.io/" target="_blank" class="btn-primary">View live site <span>→</span></a>
+  </div>
+</div>
+
+<!-- HERO IMAGE -->
+<div class="hero-single-img fade-up" style="transition-delay:0.1s;">
+  <img src="Vero-rosa-wellness.png" alt="Vero Rosa Wellness Coach website">
+</div>
+
+<!-- CONTENT -->
+<div class="wrap" style="padding-top:72px;">
+
+  <!-- THE CHALLENGE -->
+  <div class="cs-card challenge-card fade-up">
+    <h2>The <em>Challenge</em></h2>
+    <p>The main challenge was translating a personal coaching brand into a structured digital experience that feels both personal and credible.</p>
+    <p style="font-size:0.78rem;letter-spacing:0.1em;text-transform:uppercase;opacity:0.35;font-weight:500;margin-top:28px;margin-bottom:12px;">Key challenges included</p>
+    <ul class="obj-list">
+      <li>Presenting multiple coaching services in a clear and easy-to-understand way</li>
+      <li>Building trust and authenticity through visual storytelling</li>
+      <li>Creating a site that feels welcoming and calm, aligned with the wellness space</li>
+      <li>Ensuring visitors can easily navigate from discovery to booking a session</li>
+    </ul>
+    <p style="margin-top:20px;">The design needed to balance personality with clarity, making the website informative without feeling overwhelming.</p>
+  </div>
+
+  <!-- OBJECTIVE -->
+  <div class="cs-card obj-card fade-up">
+    <h2>Objective</h2>
+    <p style="font-size:0.92rem;line-height:1.7;opacity:0.8;margin-bottom:16px;">The objective of this project was to design a website that clearly communicates Vero Rosa's wellness coaching services while creating a welcoming and trustworthy online presence. The site needed to:</p>
+    <ul class="obj-list">
+      <li>Present her coaching philosophy and services in a clear and structured way</li>
+      <li>Create a warm and approachable brand experience aligned with the wellness industry</li>
+      <li>Help visitors easily understand how they can work with her</li>
+      <li>Guide users toward booking a session or making contact</li>
+    </ul>
+    <p style="font-size:0.92rem;line-height:1.7;opacity:0.8;margin-top:16px;">The goal was to build a digital experience that balances personal storytelling with clear service communication, supporting both brand credibility and client conversion.</p>
+  </div>
+
+  <!-- WEBSITE ARCHITECTURE -->
+  <div class="fade-up" style="text-align:center; margin: 48px 0 0;">
+    <h2 class="section-title">Website <em>Architecture</em></h2>
+    <p class="section-intro">The website was structured to guide visitors through Vero Rosa's coaching philosophy, services, and programs while making it easy to understand how to work with her. Structured around destination funnels instead of generic listings.</p>
+  </div>
+  <div class="cs-card fade-up">
+    <div class="results-cols" style="margin-top:0;">
+      <div class="results-col">
+        <h3>Core Pages</h3>
+        <ul>
+          <li>Home</li>
+          <li>About Vero Rosa</li>
+          <li>Coaching Services</li>
+          <li>Programs / Method</li>
+          <li>Blog / Resources</li>
+          <li>Contact / Book a Session</li>
+        </ul>
+      </div>
+      <div class="results-col">
+        <h3>User Journey</h3>
+        <ul>
+          <li>Discover Vero's philosophy (Home)</li>
+          <li>Learn about her story and expertise (About)</li>
+          <li>Explore coaching services (Services)</li>
+          <li>Understand the programs and methodology (Programs)</li>
+          <li>Build trust through content and insights (Blog)</li>
+          <li>Book a session or make contact (Contact)</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- IMAGE AFTER ARCHITECTURE -->
+  <div class="img-slot fade-up" style="width:1200px; max-width:100%; margin: 0 auto 48px;">
+    <img src="Vero-rosa-2.jpg" alt="Vero Rosa Wellness website">
+  </div>
+
+  <!-- DESIGN PROCESS -->
+  <div class="cs-card fade-up">
+    <div class="logo-typo-block" style="border-bottom:none;padding-bottom:0;padding-top:0;">
+      <h2>Design <em style="font-style:italic;color:#c5bff5;">Process</em></h2>
+      <p style="margin-bottom:12px;">The project began with defining the site structure and user flow, identifying the main pages needed to explain Vero's services and philosophy.</p>
+      <p style="margin-bottom:12px;">Wireframes were created to organize content and ensure the website would guide users naturally through the experience.</p>
+      <p>After the structure was finalized, the design moved into high-fidelity layouts, focusing on typography, imagery, and spacing to create a calm and inviting aesthetic aligned with the wellness industry.</p>
+    </div>
+  </div>
+
+  <!-- DELIVERABLES -->
+  <div class="cs-card fade-up">
+    <div class="logo-typo-block" style="border-bottom:none;padding-bottom:0;padding-top:0;">
+      <h2>What I <em>Delivered</em></h2>
+      <p>This was a full end-to-end project — from brand identity to live website. Every element was designed to work together as a cohesive system.</p>
+      <ul class="copy-list" style="margin-top:20px;">
+        <li>Brand Identity &amp; Logo</li>
+        <li>Full Website Design</li>
+        <li>Webflow Development</li>
+        <li>Copywriting in Spanish</li>
+        <li>Blog &amp; Recipes Integration</li>
+        <li>Newsletter &amp; Lead Capture</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- IMAGE AFTER DELIVERABLES -->
+  <div class="img-slot fade-up" style="width:1200px; max-width:100%; margin: 0 auto 48px;">
+    <img src="vero-rosa-3.png" alt="Vero Rosa Wellness website">
+  </div>
+
+  <!-- PLANS -->
+  <div class="cs-card fade-up">
+    <div class="logo-typo-block" style="border-bottom:none;padding-bottom:0;padding-top:0;">
+      <h2>Plans</h2>
+      <p>The program includes four different plans, each with its own dedicated page. This structure allows users to explore the details of each option individually, including what the plan includes, who it is designed for and the specific benefits offered. Separating the plans into individual pages improves clarity, makes the content easier to navigate, and helps guide users toward selecting the option that best fits their goals.</p>
+    </div>
+  </div>
+
+  <!-- IMAGE AFTER PLANS -->
+  <div class="img-slot fade-up" style="width:1200px; max-width:100%; margin: 0 auto 48px;">
+    <img src="vero-rosa-4.png" alt="Vero Rosa Wellness plans">
+  </div>
+
+  <!-- RECIPES -->
+  <div class="cs-card fade-up">
+    <div class="logo-typo-block" style="border-bottom:none;padding-bottom:0;padding-top:0;">
+      <h2>Recipes</h2>
+      <p style="margin-bottom:12px;">The recipes section was designed not only to provide valuable nutritional content but also to support the brand's marketing strategy. Each recipe is structured in a clear and visually engaging way, highlighting ingredients, preparation steps, and benefits.</p>
+      <p>The recipes were also created to be easily repurposed for platforms like Pinterest and Instagram, allowing the brand to share attractive, educational content that drives traffic back to the website. This approach helps expand reach, attract new users, and bring consistent organic traffic into the program ecosystem.</p>
+    </div>
+  </div>
+
+  <!-- BRANDING & VISUAL ASSETS -->
+  <div class="fade-up" style="text-align:center; margin: 48px 0 0;">
+    <h2 class="section-title">Branding & <em>Visual Assets</em></h2>
+    <p class="section-intro">As part of the project, the branding was developed to create a cohesive and recognizable identity across all touchpoints. This included the design of the logo, digital assets, and branded materials such as ebooks. The goal was to establish a visual language that reflects the brand's focus on wellness, clarity, and approachability while remaining consistent across the website, educational resources, and marketing content.</p>
+  </div>
+
+  <!-- VISUAL IDENTITY IMAGE -->
+  <div class="img-slot fade-up" style="width:1200px; max-width:100%; margin: 0 auto 48px;">
+    <img src="Visual Identity vero-rosa.jpg" alt="Vero Rosa Visual Identity">
+  </div>
+
+  <!-- LOGO -->
+  <div class="cs-card fade-up">
+    <div class="logo-typo-block" style="border-bottom:none;padding-bottom:0;padding-top:0;">
+      <h2>Logo design</h2>
+      <p style="margin-bottom:12px;">The logo was designed to reflect a clean and modern wellness brand. The typography is simple and elegant, helping communicate professionalism while remaining approachable for the target audience. The color palette and overall style align with the brand's focus on balance, health, and lifestyle transformation.</p>
+      <p>The logo also works effectively across different formats and assets, maintaining visual consistency whether it appears on the website, social media, ebooks, or other branded materials. This flexibility ensures the brand remains recognizable and cohesive across all platforms.</p>
+    </div>
+  </div>
+
+  <!-- RECETAS IMAGE -->
+  <div class="img-slot fade-up" style="width:1200px; max-width:100%; margin: 0 auto 48px;">
+    <img src="vero-recetas.jpg" alt="Vero Rosa Recetas">
+  </div>
+
+  <!-- OUTCOME -->
+  <div class="cs-card fade-up" style="margin-bottom:120px;">
+    <div class="logo-typo-block" style="border-bottom:none;padding-bottom:0;padding-top:0;">
+      <h2>Outcome</h2>
+      <p style="margin-bottom:12px;">The final result was a cohesive brand identity that supports both the website and the broader content strategy. The logo and visual assets created a consistent look across the website, ebooks, and marketing materials, helping strengthen the brand's recognition and credibility.</p>
+      <p>This unified branding system also made it easier to produce content for platforms such as Pinterest, Instagram, and digital resources, ensuring that every touchpoint maintains the same visual language while driving traffic back to the website and supporting the overall growth of the brand.</p>
+    </div>
+  </div>
+
+</div><!-- /wrap -->
+
+<script>
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.06 });
+  document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
+  window.addEventListener('load', () => {
+    document.querySelectorAll('.fade-up').forEach(el => {
+      if (el.getBoundingClientRect().top < window.innerHeight) el.classList.add('visible');
+    });
+  });
+
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobile-menu');
+  hamburger.addEventListener('click', () => {
+    const isOpen = hamburger.classList.toggle('open');
+    mobileMenu.classList.toggle('open', isOpen);
+    hamburger.setAttribute('aria-label', isOpen ? 'Close menu' : 'Open menu');
+    document.body.style.overflow = isOpen ? 'hidden' : '';
+  });
+  mobileMenu.querySelectorAll('.mob-link').forEach(link => {
+    link.addEventListener('click', () => {
+      hamburger.classList.remove('open');
+      mobileMenu.classList.remove('open');
+      document.body.style.overflow = '';
+    });
+  });
+</script>
+
+<!-- NEXT CASE STUDY -->
+<section class="cs-next">
+  <span class="eyebrow">Next project</span>
+  <h2>Casalty <em>Brand Identity</em></h2>
+  <a href="casalty-case-study.html" class="btn-next">View case study →</a>
+</section>
+
+<footer class="footer-editorial">
+  <div class="footer-top-bar">
+    <span class="footer-logo"><img src="Ana K. Logo.svg" alt="Ana K." style="height:24px;display:block;"></span>
+    <a href="contact.html" class="footer-cta-link">Start working together <span>→</span></a>
+  </div>
+  <div class="footer-big-phrase">
+    <h2>Good design changes<br><em>everything.</em></h2>
+  </div>
+  <div class="footer-divider"></div>
+  <div class="footer-bottom-row">
+    <div class="footer-nav-group">
+      <span class="footer-nav-label">Pages</span>
+      <a href="ana-k-landing (1).html#about">About</a>
+      <a href="ana-k-landing (1).html#work">Work</a>
+      <a href="blog.html">Blog</a>
+      <a href="contact.html">Contact</a>
+    </div>
+    <div class="footer-nav-group">
+      <span class="footer-nav-label">Connect</span>
+      <a href="#">Instagram</a>
+      <a href="https://www.linkedin.com/in/ana-karina-rosa-rosario-3b407199/?locale=en_US" target="_blank">LinkedIn</a>
+      <a href="https://www.behance.net/anarosa3" target="_blank">Behance</a>
+      <a href="mailto:anakarinarosa256@gmail.com">Email</a>
+    </div>
+    <div class="footer-copy">
+      <span>© 2025 Ana K.</span>
+      <span>Designed &amp; built by Ana K.</span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

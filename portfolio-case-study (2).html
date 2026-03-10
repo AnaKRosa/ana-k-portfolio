@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Case Study — Ana K. Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #edecea;
+      --dark: #111;
+      --accent: #b8a98a;
+      --text: #2a2a2a;
+      --muted: #6b6b6b;
+      --card: #f5f4f1;
+      --white: #faf9f7;
+      --serif: 'Instrument Serif', Georgia, serif;
+      --sans: 'DM Sans', sans-serif;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--sans);
+      font-weight: 300;
+      line-height: 1.7;
+    }
+
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.5rem 4rem;
+      border-bottom: 1px solid rgba(0,0,0,0.08);
+      position: sticky;
+      top: 0;
+      background: var(--bg);
+      z-index: 10;
+    }
+    nav .logo { font-family: var(--serif); font-size: 1.1rem; }
+    nav .links { display: flex; gap: 2rem; font-size: 0.85rem; color: var(--muted); }
+    nav .links a { text-decoration: none; color: inherit; transition: color 0.2s; }
+    nav .links a:hover { color: var(--text); }
+
+    .content-wrap {
+      padding: 0 2rem 0;
+    }
+    .hero {
+      text-align: center;
+      padding: 5rem 2rem 3rem;
+      max-width: 760px;
+      margin: 0 auto;
+    }
+    .tags { display: flex; gap: 0.5rem; justify-content: center; margin-top: 1.5rem; margin-bottom: 1.5rem; flex-wrap: wrap; }
+    .tag {
+      font-size: 0.72rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      border: 1px solid rgba(0,0,0,0.15);
+      color: var(--muted);
+      padding: 0.3rem 0.9rem;
+      border-radius: 100px;
+    }
+    .hero h1 {
+      font-family: var(--serif);
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      font-weight: 400;
+      line-height: 1.2;
+      margin-bottom: 1rem;
+    }
+    .hero h1 em { font-style: italic; color: var(--accent); }
+    .hero .subtitle { color: var(--muted); font-size: 0.95rem; max-width: 480px; margin: 0 auto; }
+
+    .hero-img-wrap {
+      max-width: 900px;
+      margin: 3rem auto 2rem;
+      padding: 0 2rem;
+    }
+    .placeholder-img {
+      width: 100%;
+      border-radius: 14px;
+      background: #1a1a1a;
+      aspect-ratio: 16/9;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: rgba(255,255,255,0.15);
+      font-size: 0.75rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      box-shadow: 0 30px 80px rgba(0,0,0,0.12);
+    }
+
+    .content-wrap { display: none; } /* removed */
+
+    .section {
+      max-width: 820px;
+      margin: 0 auto 1.5rem;
+      padding: 3rem;
+      background: var(--white);
+      border-radius: 18px;
+    }
+    .section + .section { border-top: none; }
+
+    .vibe-section {
+      background: var(--dark) !important;
+      border-radius: 18px;
+    }
+
+    .process-images {
+      max-width: 820px;
+      margin: 0 auto 1.5rem;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .hero-img-wrap {
+      max-width: 820px;
+      margin: 3rem auto 2rem;
+      padding: 0;
+    }
+
+    .section-label {
+      font-size: 0.7rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1rem;
+      font-weight: 500;
+    }
+    .section h2 {
+      font-family: var(--serif);
+      font-size: clamp(1.6rem, 3.5vw, 2.4rem);
+      font-weight: 400;
+      margin-bottom: 1.5rem;
+      line-height: 1.2;
+      color: var(--text);
+    }
+    .section h2 em {
+      font-family: var(--serif);
+      font-style: italic;
+      color: #c4bbf0;
+      font-weight: 400;
+    }
+
+    /* Challenge-style heading: "The" small + "Challenge" big purple serif */
+    .heading-split { margin-bottom: 1.5rem; }
+    .heading-split .title-line {
+      font-family: var(--serif);
+      font-size: 32px;
+      font-weight: 400;
+      color: var(--text);
+      display: block;
+      margin-bottom: 0.6rem;
+    }
+    .heading-split .title-line em {
+      font-style: italic;
+      color: #c4bbf0;
+    }
+    .heading-split .sub {
+      font-family: var(--serif);
+      font-size: 1.25rem;
+      font-weight: 400;
+      color: var(--text);
+      font-style: normal;
+      display: block;
+    }
+
+    .section p { font-family: var(--sans); font-size: 15px; color: var(--muted); max-width: 680px; margin-bottom: 0.9rem; }
+    .sublabel {
+      font-size: 0.68rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin: 2rem 0 0.8rem;
+    }
+    .bullet-list { list-style: none; padding: 0; margin: 0; }
+    .bullet-list li {
+      font-size: 0.92rem;
+      color: var(--muted);
+      padding: 0.5rem 0;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    .bullet-list li::before {
+      content: '·';
+      color: var(--muted);
+      font-size: 1.4rem;
+      line-height: 1;
+      flex-shrink: 0;
+    }
+
+    .meta-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 1px;
+      background: rgba(0,0,0,0.08);
+      border: 1px solid rgba(0,0,0,0.08);
+      border-radius: 12px;
+      overflow: hidden;
+      margin-top: 2.5rem;
+    }
+    .meta-item { background: var(--bg); padding: 1.5rem; }
+    .meta-item .label { font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.4rem; }
+    .meta-item .value { font-size: 0.9rem; font-weight: 500; color: var(--text); }
+
+    .stack-list { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1.5rem; }
+    .pill { background: var(--card); border-radius: 6px; padding: 0.4rem 1rem; font-size: 0.82rem; color: var(--text); }
+    .pill.dark { background: var(--dark); color: #fff; }
+
+    .iter-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+      margin-top: 2rem;
+    }
+    .iter-card {
+      background: var(--card);
+      border-radius: 10px;
+      aspect-ratio: 2/3;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 1rem;
+    }
+    .iter-card.final { background: var(--dark); }
+    .iter-label {
+      font-size: 0.68rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      background: var(--bg);
+      padding: 0.25rem 0.6rem;
+      border-radius: 4px;
+      width: fit-content;
+    }
+    .iter-card.final .iter-label { background: rgba(255,255,255,0.1); color: rgba(255,255,255,0.6); }
+    .iter-note { font-size: 0.75rem; color: var(--muted); margin-top: 0.4rem; }
+    .iter-card.final .iter-note { color: rgba(255,255,255,0.35); }
+
+    .pullquote {
+      border-left: 2px solid var(--accent);
+      padding: 1.5rem 2rem;
+      margin: 2.5rem 0 1rem;
+      background: var(--card);
+      border-radius: 0 10px 10px 0;
+    }
+    .pullquote p {
+      font-family: var(--serif);
+      font-size: 1.15rem;
+      font-style: italic;
+      color: var(--text) !important;
+      max-width: 100% !important;
+      margin: 0 !important;
+      line-height: 1.5;
+    }
+
+    .vibe-inner { max-width: 100%; margin: 0 auto; }
+    .vibe-section .section-label { color: #c4bbf0; }
+    .vibe-section h2 {
+      font-family: var(--serif);
+      font-size: clamp(1.5rem, 3vw, 2.2rem);
+      font-weight: 400;
+      color: #fff;
+      margin-bottom: 1.2rem;
+      line-height: 1.25;
+    }
+    .vibe-section h2 em { font-style: italic; color: #c4bbf0; }
+    .vibe-section p { color: rgba(255,255,255,0.55); font-size: 0.95rem; max-width: 620px; margin-bottom: 0.9rem; }
+
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 1.5rem;
+      margin-top: 3rem;
+    }
+    .step { border-top: 1px solid rgba(255,255,255,0.12); padding-top: 1.2rem; }
+    .step .num { font-family: var(--serif); font-size: 2rem; color: rgba(255,255,255,0.12); line-height: 1; margin-bottom: 0.6rem; }
+    .step .title { font-size: 0.85rem; font-weight: 500; color: #fff; margin-bottom: 0.4rem; }
+    .step .desc { font-size: 0.8rem; color: rgba(255,255,255,0.45); line-height: 1.55; }
+
+    .results-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 1rem;
+      margin-top: 2.5rem;
+    }
+    .result-card { background: var(--card); border-radius: 12px; padding: 2rem 1.5rem; }
+    .result-card .big { font-family: var(--serif); font-size: 2.8rem; font-weight: 400; color: var(--text); line-height: 1; margin-bottom: 0.5rem; }
+    .result-card .big em { font-style: italic; color: var(--accent); }
+    .result-card .desc { font-size: 0.82rem; color: var(--muted); line-height: 1.5; }
+
+    .next-case { border-top: 1px solid rgba(0,0,0,0.08); padding: 5rem 2rem; text-align: center; }
+    .next-case .eyebrow { font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.8rem; }
+    .next-case h3 { font-family: var(--serif); font-size: clamp(1.5rem, 3vw, 2.2rem); font-weight: 400; }
+    .next-case h3 em { font-style: italic; color: #c4bbf0; }
+
+    footer {
+      background: var(--dark);
+      color: rgba(255,255,255,0.4);
+      text-align: center;
+      padding: 5rem 2rem 3rem;
+      font-size: 0.8rem;
+    }
+    footer .f-headline { font-family: var(--serif); font-size: clamp(2rem, 5vw, 3.5rem); color: #fff; font-weight: 400; margin-bottom: 0.3rem; }
+    footer .f-headline em { font-style: italic; color: var(--accent); }
+    footer .f-links { display: flex; gap: 2rem; justify-content: center; margin-top: 3rem; }
+    footer .f-links a { text-decoration: none; color: rgba(255,255,255,0.4); font-size: 0.8rem; transition: color 0.2s; }
+    footer .f-links a:hover { color: rgba(255,255,255,0.8); }
+
+    .process-images {
+      max-width: 900px;
+      margin: 0 auto 1.5rem;
+      padding: 0 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    .process-img-placeholder {
+      width: 100%;
+      aspect-ratio: 16/10;
+      background: var(--card);
+      border-radius: 14px;
+    }
+
+    @media (max-width: 640px) {
+      nav { padding: 1rem 1.5rem; }
+      nav .links { gap: 1rem; }
+      .iter-grid { grid-template-columns: 1fr 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+
+
+  <div class="hero">
+    <h1>Designing — and building — my own portfolio from scratch</h1>
+    <p class="subtitle">A case study on going from look & feel to live, coded product using AI-assisted development.</p>
+    <div class="tags">
+      <span class="tag">Web Design</span>
+      <span class="tag">Vibe Coding</span>
+      <span class="tag">Personal Brand</span>
+    </div>
+  </div>
+
+  <div class="hero-img-wrap">
+    <div class="placeholder-img">[ Portfolio screenshot ]</div>
+  </div>
+
+  <!-- THE CHALLENGE -->
+  <div class="section">
+    <div class="heading-split">
+      <span class="title-line">The <em>Challenge</em></span>
+      <span class="sub">I needed a portfolio that looked like mine — and that I could build.</span>
+    </div>
+    <p>As a web and graphic designer, my portfolio is my most important piece of work. But I didn't want to be limited by no-code tools or dependent on a developer to make changes. I wanted full ownership — design and code.</p>
+    <p>The goal wasn't just a good-looking site. It was proof that I can take a project from concept to production without handing it off to anyone.</p>
+    <div class="meta-grid">
+      <div class="meta-item">
+        <div class="label">Role</div>
+        <div class="value">Designer & Developer</div>
+      </div>
+      <div class="meta-item">
+        <div class="label">Scope</div>
+        <div class="value">End-to-end</div>
+      </div>
+      <div class="meta-item">
+        <div class="label">Method</div>
+        <div class="value">Vibe Coding</div>
+      </div>
+      <div class="meta-item">
+        <div class="label">Status</div>
+        <div class="value">Live in production</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- STACK -->
+  <div class="section">
+    <h2>Stack</h2>
+    <p>I designed in Figma, then executed the entire build using vibe coding — directing Claude to write, iterate, and refine the code based on my design decisions. No Webflow, no templates, no handoff.</p>
+    <div class="stack-list">
+      <span class="pill dark">Claude (Vibe Coding)</span>
+      <span class="pill dark">HTML / CSS / JS</span>
+      <span class="pill">Figma</span>
+      <span class="pill">VS Code</span>
+      <span class="pill">Netlify</span>
+      <span class="pill">Cal.com</span>
+    </div>
+  </div>
+
+  <!-- DESIGN PROCESS -->
+  <div class="section">
+    <h2>Design <em>Process</em></h2>
+    <p>I started in Figma by defining the look and feel — dark hero, lavender cards, editorial typography, and a tone that feels personal but professional. Then I iterated across multiple versions before touching a single line of code.</p>
+  </div>
+
+  <div class="process-images">
+    <div class="process-img-placeholder"></div>
+    <div class="process-img-placeholder"></div>
+  </div>
+
+  <!-- VIBE CODING -->
+  <div class="section vibe-section">
+    <div class="section-label">Vibe Coding</div>
+    <h2 style="color:#fff;">Design <em>and</em> build — no developer needed</h2>
+    <p style="color:rgba(255,255,255,0.55);">Vibe coding means using AI as a development partner — you direct, it executes. I described each section, made decisions on spacing, components, and behavior, and iterated in real time. Every pixel reflects a deliberate creative choice.</p>
+    <p style="color:rgba(255,255,255,0.55);">This is the skill that sets me apart: I can take a design from Figma to a live, functional website myself — which means faster delivery, lower cost, and zero translation errors for my clients.</p>
+    <div class="steps">
+      <div class="step">
+        <div class="num">01</div>
+        <div class="title">Define the vision</div>
+        <div class="desc">Look & feel, colors, typography, tone — all locked in Figma before writing a single prompt.</div>
+      </div>
+      <div class="step">
+        <div class="num">02</div>
+        <div class="title">Prompt & build</div>
+        <div class="desc">I directed Claude section by section, describing layout, components, and interactions.</div>
+      </div>
+      <div class="step">
+        <div class="num">03</div>
+        <div class="title">Iterate in real time</div>
+        <div class="desc">Adjusted spacing, copy, animations, and responsiveness through live conversation.</div>
+      </div>
+      <div class="step">
+        <div class="num">04</div>
+        <div class="title">Ship to production</div>
+        <div class="desc">Took the final code live — fully responsive, performant, and entirely mine.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="process-images">
+    <div class="process-img-placeholder"></div>
+    <div class="process-img-placeholder"></div>
+  </div>
+
+  <!-- WHAT GOT BUILT -->
+  <div class="section">
+    <h2>What Got <em>Built</em></h2>
+    <p>The final portfolio includes every section built from scratch: hero with animated gradient, services breakdown, selected work with case studies, client testimonials, transparent pricing, about section, FAQ, blog previews, and a full footer.</p>
+    <p>Everything is responsive, intentional, and reflects my brand — not a theme someone else designed.</p>
+    <div class="results-grid">
+      <div class="result-card">
+        <div class="big">10<em>+</em></div>
+        <div class="desc">Sections built from scratch, no templates used</div>
+      </div>
+      <div class="result-card">
+        <div class="big">3<em>×</em></div>
+        <div class="desc">Faster than a traditional design-to-dev handoff</div>
+      </div>
+      <div class="result-card">
+        <div class="big">1<em>→∞</em></div>
+        <div class="desc">One person: designer, developer, and creative director</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TAKEAWAY -->
+  <div class="section">
+    <h2>The <em>Takeaway</em></h2>
+    <p>When you work with me, you get a designer who can also execute. No waiting on developers, no lost-in-translation moments, no extra cost. I take your vision from concept to live product — and this portfolio is the proof.</p>
+    <div class="pullquote">
+      <p>"Good design changes everything — but only when it actually ships."</p>
+    </div>
+  </div>
+
+  <!-- NEXT CASE -->
+  <div class="next-case">
+    <div class="eyebrow">Next case study</div>
+    <h3>Casalty — <em>Brand Identity</em></h3>
+  </div>
+
+
+</body>
+</html>

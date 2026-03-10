@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Blog · Ana K.</title>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --cream: #f4f1eb;
+    --black: #0e0e0e;
+    --forest: #2c4a35;
+    --lavender: #c5bff5;
+    --lime: #EAF58D;
+    --serif: 'Instrument Serif', Georgia, serif;
+    --sans: 'DM Sans', sans-serif;
+  }
+  html { scroll-behavior: smooth; }
+  body { font-family: var(--sans); background: var(--cream); color: var(--black); overflow-x: hidden; }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: var(--cream); border-bottom: 1px solid rgba(0,0,0,0.07);
+    padding: 0 48px;
+  }
+  .nav-inner {
+    max-width: 1200px; margin: 0 auto;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 18px 0;
+  }
+  .logo { font-family: var(--serif); font-size: 1.5rem; letter-spacing: 0.04em; text-decoration: none; color: var(--black); }
+  .nav-links { display: flex; gap: 28px; list-style: none; }
+  .nav-links a { font-size: 0.8rem; text-decoration: none; color: var(--black); opacity: 0.55; letter-spacing: 0.04em; transition: opacity 0.2s; }
+  .nav-links a:hover, .nav-links a.active { opacity: 1; }
+
+  /* WRAP */
+  .wrap { max-width: 1200px; margin: 0 auto; padding: 0 48px; }
+
+  /* PAGE HEADER */
+  .page-header {
+    padding: 130px 0 64px;
+    border-bottom: 1px solid rgba(0,0,0,0.08);
+    margin-bottom: 72px;
+    display: flex; justify-content: space-between; align-items: flex-end;
+  }
+  .page-header-left {}
+  .eyebrow {
+    font-size: 0.62rem; letter-spacing: 0.2em; text-transform: uppercase;
+    opacity: 0.35; font-weight: 500; margin-bottom: 16px;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .eyebrow::before { content: ''; display: block; width: 24px; height: 1px; background: currentColor; }
+  .page-header h1 {
+    font-family: var(--serif);
+    font-size: clamp(2.8rem, 5vw, 4.5rem);
+    font-weight: 400; line-height: 1.05;
+    letter-spacing: -0.02em;
+  }
+  .page-header h1 em { font-style: italic; color: var(--lavender); }
+  .post-count {
+    font-size: 0.75rem; letter-spacing: 0.08em; opacity: 0.3;
+    padding-bottom: 8px;
+  }
+
+  /* FEATURED POST */
+  .featured {
+    display: grid; grid-template-columns: 1.1fr 0.9fr;
+    gap: 0;
+    background: rgba(255,255,255,0.4);
+    border: 1px solid rgba(0,0,0,0.08);
+    border-radius: 12px; overflow: hidden;
+    margin-bottom: 16px;
+    text-decoration: none; color: var(--black);
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+  }
+  .featured:hover { transform: translateY(-3px); box-shadow: 0 16px 48px rgba(0,0,0,0.07); }
+  .featured-img {
+    background: #c0ccc4;
+    overflow: hidden; position: relative;
+  }
+  .featured-img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s ease; }
+  .featured:hover .featured-img img { transform: scale(1.03); }
+  .featured-img .ph {
+    width: 100%; height: 100%; display: flex; flex-direction: column;
+    align-items: center; justify-content: center; gap: 8px;
+  }
+  .featured-img .ph svg { opacity: 0.2; }
+  .featured-img .ph span { font-size: 0.6rem; letter-spacing: 0.1em; text-transform: uppercase; opacity: 0.3; }
+  .featured-body {
+    padding: 52px 56px;
+    display: flex; flex-direction: column; justify-content: space-between;
+  }
+  .featured-top {}
+  .featured-tag {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-size: 0.62rem; letter-spacing: 0.14em; text-transform: uppercase;
+    background: var(--lavender); color: var(--black);
+    padding: 5px 12px; border-radius: 100px; font-weight: 500;
+    margin-bottom: 20px;
+  }
+  .featured-label {
+    font-size: 0.62rem; letter-spacing: 0.14em; text-transform: uppercase;
+    opacity: 0.35; font-weight: 500; margin-bottom: 12px;
+  }
+  .featured-title {
+    font-family: var(--serif);
+    font-size: clamp(1.6rem, 2.5vw, 2.2rem);
+    font-weight: 400; line-height: 1.2;
+    letter-spacing: -0.01em; margin-bottom: 20px;
+  }
+  .featured-excerpt {
+    font-size: 0.88rem; line-height: 1.8; opacity: 0.55;
+    margin-bottom: 0;
+  }
+  .featured-meta {
+    display: flex; align-items: center; gap: 20px;
+    padding-top: 32px;
+    border-top: 1px solid rgba(0,0,0,0.07);
+    margin-top: 32px;
+  }
+  .meta-item { font-size: 0.72rem; opacity: 0.4; letter-spacing: 0.04em; }
+  .meta-dot { width: 3px; height: 3px; border-radius: 50%; background: currentColor; opacity: 0.25; }
+  .read-more {
+    margin-left: auto;
+    font-size: 0.75rem; opacity: 0.5;
+    display: flex; align-items: center; gap: 6px;
+    transition: opacity 0.2s, gap 0.2s;
+  }
+  .featured:hover .read-more { opacity: 1; gap: 10px; }
+
+  /* POSTS GRID */
+  .posts-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-bottom: 120px;
+  }
+
+  .post-card {
+    background: rgba(255,255,255,0.4);
+    border: 1px solid rgba(0,0,0,0.08);
+    border-radius: 12px; overflow: hidden;
+    text-decoration: none; color: var(--black);
+    display: flex; flex-direction: column;
+    transition: transform 0.35s ease, box-shadow 0.35s ease;
+  }
+  .post-card:hover { transform: translateY(-4px); box-shadow: 0 12px 36px rgba(0,0,0,0.07); }
+
+  .post-img {
+    background: #c8d4cc; aspect-ratio: 16/10;
+    overflow: hidden; flex-shrink: 0;
+  }
+  .post-img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; }
+  .post-card:hover .post-img img { transform: scale(1.04); }
+  .post-img .ph {
+    width: 100%; height: 100%; display: flex; flex-direction: column;
+    align-items: center; justify-content: center; gap: 6px;
+  }
+  .post-img .ph svg { opacity: 0.2; }
+
+  .post-body { padding: 28px 32px 32px; display: flex; flex-direction: column; flex: 1; }
+
+  .post-tag {
+    display: inline-flex;
+    font-size: 0.58rem; letter-spacing: 0.14em; text-transform: uppercase;
+    background: rgba(197,191,245,0.2); color: var(--black);
+    padding: 4px 10px; border-radius: 100px; font-weight: 500;
+    margin-bottom: 14px; align-self: flex-start;
+    border: 1px solid rgba(197,191,245,0.3);
+  }
+
+  .post-title {
+    font-family: var(--serif);
+    font-size: 1.25rem; font-weight: 400; line-height: 1.25;
+    letter-spacing: -0.01em; margin-bottom: 12px;
+  }
+
+  .post-excerpt {
+    font-size: 0.82rem; line-height: 1.75; opacity: 0.5;
+    margin-bottom: 0; flex: 1;
+  }
+
+  .post-meta {
+    display: flex; align-items: center; gap: 12px;
+    margin-top: 24px; padding-top: 20px;
+    border-top: 1px solid rgba(0,0,0,0.07);
+  }
+  .post-meta .meta-item { font-size: 0.68rem; opacity: 0.38; }
+  .post-meta .meta-dot { width: 2px; height: 2px; border-radius: 50%; background: currentColor; opacity: 0.25; flex-shrink: 0; }
+
+  /* FADE */
+  .fade-up { opacity: 0; transform: translateY(20px); transition: opacity 0.65s ease, transform 0.65s ease; }
+  .fade-up.visible { opacity: 1; transform: translateY(0); }
+
+  /* HAMBURGER */
+  .hamburger {
+    display: none; flex-direction: column; justify-content: center; gap: 5px;
+    background: none; border: none; cursor: pointer; padding: 4px; position: relative;
+  }
+  .hamburger span {
+    display: block; width: 22px; height: 2px; background: var(--black);
+    border-radius: 2px; transition: transform 0.3s ease, opacity 0.3s ease; transform-origin: center;
+  }
+  .hamburger.open span:first-child { transform: translateY(7px) rotate(45deg); }
+  .hamburger.open span:nth-child(2) { opacity: 0; }
+  .hamburger.open span:last-child { transform: translateY(-7px) rotate(-45deg); }
+  .mobile-menu {
+    display: none; position: fixed; inset: 0; background: var(--cream); z-index: 99;
+    flex-direction: column; align-items: center; justify-content: center; gap: 8px;
+  }
+  .mobile-menu.open { display: flex; }
+  .mob-link {
+    font-family: var(--serif); font-size: 2.8rem; color: var(--black);
+    text-decoration: none; font-weight: 400; line-height: 1.4;
+    opacity: 0; transform: translateY(16px);
+    transition: opacity 0.35s ease, transform 0.35s ease; letter-spacing: -0.01em;
+  }
+  .mobile-menu.open .mob-link { opacity: 1; transform: translateY(0); }
+  .mobile-menu.open .mob-link:nth-child(1) { transition-delay: 0.06s; }
+  .mobile-menu.open .mob-link:nth-child(2) { transition-delay: 0.12s; }
+  .mobile-menu.open .mob-link:nth-child(3) { transition-delay: 0.18s; }
+  .mobile-menu.open .mob-link:nth-child(4) { transition-delay: 0.24s; }
+  .mob-link:hover { color: #c5bff5; }
+  @media (max-width: 700px) {
+    .hamburger { display: flex; }
+    .nav-links { display: none; }
+  }
+
+  @media (max-width: 1024px) {
+    .posts-grid { grid-template-columns: repeat(2, 1fr); }
+    .featured { grid-template-columns: 1fr; }
+    .featured-img { aspect-ratio: 16/9; }
+  }
+  @media (max-width: 700px) {
+    nav { padding: 0 24px; }
+    .wrap { padding: 0 24px; }
+    .posts-grid { grid-template-columns: 1fr; }
+    .featured-body { padding: 32px; }
+    .page-header { flex-direction: column; align-items: flex-start; gap: 12px; }
+  }
+
+  /* FOOTER */
+  .footer-editorial { background: var(--black); color: white; padding: 72px 48px 48px; }
+  .footer-top-bar { display: flex; justify-content: space-between; align-items: center; max-width: 1200px; margin: 0 auto 80px; }
+  .footer-logo { font-family: var(--serif); font-size: 1.65rem; letter-spacing: 0.06em; opacity: 0.5; }
+  .footer-cta-link { font-size: 0.85rem; font-weight: 500; color: #EAF58D; text-decoration: none; letter-spacing: 0.02em; display: flex; align-items: center; gap: 8px; transition: gap 0.2s ease; }
+  .footer-cta-link:hover { gap: 14px; }
+  .footer-big-phrase { max-width: 1200px; margin: 0 auto 80px; }
+  .footer-big-phrase h2 { font-family: var(--serif); font-size: clamp(3.5rem, 8vw, 7rem); line-height: 1.0; color: white; font-weight: 400; margin: 0; }
+  .footer-big-phrase h2 em { color: #c5bff5; font-style: italic; }
+  .footer-divider { margin: 0 0 48px; height: 1px; background: rgba(255,255,255,0.1); }
+  .footer-bottom-row { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(3, 1fr) auto; gap: 48px; align-items: start; }
+  .footer-nav-group { display: flex; flex-direction: column; gap: 12px; }
+  .footer-nav-label { font-size: 0.68rem; letter-spacing: 0.14em; text-transform: uppercase; opacity: 0.3; margin-bottom: 4px; }
+  .footer-nav-group a { font-size: 0.85rem; color: white; text-decoration: none; opacity: 0.5; transition: opacity 0.2s; }
+  .footer-nav-group a:hover { opacity: 1; }
+  .footer-copy { display: flex; flex-direction: column; gap: 6px; font-size: 0.72rem; opacity: 0.25; text-align: right; align-self: end; }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="ana-k-landing (1).html" class="logo"><img src="Ana K. Logo-dark.svg" alt="Ana K." style="height:26px;display:block;"></a>
+    <ul class="nav-links">
+      <li><a href="ana-k-landing (1).html#about">About</a></li>
+      <li><a href="ana-k-landing (1).html#work">Work</a></li>
+      <li><a href="#" class="active">Blog</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+    <button class="hamburger" id="hamburger" aria-label="Open menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<div class="mobile-menu" id="mobile-menu">
+  <a href="ana-k-landing (1).html#about" class="mob-link">About</a>
+  <a href="ana-k-landing (1).html#work" class="mob-link">Work</a>
+  <a href="blog.html" class="mob-link">Blog</a>
+  <a href="contact.html" class="mob-link">Contact</a>
+</div>
+
+<div class="wrap">
+
+  <!-- HEADER -->
+  <div class="page-header fade-up">
+    <div class="page-header-left">
+      <p class="eyebrow">Writing</p>
+      <h1>Thoughts on design,<br><em>brand & craft</em></h1>
+    </div>
+    <span class="post-count">6 articles</span>
+  </div>
+
+  <!-- FEATURED POST -->
+  <a href="blog-post (1).html" class="featured fade-up">
+    <div class="featured-img">
+      <img src="Portafolio images/Blog Images/blog image-home.jpg" alt="Why most luxury brands fail at digital">
+    </div>
+    <div class="featured-body">
+      <div class="featured-top">
+        <p class="featured-label">Featured</p>
+        <span class="featured-tag">Brand Identity</span>
+        <h2 class="featured-title">Why most luxury brands fail at digital — and what great ones do differently</h2>
+        <p class="featured-excerpt">Premium positioning isn't about being expensive. It's about being precise. Here's what separates brands that feel truly elevated from those that just look expensive.</p>
+      </div>
+      <div class="featured-meta">
+        <span class="meta-item">March 2026</span>
+        <span class="meta-dot"></span>
+        <span class="meta-item">6 min read</span>
+        <span class="read-more">Read article →</span>
+      </div>
+    </div>
+  </a>
+
+  <!-- POSTS GRID -->
+  <div class="posts-grid">
+
+    <a href="blog-post.html" class="post-card fade-up">
+      <div class="post-img">
+        <div class="ph" style="background:#c4d0c8;">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg>
+        </div>
+      </div>
+      <div class="post-body">
+        <span class="post-tag">Typography</span>
+        <h3 class="post-title">The typefaces I always come back to — and why they work</h3>
+        <p class="post-excerpt">A curated look at the fonts that define refined, editorial design and the logic behind choosing them.</p>
+        <div class="post-meta">
+          <span class="meta-item">Feb 2026</span>
+          <span class="meta-dot"></span>
+          <span class="meta-item">4 min read</span>
+        </div>
+      </div>
+    </a>
+
+    <a href="blog-post.html" class="post-card fade-up" style="transition-delay:0.08s">
+      <div class="post-img">
+        <div class="ph" style="background:#d0ccdc;">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg>
+        </div>
+      </div>
+      <div class="post-body">
+        <span class="post-tag">Process</span>
+        <h3 class="post-title">How I structure a brand identity project from brief to delivery</h3>
+        <p class="post-excerpt">My step-by-step process for taking a branding project from first conversation to final handoff — without losing the concept along the way.</p>
+        <div class="post-meta">
+          <span class="meta-item">Jan 2026</span>
+          <span class="meta-dot"></span>
+          <span class="meta-item">7 min read</span>
+        </div>
+      </div>
+    </a>
+
+    <a href="blog-post.html" class="post-card fade-up" style="transition-delay:0.16s">
+      <div class="post-img">
+        <div class="ph" style="background:#ccd4c4;">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg>
+        </div>
+      </div>
+      <div class="post-body">
+        <span class="post-tag">Color</span>
+        <h3 class="post-title">Building a color system that actually works across print and digital</h3>
+        <p class="post-excerpt">Color is one of the most misunderstood parts of brand design. Here's how to build a palette that stays consistent everywhere.</p>
+        <div class="post-meta">
+          <span class="meta-item">Dec 2025</span>
+          <span class="meta-dot"></span>
+          <span class="meta-item">5 min read</span>
+        </div>
+      </div>
+    </a>
+
+  </div>
+
+</div>
+
+<script>
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.06 });
+  document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
+  window.addEventListener('load', () => {
+    document.querySelectorAll('.fade-up').forEach(el => {
+      if (el.getBoundingClientRect().top < window.innerHeight) el.classList.add('visible');
+    });
+  });
+
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobile-menu');
+  hamburger.addEventListener('click', () => {
+    const isOpen = hamburger.classList.toggle('open');
+    mobileMenu.classList.toggle('open', isOpen);
+    hamburger.setAttribute('aria-label', isOpen ? 'Close menu' : 'Open menu');
+    document.body.style.overflow = isOpen ? 'hidden' : '';
+  });
+  mobileMenu.querySelectorAll('.mob-link').forEach(link => {
+    link.addEventListener('click', () => {
+      hamburger.classList.remove('open');
+      mobileMenu.classList.remove('open');
+      document.body.style.overflow = '';
+    });
+  });
+</script>
+
+<footer class="footer-editorial">
+  <div class="footer-top-bar">
+    <span class="footer-logo"><img src="Ana K. Logo.svg" alt="Ana K." style="height:24px;display:block;"></span>
+    <a href="contact.html" class="footer-cta-link">Start working together <span>→</span></a>
+  </div>
+  <div class="footer-big-phrase">
+    <h2>Good design changes<br><em>everything.</em></h2>
+  </div>
+  <div class="footer-divider"></div>
+  <div class="footer-bottom-row">
+    <div class="footer-nav-group">
+      <span class="footer-nav-label">Pages</span>
+      <a href="ana-k-landing (1).html#about">About</a>
+      <a href="ana-k-landing (1).html#work">Work</a>
+      <a href="blog.html">Blog</a>
+      <a href="contact.html">Contact</a>
+    </div>
+    <div class="footer-nav-group">
+      <span class="footer-nav-label">Connect</span>
+      <a href="#">Instagram</a>
+      <a href="https://www.linkedin.com/in/ana-karina-rosa-rosario-3b407199/?locale=en_US" target="_blank">LinkedIn</a>
+      <a href="https://www.behance.net/anarosa3" target="_blank">Behance</a>
+      <a href="mailto:anakarinarosa256@gmail.com">Email</a>
+    </div>
+    <div class="footer-copy">
+      <span>© 2025 Ana K.</span>
+      <span>Designed &amp; built by Ana K.</span>
+    </div>
+  </div>
+</footer>
+</body>
+</html>
