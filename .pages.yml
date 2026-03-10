@@ -1,0 +1,26 @@
+content:
+  - name: blog
+    label: Blog Posts
+    type: collection
+    path: posts
+    view:
+      fields: [title, date, category]
+    fields:
+      - name: title
+        label: Título
+        type: string
+      - name: date
+        label: Fecha
+        type: date
+      - name: category
+        label: Categoría
+        type: string
+      - name: excerpt
+        label: Resumen corto
+        type: string
+      - name: image
+        label: Imagen principal
+        type: image
+      - name: body
+        label: Contenido
+        type: rich-text
