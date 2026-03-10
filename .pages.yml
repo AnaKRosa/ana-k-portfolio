@@ -1,3 +1,7 @@
+media:
+  input: Portafolio images/Blog Images
+  output: /Portafolio images/Blog Images
+
 content:
   - name: blog
     label: Blog Posts
