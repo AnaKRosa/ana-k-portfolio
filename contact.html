@@ -281,10 +281,10 @@
     </div>
 
     <div class="direct-links fade-up">
-      <a href="mailto:anakarinarosa256@gmail.com" class="direct-link">
+      <a href="mailto:anakrosawork@gmail.com" class="direct-link">
         <div>
           <div class="link-label">Email</div>
-          <div class="link-value">anakarinarosa256@gmail.com</div>
+          <div class="link-value">anakrosawork@gmail.com</div>
         </div>
         <span class="link-arrow">↗</span>
       </a>
@@ -309,21 +309,22 @@
   <div class="right">
     <p class="form-heading fade-up">Send a message</p>
 
-    <form class="form" onsubmit="handleSubmit(event)">
+    <form class="form" name="contact" method="POST" data-netlify="true">
+      <input type="hidden" name="form-name" value="contact">
       <div class="field-row fade-up">
         <div class="field">
           <label>Name</label>
-          <input type="text" placeholder="Your name">
+          <input type="text" name="name" placeholder="Your name">
         </div>
         <div class="field">
           <label>Email</label>
-          <input type="email" placeholder="your@email.com">
+          <input type="email" name="email" placeholder="your@email.com">
         </div>
       </div>
 
       <div class="field fade-up">
         <label>Project type</label>
-        <select>
+        <select name="project-type">
           <option value="" disabled selected>Select a service</option>
           <option>Brand Identity</option>
           <option>Website Design</option>
@@ -335,7 +336,7 @@
 
       <div class="field fade-up">
         <label>Message</label>
-        <textarea placeholder="Tell me about your project — what you need, your timeline, and any relevant context."></textarea>
+        <textarea name="message" placeholder="Tell me about your project — what you need, your timeline, and any relevant context."></textarea>
       </div>
 
       <div class="or-divider fade-up">or schedule a call</div>
@@ -362,11 +363,6 @@
 </div>
 
 <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
-function handleSubmit(e) {
-  e.preventDefault();
-  const btn = e.target.querySelector('.btn-subm
-  e.target.querySelector('button[type=submit]').textContent = 'Sent!';
-}
 
 const hamburger = document.getElementById('hamburger');
 const mobileMenu = document.getElementById('mobile-menu');
@@ -407,7 +403,7 @@ mobileMenu.querySelectorAll('.mob-link').forEach(link => {
       <a href="#">Instagram</a>
       <a href="https://www.linkedin.com/in/ana-karina-rosa-rosario-3b407199/?locale=en_US" target="_blank">LinkedIn</a>
       <a href="https://www.behance.net/anarosa3" target="_blank">Behance</a>
-      <a href="mailto:anakarinarosa256@gmail.com">Email</a>
+      <a href="mailto:anakrosawork@gmail.com">Email</a>
     </div>
     <div class="footer-copy">
       <span>© 2025 Ana K.</span>
