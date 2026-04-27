@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Arepa Stand — Case Study · Ana K.</title>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --cream: #f4f1eb;
+    --black: #0e0e0e;
+    --forest: #2c4a35;
+    --lavender: #C3C3FA;
+    --serif: 'Instrument Serif', Georgia, serif;
+    --sans: 'DM Sans', sans-serif;
+  }
+  html { scroll-behavior: smooth; }
+  body { font-family: var(--sans); background: var(--cream); color: var(--black); overflow-x: hidden; }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: var(--cream); border-bottom: 1px solid rgba(0,0,0,0.07);
+    padding: 0 48px; display: flex; justify-content: center;
+  }
+  .nav-inner {
+    width: 100%; max-width: 1200px;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 18px 0;
+  }
+  .logo { font-family: var(--serif); font-size: 1.1rem; letter-spacing: 0.04em; text-decoration: none; color: var(--black); }
+  .logo .dot { color: var(--lavender); }
+  .nav-links { display: flex; gap: 28px; list-style: none; }
+  .nav-links a { font-size: 0.8rem; text-decoration: none; color: var(--black); opacity: 0.55; letter-spacing: 0.04em; transition: opacity 0.2s; }
+  .nav-links a:hover { opacity: 1; }
+
+  /* HERO */
+  .hero-text { padding: 140px 48px 48px; text-align: center; max-width: 1200px; margin: 0 auto; }
+  .hero-text h1 { font-family: var(--serif); font-size: clamp(2rem, 4vw, 3.2rem); font-weight: 400; line-height: 1.15; margin-bottom: 20px; }
+  .hero-text h1 em { font-style: italic; color: var(--lavender); }
+  .hero-text .subtitle { font-size: 0.95rem; font-weight: 300; opacity: 0.6; max-width: 600px; margin: 0 auto 28px; line-height: 1.6; }
+  .tags { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; margin-bottom: 48px; }
+  .tags span {
+    font-size: 0.72rem; letter-spacing: 0.06em; padding: 6px 16px;
+    border: 1px solid rgba(0,0,0,0.12); border-radius: 40px; opacity: 0.6;
+  }
+
+  /* IMAGES */
+  .img-full {
+    max-width: 1200px; margin: 0 auto 64px; padding: 0 48px;
+  }
+  .img-full img { width: 100%; height: 828px; object-fit: cover; border-radius: 12px; display: block; }
+  .img-placeholder {
+    background: #e2ddd6; border-radius: 12px; display: flex;
+    align-items: center; justify-content: center;
+    font-size: 0.75rem; color: rgba(0,0,0,0.3); letter-spacing: 0.04em;
+  }
+  .img-full .img-placeholder { width: 100%; height: 500px; }
+
+  .img-pair {
+    max-width: 1200px; margin: 0 auto 64px; padding: 0 48px;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 20px;
+  }
+  .img-pair .img-placeholder { height: 380px; }
+
+  .img-triple {
+    max-width: 1200px; margin: 0 auto 64px; padding: 0 48px;
+    display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px;
+  }
+  .img-triple .img-placeholder { height: 340px; }
+
+  /* SECTIONS */
+  .section {
+    max-width: 800px; margin: 0 auto 72px; padding: 0 48px;
+  }
+  .section-label {
+    font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase;
+    opacity: 0.4; margin-bottom: 14px;
+  }
+  .section h2 {
+    font-family: var(--serif); font-size: clamp(1.5rem, 3vw, 2.2rem);
+    font-weight: 400; line-height: 1.2; margin-bottom: 20px;
+  }
+  .section h2 em { font-style: italic; color: var(--lavender); }
+  .section p { font-size: 0.92rem; line-height: 1.7; opacity: 0.7; margin-bottom: 14px; font-weight: 300; }
+
+  /* CARDS */
+  .card {
+    max-width: 1200px; margin: 0 auto 48px; padding: 0 48px;
+  }
+  .card-inner {
+    background: #f9f7f2; border-radius: 16px; padding: 56px;
+    border: 1px solid rgba(0,0,0,0.06);
+  }
+  .card-inner h2 {
+    font-family: var(--serif); font-size: 1.6rem; font-weight: 400;
+    margin-bottom: 20px; line-height: 1.2;
+  }
+  .card-inner h2 em { font-style: italic; color: var(--lavender); }
+  .card-inner p { font-size: 0.9rem; line-height: 1.7; opacity: 0.7; margin-bottom: 14px; font-weight: 300; }
+  .card-inner ul {
+    list-style: none; padding: 0; margin-top: 20px;
+  }
+  .card-inner ul li {
+    font-size: 0.88rem; line-height: 1.6; opacity: 0.65; padding: 6px 0;
+    padding-left: 18px; position: relative; font-weight: 300;
+  }
+  .card-inner ul li::before {
+    content: ''; position: absolute; left: 0; top: 14px;
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--black); opacity: 0.25;
+  }
+
+  /* RESULTS TWO COL */
+  .results-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-top: 28px;
+  }
+  .results-grid h3 {
+    font-family: var(--serif); font-size: 1.1rem; font-weight: 400; margin-bottom: 14px;
+  }
+
+  /* CENTERED TITLE + TEXT */
+  .center-section {
+    max-width: 1200px; margin: 0 auto 40px; padding: 0 48px; text-align: center;
+  }
+  .center-section h2 {
+    font-family: var(--serif); font-size: clamp(1.5rem, 3vw, 2.2rem);
+    font-weight: 400; margin-bottom: 16px;
+  }
+  .center-section h2 em { font-style: italic; color: var(--lavender); }
+  .center-section p {
+    font-size: 0.92rem; line-height: 1.7; opacity: 0.6; max-width: 650px;
+    margin: 0 auto; font-weight: 300;
+  }
+
+  /* OUTCOME */
+  .outcome {
+    max-width: 800px; margin: 0 auto 80px; padding: 0 48px;
+  }
+  .outcome h2 {
+    font-family: var(--serif); font-size: clamp(1.5rem, 3vw, 2.2rem);
+    font-weight: 400; margin-bottom: 20px;
+  }
+  .outcome h2 em { font-style: italic; color: var(--lavender); }
+  .outcome p { font-size: 0.92rem; line-height: 1.7; opacity: 0.7; margin-bottom: 14px; font-weight: 300; }
+
+  /* NEXT PROJECT */
+  .next-project {
+    text-align: center; padding: 80px 48px; border-top: 1px solid rgba(0,0,0,0.08);
+    max-width: 1200px; margin: 0 auto;
+  }
+  .next-project span { font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase; opacity: 0.4; }
+  .next-project h2 { font-family: var(--serif); font-size: 1.8rem; font-weight: 400; margin: 12px 0 24px; }
+  .next-project h2 em { font-style: italic; color: var(--lavender); }
+  .next-project a {
+    font-size: 0.85rem; color: var(--black); text-decoration: none;
+    border-bottom: 1px solid rgba(0,0,0,0.2); padding-bottom: 2px;
+    transition: opacity 0.2s;
+  }
+  .next-project a:hover { opacity: 0.6; }
+
+  /* FOOTER */
+  footer {
+    width: 100%;
+  }
+  .footer-inner {
+    display: flex; justify-content: space-between; align-items: center;
+    font-size: 0.75rem; opacity: 0.4;
+  }
+  .footer-links { display: flex; gap: 20px; }
+  .footer-links a { color: var(--black); text-decoration: none; }
+  .footer-links a:hover { opacity: 0.7; }
+
+  /* FADE ANIMATION */
+  .fade-up {
+    opacity: 0; transform: translateY(30px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .fade-up.visible { opacity: 1; transform: translateY(0); }
+
+  /* HAMBURGER & MOBILE MENU */
+  .hamburger {
+    display: none; flex-direction: column; justify-content: center; gap: 5px;
+    background: none; border: none; cursor: pointer; padding: 4px; position: relative;
+  }
+  .hamburger span {
+    display: block; width: 22px; height: 2px; background: var(--black);
+    border-radius: 2px; transition: transform 0.3s ease, opacity 0.3s ease; transform-origin: center;
+  }
+  .hamburger.open span:first-child { transform: translateY(7px) rotate(45deg); }
+  .hamburger.open span:nth-child(2) { opacity: 0; }
+  .hamburger.open span:last-child { transform: translateY(-7px) rotate(-45deg); }
+  .mobile-menu {
+    display: none; position: fixed; inset: 0; background: var(--cream); z-index: 99;
+    flex-direction: column; align-items: center; justify-content: center; gap: 8px;
+  }
+  .mobile-menu.open { display: flex; }
+  .mob-link {
+    font-family: var(--serif); font-size: 2.8rem; color: var(--black);
+    text-decoration: none; font-weight: 400; line-height: 1.4;
+    opacity: 0; transform: translateY(16px);
+    transition: opacity 0.35s ease, transform 0.35s ease; letter-spacing: -0.01em;
+  }
+  .mobile-menu.open .mob-link { opacity: 1; transform: translateY(0); }
+  .mobile-menu.open .mob-link:nth-child(1) { transition-delay: 0.06s; }
+  .mobile-menu.open .mob-link:nth-child(2) { transition-delay: 0.12s; }
+  .mobile-menu.open .mob-link:nth-child(3) { transition-delay: 0.18s; }
+  .mobile-menu.open .mob-link:nth-child(4) { transition-delay: 0.24s; }
+  .mob-link:hover { color: var(--lavender); }
+
+  /* FOOTER */
+  .footer-editorial { background: var(--black); color: white; padding: 72px 48px 48px; }
+  .footer-top-bar { display: flex; justify-content: space-between; align-items: center; max-width: 1200px; margin: 0 auto 80px; }
+  .footer-logo { font-family: var(--serif); font-size: 1.65rem; letter-spacing: 0.06em; opacity: 0.5; }
+  .footer-cta-link { font-size: 0.85rem; font-weight: 500; color: #EAF58D; text-decoration: none; letter-spacing: 0.02em; display: flex; align-items: center; gap: 8px; transition: gap 0.2s ease; }
+  .footer-cta-link:hover { gap: 14px; }
+  .footer-big-phrase { max-width: 1200px; margin: 0 auto 80px; }
+  .footer-big-phrase h2 { font-family: var(--serif); font-size: clamp(3.5rem, 8vw, 7rem); line-height: 1.0; color: white; font-weight: 400; margin: 0; }
+  .footer-big-phrase h2 em { color: #c5bff5; font-style: italic; }
+  .footer-divider { max-width: 1200px; margin: 0 auto 48px; height: 1px; background: rgba(255,255,255,0.1); }
+  .footer-bottom-row { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(3, 1fr) auto; gap: 48px; align-items: start; }
+  .footer-nav-group { display: flex; flex-direction: column; gap: 12px; }
+  .footer-nav-label { font-size: 0.68rem; letter-spacing: 0.14em; text-transform: uppercase; opacity: 0.3; margin-bottom: 4px; }
+  .footer-nav-group a { font-size: 0.85rem; color: white; text-decoration: none; opacity: 0.5; transition: opacity 0.2s; }
+  .footer-nav-group a:hover { opacity: 1; }
+  .footer-copy { display: flex; flex-direction: column; gap: 6px; font-size: 0.72rem; opacity: 0.25; text-align: right; align-self: end; }
+
+  /* MOBILE */
+  @media (max-width: 768px) {
+    nav { padding: 0 24px; }
+    .hamburger { display: flex; }
+    .nav-links { display: none; }
+    .hero-text { padding: 120px 24px 36px; }
+    .section, .outcome { padding: 0 24px; }
+    .card { padding: 0 24px; }
+    .card-inner { padding: 36px 28px; }
+    .img-full { padding: 0 24px; }
+    .img-full .img-placeholder { height: 280px; }
+    .img-pair { padding: 0 24px; grid-template-columns: 1fr; }
+    .img-pair .img-placeholder { height: 260px; }
+    .img-triple { padding: 0 24px; grid-template-columns: 1fr; }
+    .img-triple .img-placeholder { height: 260px; }
+    .results-grid { grid-template-columns: 1fr; gap: 28px; }
+    .center-section { padding: 0 24px; }
+    .next-project { padding: 60px 24px; }
+    footer { padding: 24px; }
+    .footer-inner { flex-direction: column; gap: 12px; }
+  }
+</style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <div class="nav-inner">
+      <a href="index.html" class="logo"><img src="Ana K. Logo-dark.svg" alt="Ana K." style="height:26px;display:block;"></a>
+      <ul class="nav-links">
+        <li><a href="index.html#about">About</a></li>
+        <li><a href="index.html#work">Work</a></li>
+        <li><a href="blog.html">Blog</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+      <button class="hamburger" id="hamburger" aria-label="Open menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <div class="mobile-menu" id="mobile-menu">
+    <a href="index.html#about" class="mob-link">About</a>
+    <a href="index.html#work" class="mob-link">Work</a>
+    <a href="blog.html" class="mob-link">Blog</a>
+    <a href="contact.html" class="mob-link">Contact</a>
+  </div>
+
+  <!-- HERO -->
+  <div class="hero-text fade-up">
+    <h1>The Arepa Stand<br>Building a Brand Identity for <em>LA's Farmers Markets</em></h1>
+    <p class="subtitle">A complete brand identity and digital presence for a Venezuelan popup food shop — from logo to website to market-day signage.</p>
+    <div class="tags">
+      <span>Branding</span>
+      <span>Logo Design</span>
+      <span>Web Design</span>
+      <span>Marketing Collateral</span>
+    </div>
+  </div>
+
+  <!-- HERO IMAGE -->
+  <div class="img-full fade-up">
+    <img src="The arepa Stand/TAS-01.jpg" alt="The Arepa Stand hero">
+  </div>
+
+  <!-- THE CHALLENGE -->
+  <div class="card fade-up">
+    <div class="card-inner">
+      <h2>The <em>Challenge</em></h2>
+      <p>The Arepa Stand is a popup food shop found at different farmers markets around the Los Angeles area, serving authentic Venezuelan arepas. The business needed a memorable, professional brand identity that could stand out in the crowded and competitive LA farmers market scene.</p>
+      <p>Without a cohesive visual presence, the brand relied on word-of-mouth alone. To grow beyond a single market and attract new customers at each location, The Arepa Stand needed a system — not just a logo, but a full identity that worked across signage, social media, packaging, and web.</p>
+      <ul>
+        <li>No established visual identity or brand system</li>
+        <li>Competing for attention in busy, high-energy market environments</li>
+        <li>Needed to communicate authenticity and quality at a glance</li>
+        <li>No digital presence to drive awareness between market days</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- OBJECTIVE -->
+  <div class="card fade-up">
+    <div class="card-inner">
+      <h2>Objective</h2>
+      <p>Create a complete brand identity and digital presence that positions The Arepa Stand as a recognizable, trustworthy food brand across every customer touchpoint:</p>
+      <ul>
+        <li>Logo concept and brand identity system</li>
+        <li>Creative direction and visual language</li>
+        <li>Marketing materials and printed collateral</li>
+        <li>Signage for farmers market setups</li>
+        <li>Social media templates and content direction</li>
+        <li>Responsive website design</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- RESULTS -->
+  <div class="card fade-up">
+    <div class="card-inner">
+      <h2>Results</h2>
+      <p>A full brand ecosystem designed for a food business that lives both in-person and online.</p>
+      <div class="results-grid">
+        <div>
+          <h3>Brand</h3>
+          <ul>
+            <li>Logo and badge mark system</li>
+            <li>Color palette and typography</li>
+            <li>Brand guidelines</li>
+            <li>Photography art direction</li>
+          </ul>
+        </div>
+        <div>
+          <h3>Deliverables</h3>
+          <ul>
+            <li>Responsive marketing website</li>
+            <li>Market signage and banners</li>
+            <li>Social media templates</li>
+            <li>Printed menus and collateral</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- OVERVIEW IMAGE -->
+  <div class="img-full fade-up">
+    <img src="The arepa Stand/TAS-02.jpg" alt="The Arepa Stand marketing materials">
+  </div>
+
+  <!-- CREATIVE DIRECTION -->
+  <div class="center-section fade-up">
+    <h2>Creative <em>Direction</em></h2>
+    <p>The visual language draws from the boldness of street food culture — dark, moody tones that let the food photography pop, paired with a gold-and-black palette that communicates quality without pretension.</p>
+  </div>
+
+  <!-- COLOR PALETTE & BRANDING IMAGE -->
+  <div class="img-full fade-up">
+    <img src="The arepa Stand/TAS-07.jpg" alt="Color palette and branding">
+  </div>
+
+  <!-- RESPONSIVE WEBSITE -->
+  <div class="img-full fade-up">
+    <img src="The arepa Stand/TAS-03.jpg" alt="Responsive website">
+  </div>
+
+  <!-- WEBSITE SCREENS -->
+  <div class="img-full fade-up">
+    <img src="The arepa Stand/TAS-04.jpg" alt="Website screens">
+  </div>
+
+  <!-- LOGO VARIATIONS -->
+  <div class="img-full fade-up">
+    <img src="The arepa Stand/TAS-05.jpg" alt="Logo variations">
+  </div>
+
+  <!-- LOGO IN USE -->
+  <div class="img-full fade-up">
+    <img src="The arepa Stand/TAS-06.jpg" alt="Logo in context">
+  </div>
+
+  <!-- ADDITIONAL IMAGES -->
+  <div class="img-full fade-up">
+    <img src="The arepa Stand/TAS-08.jpg" alt="The Arepa Stand">
+  </div>
+
+  <div class="img-full fade-up">
+    <img src="The arepa Stand/TAS-09.jpg" alt="The Arepa Stand">
+  </div>
+
+  <div class="img-full fade-up">
+    <img src="The arepa Stand/TAS-10.jpg" alt="The Arepa Stand">
+  </div>
+
+  <div class="img-full fade-up">
+    <img src="The arepa Stand/TAS-11.jpg" alt="The Arepa Stand">
+  </div>
+
+  <div class="img-full fade-up">
+    <img src="The arepa Stand/TAS-12.jpg" alt="The Arepa Stand">
+  </div>
+
+  <!-- OUTCOME -->
+  <div class="card fade-up">
+    <div class="card-inner">
+      <h2>Outcome</h2>
+      <p>The Arepa Stand went from having no visual identity to owning a complete brand system that works as hard as the business does — at the market, on social media, and online.</p>
+      <p>The brand now has a professional, recognizable presence that builds trust with new customers before they even take a bite. Every touchpoint — from the banner behind the stand to the Instagram grid to the website — tells the same story: authentic Venezuelan food, made with care.</p>
+    </div>
+  </div>
+
+  <!-- NEXT PROJECT -->
+  <div class="next-project fade-up">
+    <span>Next project</span>
+    <h2>Kiwi <em>Searches</em></h2>
+    <a href="https://anakrosadesign.com/kiwi-case-study">View case study →</a>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="footer-editorial">
+    <div class="footer-top-bar">
+      <span class="footer-logo"><img src="Ana K. Logo.svg" alt="Ana K." style="height:24px;display:block;"></span>
+      <a href="index.html#contact" class="footer-cta-link">Start working together <span class="arrow">→</span></a>
+    </div>
+    <div class="footer-big-phrase">
+      <h2>Good design changes<br><em>everything.</em></h2>
+    </div>
+    <div class="footer-divider"></div>
+    <div class="footer-bottom-row">
+      <div class="footer-nav-group">
+        <span class="footer-nav-label">Pages</span>
+        <a href="index.html#about">About</a>
+        <a href="index.html#work">Work</a>
+        <a href="blog.html">Blog</a>
+        <a href="index.html#contact">Contact</a>
+      </div>
+      <div class="footer-nav-group">
+        <span class="footer-nav-label">Connect</span>
+        <a href="https://www.instagram.com/anakrosadesign/" target="_blank">Instagram</a>
+        <a href="https://www.linkedin.com/in/ana-karina-rosa-rosario-3b407199/?locale=en_US" target="_blank">LinkedIn</a>
+        <a href="https://www.behance.net/anarosa3" target="_blank">Behance</a>
+        <a href="mailto:anakrosawork@gmail.com">Email</a>
+      </div>
+      <div class="footer-copy">
+        <span>© 2025 Ana K.</span>
+        <span>Designed &amp; built by Ana K.</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- SCROLL ANIMATION -->
+  <script>
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15 });
+    document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobile-menu');
+    hamburger.addEventListener('click', () => {
+      const isOpen = hamburger.classList.toggle('open');
+      mobileMenu.classList.toggle('open', isOpen);
+      hamburger.setAttribute('aria-label', isOpen ? 'Close menu' : 'Open menu');
+      document.body.style.overflow = isOpen ? 'hidden' : '';
+    });
+    mobileMenu.querySelectorAll('.mob-link').forEach(link => {
+      link.addEventListener('click', () => {
+        hamburger.classList.remove('open');
+        mobileMenu.classList.remove('open');
+        document.body.style.overflow = '';
+      });
+    });
+  </script>
+
+</body>
+</html>
