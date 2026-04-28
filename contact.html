@@ -253,11 +253,12 @@
   <div class="nav-inner">
     <a href="index.html" class="logo"><img src="Ana K. Logo.svg" alt="Ana K." style="height:26px;display:block;"></a>
     <ul class="nav-links">
-      <li><a href="index.html#about">About</a></li>
-      <li><a href="index.html#work">Work</a></li>
-      <li><a href="blog.html">Blog</a></li>
-      <li><a href="#" class="active">Contact</a></li>
+      <li><a href="index.html#about" data-i18n="nav.about">About</a></li>
+      <li><a href="index.html#work" data-i18n="nav.work">Work</a></li>
+      <li><a href="blog.html" data-i18n="nav.blog">Blog</a></li>
+      <li><a href="#" class="active" data-i18n="nav.contact">Contact</a></li>
     </ul>
+    <button id="lang-toggle" style="background:none;border:1px solid rgba(255,255,255,0.3);border-radius:20px;padding:4px 12px;font-size:0.75rem;cursor:pointer;letter-spacing:0.04em;font-family:var(--sans);color:white;transition:opacity 0.2s;" onmouseover="this.style.opacity='0.6'" onmouseout="this.style.opacity='1'">ES</button>
     <button class="hamburger" id="hamburger" aria-label="Open menu">
       <span></span><span></span><span></span>
     </button>
@@ -265,10 +266,10 @@
 </nav>
 
 <div class="mobile-menu" id="mobile-menu">
-  <a href="index.html#about" class="mob-link">About</a>
-  <a href="index.html#work" class="mob-link">Work</a>
-  <a href="blog.html" class="mob-link">Blog</a>
-  <a href="contact.html" class="mob-link">Contact</a>
+  <a href="index.html#about" class="mob-link" data-i18n="nav.about">About</a>
+  <a href="index.html#work" class="mob-link" data-i18n="nav.work">Work</a>
+  <a href="blog.html" class="mob-link" data-i18n="nav.blog">Blog</a>
+  <a href="contact.html" class="mob-link" data-i18n="nav.contact">Contact</a>
 </div>
 
 <div class="page">
@@ -276,30 +277,30 @@
   <!-- LEFT -->
   <div class="left">
     <div class="fade-up">
-      <p class="eyebrow">Get in touch</p>
-      <h1>Let's build something<br><em>worth remembering</em></h1>
-      <p class="lead">Available for branding, web design, and thoughtful visual design across digital experiences.</p>
+      <p class="eyebrow" data-i18n="contact.eyebrow">Get in touch</p>
+      <h1 data-i18n="contact.heading">Let's build something<br><em>worth remembering</em></h1>
+      <p class="lead" data-i18n="contact.lead">Available for branding, web design, and thoughtful visual design across digital experiences.</p>
     </div>
 
     <div class="direct-links fade-up">
       <a href="mailto:anakrosawork@gmail.com" class="direct-link">
         <div>
-          <div class="link-label">Email</div>
+          <div class="link-label" data-i18n="contact.emailLabel">Email</div>
           <div class="link-value">anakrosawork@gmail.com</div>
         </div>
         <span class="link-arrow">↗</span>
       </a>
       <a href="https://instagram.com/anakrosadesign" target="_blank" class="direct-link">
         <div>
-          <div class="link-label">Instagram</div>
-          <div class="link-value">@anakrosadesign</div>
+          <div class="link-label" data-i18n="contact.igLabel">Instagram</div>
+          <div class="link-value" data-i18n="contact.igValue">@anakrosadesign</div>
         </div>
         <span class="link-arrow">↗</span>
       </a>
       <a href="https://www.linkedin.com/in/ana-karina-rosa-rosario-3b407199/?locale=en_US" target="_blank" class="direct-link">
         <div>
-          <div class="link-label">LinkedIn</div>
-          <div class="link-value">Ana Karina</div>
+          <div class="link-label" data-i18n="contact.liLabel">LinkedIn</div>
+          <div class="link-value" data-i18n="contact.liValue">Ana Karina</div>
         </div>
         <span class="link-arrow">↗</span>
       </a>
@@ -308,39 +309,39 @@
 
   <!-- RIGHT -->
   <div class="right">
-    <p class="form-heading fade-up">Send a message</p>
+    <p class="form-heading fade-up" data-i18n="contact.formHeading">Send a message</p>
 
     <form class="form" name="contact" method="POST" action="/thank-you.html" data-netlify="true">
       <input type="hidden" name="form-name" value="contact">
       <div class="field-row fade-up">
         <div class="field">
-          <label>Name</label>
+          <label data-i18n="contact.labelName">Name</label>
           <input type="text" name="name" placeholder="Your name">
         </div>
         <div class="field">
-          <label>Email</label>
+          <label data-i18n="contact.labelEmail">Email</label>
           <input type="email" name="email" placeholder="your@email.com">
         </div>
       </div>
 
       <div class="field fade-up">
-        <label>Project type</label>
+        <label data-i18n="contact.labelType">Project type</label>
         <select name="project-type">
-          <option value="" disabled selected>Select a service</option>
-          <option>Brand Identity</option>
-          <option>Website Design</option>
-          <option>Visual Identity System</option>
-          <option>Social Media Design</option>
-          <option>Other</option>
+          <option value="" disabled selected data-i18n="contact.optDefault">Select a service</option>
+          <option data-i18n="contact.opt1">Brand Identity</option>
+          <option data-i18n="contact.opt2">Website Design</option>
+          <option data-i18n="contact.opt3">Visual Identity System</option>
+          <option data-i18n="contact.opt4">Social Media Design</option>
+          <option data-i18n="contact.opt5">Other</option>
         </select>
       </div>
 
       <div class="field fade-up">
-        <label>Message</label>
+        <label data-i18n="contact.labelMsg">Message</label>
         <textarea name="message" placeholder="Tell me about your project — what you need, your timeline, and any relevant context."></textarea>
       </div>
 
-      <div class="or-divider fade-up">or schedule a call</div>
+      <div class="or-divider fade-up" data-i18n="contact.orDivider">or schedule a call</div>
 
       <a href="https://cal.com/ana-karina-rosa-vwdmwe/30min" target="_blank" class="calendly-row fade-up">
         <div class="cal-icon">
@@ -349,8 +350,8 @@
           </svg>
         </div>
         <div class="cal-text">
-          <div class="cal-label">Cal.com</div>
-          <div class="cal-value">Book a 30-min discovery call</div>
+          <div class="cal-label" data-i18n="contact.calLabel">Cal.com</div>
+          <div class="cal-value" data-i18n="contact.calValue">Book a 30-min discovery call</div>
         </div>
         <span class="cal-arrow">↗</span>
       </a>
@@ -385,33 +386,34 @@ mobileMenu.querySelectorAll('.mob-link').forEach(link => {
 <footer class="footer-editorial">
   <div class="footer-top-bar">
     <span class="footer-logo"><img src="Ana K. Logo.svg" alt="Ana K." style="height:24px;display:block;"></span>
-    <a href="contact.html" class="footer-cta-link">Start working together <span>→</span></a>
+    <a href="contact.html" class="footer-cta-link" data-i18n="footer.cta">Start working together <span>→</span></a>
   </div>
   <div class="footer-big-phrase">
-    <h2>Good design changes<br><em>everything.</em></h2>
+    <h2 data-i18n="footer.tagline">Good design changes<br><em>everything.</em></h2>
   </div>
   <div class="footer-divider"></div>
   <div class="footer-bottom-row">
     <div class="footer-nav-group">
-      <span class="footer-nav-label">Pages</span>
-      <a href="index.html#about">About</a>
-      <a href="index.html#work">Work</a>
-      <a href="blog.html">Blog</a>
-      <a href="contact.html">Contact</a>
+      <span class="footer-nav-label" data-i18n="footer.pages">Pages</span>
+      <a href="index.html#about" data-i18n="footer.about">About</a>
+      <a href="index.html#work" data-i18n="footer.work">Work</a>
+      <a href="blog.html" data-i18n="footer.blog">Blog</a>
+      <a href="contact.html" data-i18n="nav.contact">Contact</a>
     </div>
     <div class="footer-nav-group">
-      <span class="footer-nav-label">Connect</span>
+      <span class="footer-nav-label" data-i18n="footer.connect">Connect</span>
       <a href="https://instagram.com/anakrosadesign" target="_blank">Instagram</a>
       <a href="https://www.linkedin.com/in/ana-karina-rosa-rosario-3b407199/?locale=en_US" target="_blank">LinkedIn</a>
       <a href="https://www.behance.net/anarosa3" target="_blank">Behance</a>
       <a href="mailto:anakrosawork@gmail.com">Email</a>
     </div>
     <div class="footer-copy">
-      <span>© 2025 Ana K.</span>
-      <span>Designed &amp; built by Ana K.</span>
+      <span data-i18n="footer.copy">© 2025 Ana K.</span>
+      <span data-i18n="footer.built">Designed &amp; built by Ana K.</span>
     </div>
   </div>
 </footer>
-
+<script src="translations.js"></script>
+<script src="i18n.js"></script>
 </body>
 </html>

@@ -269,11 +269,12 @@
   <div class="nav-inner">
     <a href="index.html" class="logo"><img src="Ana K. Logo-dark.svg" alt="Ana K." style="height:26px;display:block;"></a>
     <ul class="nav-links">
-      <li><a href="index.html#about">About</a></li>
-      <li><a href="index.html#work">Work</a></li>
-      <li><a href="#" class="active">Blog</a></li>
-      <li><a href="contact.html">Contact</a></li>
+      <li><a href="index.html#about" data-i18n="nav.about">About</a></li>
+      <li><a href="index.html#work" data-i18n="nav.work">Work</a></li>
+      <li><a href="#" class="active" data-i18n="nav.blog">Blog</a></li>
+      <li><a href="contact.html" data-i18n="nav.contact">Contact</a></li>
     </ul>
+    <button id="lang-toggle" style="background:none;border:1px solid rgba(0,0,0,0.15);border-radius:20px;padding:4px 12px;font-size:0.75rem;cursor:pointer;letter-spacing:0.04em;font-family:var(--sans);color:var(--black);transition:opacity 0.2s;" onmouseover="this.style.opacity='0.6'" onmouseout="this.style.opacity='1'">ES</button>
     <button class="hamburger" id="hamburger" aria-label="Open menu">
       <span></span><span></span><span></span>
     </button>
@@ -281,10 +282,10 @@
 </nav>
 
 <div class="mobile-menu" id="mobile-menu">
-  <a href="index.html#about" class="mob-link">About</a>
-  <a href="index.html#work" class="mob-link">Work</a>
-  <a href="blog.html" class="mob-link">Blog</a>
-  <a href="contact.html" class="mob-link">Contact</a>
+  <a href="index.html#about" class="mob-link" data-i18n="nav.about">About</a>
+  <a href="index.html#work" class="mob-link" data-i18n="nav.work">Work</a>
+  <a href="blog.html" class="mob-link" data-i18n="nav.blog">Blog</a>
+  <a href="contact.html" class="mob-link" data-i18n="nav.contact">Contact</a>
 </div>
 
 <div class="wrap">
@@ -292,10 +293,10 @@
   <!-- HEADER -->
   <div class="page-header fade-up">
     <div class="page-header-left">
-      <p class="eyebrow">Writing</p>
-      <h1>Thoughts on design,<br><em>brand & craft</em></h1>
+      <p class="eyebrow" data-i18n="blog.eyebrow">Writing</p>
+      <h1 data-i18n="blog.heading">Thoughts on design,<br><em>brand &amp; craft</em></h1>
     </div>
-    <span class="post-count">4 articles</span>
+    <span class="post-count" data-i18n="blog.count">4 articles</span>
   </div>
 
   <!-- FEATURED POST -->
@@ -305,16 +306,16 @@
     </div>
     <div class="featured-body">
       <div class="featured-top">
-        <p class="featured-label">Featured</p>
-        <span class="featured-tag">Business</span>
-        <h2 class="featured-title">How Much Does a Framer Website Actually Cost in 2026?</h2>
-        <p class="featured-excerpt">A freelance designer's honest breakdown — platform fees, design costs, and what nobody tells you before you start.</p>
+        <p class="featured-label" data-i18n="blog.featuredLabel">Featured</p>
+        <span class="featured-tag" data-i18n="blog.tag1">Business</span>
+        <h2 class="featured-title" data-i18n="blog.feat1Title">How Much Does a Framer Website Actually Cost in 2026?</h2>
+        <p class="featured-excerpt" data-i18n="blog.feat1Excerpt">A freelance designer's honest breakdown — platform fees, design costs, and what nobody tells you before you start.</p>
       </div>
       <div class="featured-meta">
-        <span class="meta-item">April 2026</span>
+        <span class="meta-item" data-i18n="blog.feat1Date">April 2026</span>
         <span class="meta-dot"></span>
-        <span class="meta-item">6 min read</span>
-        <span class="read-more">Read article →</span>
+        <span class="meta-item" data-i18n="blog.feat1Read">6 min read</span>
+        <span class="read-more" data-i18n="blog.readMore">Read article →</span>
       </div>
     </div>
   </a>
@@ -326,13 +327,13 @@
         <img src="Portafolio images/Blog Images/blog image-home.jpg" alt="Why most luxury brands fail at digital">
       </div>
       <div class="post-body">
-        <span class="post-tag">Brand Identity</span>
-        <h3 class="post-title">Why most luxury brands fail at digital — and what great ones do differently</h3>
-        <p class="post-excerpt">Premium positioning isn't about being expensive. It's about being precise. Here's what separates brands that feel truly elevated from those that just look expensive.</p>
+        <span class="post-tag" data-i18n="blog.tag2">Brand Identity</span>
+        <h3 class="post-title" data-i18n="blog.post1Title">Why most luxury brands fail at digital — and what great ones do differently</h3>
+        <p class="post-excerpt" data-i18n="blog.post1Excerpt">Premium positioning isn't about being expensive. It's about being precise. Here's what separates brands that feel truly elevated from those that just look expensive.</p>
         <div class="post-meta">
-          <span class="meta-item">March 2026</span>
+          <span class="meta-item" data-i18n="blog.post1Date">March 2026</span>
           <span class="meta-dot"></span>
-          <span class="meta-item">6 min read</span>
+          <span class="meta-item" data-i18n="blog.post1Read">6 min read</span>
         </div>
       </div>
     </a>
@@ -342,13 +343,13 @@
         <img src="Portafolio images/Blog Images/blog2 image-home.jpg" alt="The Truth About AI and Design">
       </div>
       <div class="post-body">
-        <span class="post-tag">Business</span>
-        <h3 class="post-title">The Truth About AI and Design: Can It Really Replace a Designer?</h3>
-        <p class="post-excerpt">AI tools are everywhere. But before you cancel your designer, here's what they actually can and can't do — and the real math on cost.</p>
+        <span class="post-tag" data-i18n="blog.tag1">Business</span>
+        <h3 class="post-title" data-i18n="blog.post2Title">The Truth About AI and Design: Can It Really Replace a Designer?</h3>
+        <p class="post-excerpt" data-i18n="blog.post2Excerpt">AI tools are everywhere. But before you cancel your designer, here's what they actually can and can't do — and the real math on cost.</p>
         <div class="post-meta">
-          <span class="meta-item">March 2026</span>
+          <span class="meta-item" data-i18n="blog.post2Date">March 2026</span>
           <span class="meta-dot"></span>
-          <span class="meta-item">5 min read</span>
+          <span class="meta-item" data-i18n="blog.post2Read">5 min read</span>
         </div>
       </div>
     </a>
@@ -358,13 +359,13 @@
         <img src="Portafolio images/Blog Images/blog3 image-home.jpg" alt="How to Brief a Designer">
       </div>
       <div class="post-body">
-        <span class="post-tag">Process</span>
-        <h3 class="post-title">How to Brief a Designer (Even If You've Never Done It)</h3>
-        <p class="post-excerpt">You don't need design experience to give a great brief. You just need to know what to say — and what to skip.</p>
+        <span class="post-tag" data-i18n="blog.tag3">Process</span>
+        <h3 class="post-title" data-i18n="blog.post3Title">How to Brief a Designer (Even If You've Never Done It)</h3>
+        <p class="post-excerpt" data-i18n="blog.post3Excerpt">You don't need design experience to give a great brief. You just need to know what to say — and what to skip.</p>
         <div class="post-meta">
-          <span class="meta-item">March 2026</span>
+          <span class="meta-item" data-i18n="blog.post3Date">March 2026</span>
           <span class="meta-dot"></span>
-          <span class="meta-item">5 min read</span>
+          <span class="meta-item" data-i18n="blog.post3Read">5 min read</span>
         </div>
       </div>
     </a>
@@ -403,32 +404,34 @@
 <footer class="footer-editorial">
   <div class="footer-top-bar">
     <span class="footer-logo"><img src="Ana K. Logo.svg" alt="Ana K." style="height:24px;display:block;"></span>
-    <a href="contact.html" class="footer-cta-link">Start working together <span>→</span></a>
+    <a href="contact.html" class="footer-cta-link" data-i18n="footer.cta">Start working together <span>→</span></a>
   </div>
   <div class="footer-big-phrase">
-    <h2>Good design changes<br><em>everything.</em></h2>
+    <h2 data-i18n="footer.tagline">Good design changes<br><em>everything.</em></h2>
   </div>
   <div class="footer-divider"></div>
   <div class="footer-bottom-row">
     <div class="footer-nav-group">
-      <span class="footer-nav-label">Pages</span>
-      <a href="index.html#about">About</a>
-      <a href="index.html#work">Work</a>
-      <a href="blog.html">Blog</a>
-      <a href="contact.html">Contact</a>
+      <span class="footer-nav-label" data-i18n="footer.pages">Pages</span>
+      <a href="index.html#about" data-i18n="footer.about">About</a>
+      <a href="index.html#work" data-i18n="footer.work">Work</a>
+      <a href="blog.html" data-i18n="footer.blog">Blog</a>
+      <a href="contact.html" data-i18n="nav.contact">Contact</a>
     </div>
     <div class="footer-nav-group">
-      <span class="footer-nav-label">Connect</span>
+      <span class="footer-nav-label" data-i18n="footer.connect">Connect</span>
       <a href="#">Instagram</a>
       <a href="https://www.linkedin.com/in/ana-karina-rosa-rosario-3b407199/?locale=en_US" target="_blank">LinkedIn</a>
       <a href="https://www.behance.net/anarosa3" target="_blank">Behance</a>
       <a href="mailto:anakrosawork@gmail.com">Email</a>
     </div>
     <div class="footer-copy">
-      <span>© 2025 Ana K.</span>
-      <span>Designed &amp; built by Ana K.</span>
+      <span data-i18n="footer.copy">© 2025 Ana K.</span>
+      <span data-i18n="footer.built">Designed &amp; built by Ana K.</span>
     </div>
   </div>
 </footer>
+<script src="translations.js"></script>
+<script src="i18n.js"></script>
 </body>
 </html>

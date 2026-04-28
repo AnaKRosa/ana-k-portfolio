@@ -227,11 +227,12 @@
   <div class="nav-inner">
     <a href="index.html" class="logo"><img src="Ana K. Logo-dark.svg" alt="Ana K." style="height:26px;display:block;"></a>
     <ul class="nav-links">
-      <li><a href="index.html#about">About</a></li>
-      <li><a href="index.html#work">Work</a></li>
-      <li><a href="blog.html">Blog</a></li>
-      <li><a href="contact.html">Contact</a></li>
+      <li><a href="index.html#about" data-i18n="nav.about">About</a></li>
+      <li><a href="index.html#work" data-i18n="nav.work">Work</a></li>
+      <li><a href="blog.html" data-i18n="nav.blog">Blog</a></li>
+      <li><a href="contact.html" data-i18n="nav.contact">Contact</a></li>
     </ul>
+    <button id="lang-toggle" style="background:none;border:1px solid rgba(0,0,0,0.15);border-radius:20px;padding:4px 12px;font-size:0.75rem;cursor:pointer;letter-spacing:0.04em;font-family:var(--sans);color:var(--black);transition:opacity 0.2s;" onmouseover="this.style.opacity='0.6'" onmouseout="this.style.opacity='1'">ES</button>
     <button class="hamburger" id="hamburger" aria-label="Open menu">
       <span></span><span></span><span></span>
     </button>
@@ -412,5 +413,7 @@
   </div>
 </footer>
 
+<script src="translations.js"></script>
+<script src="i18n.js"></script>
 </body>
 </html>

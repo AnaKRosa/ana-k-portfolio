@@ -142,11 +142,12 @@
   <div class="nav-inner">
     <a href="index.html" class="logo"><img src="Ana K. Logo.svg" alt="Ana K." style="height:26px;display:block;"></a>
     <ul class="nav-links">
-      <li><a href="index.html#about">About</a></li>
-      <li><a href="index.html#work">Work</a></li>
-      <li><a href="blog.html">Blog</a></li>
-      <li><a href="contact.html">Contact</a></li>
+      <li><a href="index.html#about" data-i18n="nav.about">About</a></li>
+      <li><a href="index.html#work" data-i18n="nav.work">Work</a></li>
+      <li><a href="blog.html" data-i18n="nav.blog">Blog</a></li>
+      <li><a href="contact.html" data-i18n="nav.contact">Contact</a></li>
     </ul>
+    <button id="lang-toggle" style="background:none;border:1px solid rgba(0,0,0,0.15);border-radius:20px;padding:4px 12px;font-size:0.75rem;cursor:pointer;letter-spacing:0.04em;font-family:var(--sans);color:var(--black);transition:opacity 0.2s;" onmouseover="this.style.opacity='0.6'" onmouseout="this.style.opacity='1'">ES</button>
     <button class="hamburger" id="hamburger" aria-label="Open menu">
       <span></span><span></span><span></span>
     </button>
@@ -154,48 +155,48 @@
 </nav>
 
 <div class="mobile-menu" id="mobile-menu">
-  <a href="index.html#about" class="mob-link">About</a>
-  <a href="index.html#work" class="mob-link">Work</a>
-  <a href="blog.html" class="mob-link">Blog</a>
-  <a href="contact.html" class="mob-link">Contact</a>
+  <a href="index.html#about" class="mob-link" data-i18n="nav.about">About</a>
+  <a href="index.html#work" class="mob-link" data-i18n="nav.work">Work</a>
+  <a href="blog.html" class="mob-link" data-i18n="nav.blog">Blog</a>
+  <a href="contact.html" class="mob-link" data-i18n="nav.contact">Contact</a>
 </div>
 
 <div class="page">
   <div class="content">
-    <p class="eyebrow">Message received</p>
-    <h1>Thank <em>you!</em></h1>
-    <p class="lead">Your message has been received. I'll get back to you within 1–2 business days.</p>
-    <a href="index.html" class="btn-home">Back to home <span>→</span></a>
+    <p class="eyebrow" data-i18n="thankYou.eyebrow">Message received</p>
+    <h1 data-i18n="thankYou.heading">Thank <em>you!</em></h1>
+    <p class="lead" data-i18n="thankYou.lead">Your message has been received. I'll get back to you within 1–2 business days.</p>
+    <a href="index.html" class="btn-home" data-i18n="thankYou.btn">Back to home <span>→</span></a>
   </div>
 </div>
 
 <footer class="footer-editorial">
   <div class="footer-top-bar">
     <span class="footer-logo"><img src="Ana K. Logo.svg" alt="Ana K." style="height:24px;display:block;"></span>
-    <a href="contact.html" class="footer-cta-link">Start working together <span>→</span></a>
+    <a href="contact.html" class="footer-cta-link" data-i18n="footer.cta">Start working together <span>→</span></a>
   </div>
   <div class="footer-big-phrase">
-    <h2>Good design changes<br><em>everything.</em></h2>
+    <h2 data-i18n="footer.tagline">Good design changes<br><em>everything.</em></h2>
   </div>
   <div class="footer-divider"></div>
   <div class="footer-bottom-row">
     <div class="footer-nav-group">
-      <span class="footer-nav-label">Pages</span>
-      <a href="index.html#about">About</a>
-      <a href="index.html#work">Work</a>
-      <a href="blog.html">Blog</a>
-      <a href="contact.html">Contact</a>
+      <span class="footer-nav-label" data-i18n="footer.pages">Pages</span>
+      <a href="index.html#about" data-i18n="footer.about">About</a>
+      <a href="index.html#work" data-i18n="footer.work">Work</a>
+      <a href="blog.html" data-i18n="footer.blog">Blog</a>
+      <a href="contact.html" data-i18n="nav.contact">Contact</a>
     </div>
     <div class="footer-nav-group">
-      <span class="footer-nav-label">Connect</span>
+      <span class="footer-nav-label" data-i18n="footer.connect">Connect</span>
       <a href="https://instagram.com/anakrosadesign" target="_blank">Instagram</a>
       <a href="https://www.linkedin.com/in/ana-karina-rosa-rosario-3b407199/?locale=en_US" target="_blank">LinkedIn</a>
       <a href="https://www.behance.net/anarosa3" target="_blank">Behance</a>
       <a href="mailto:anakrosawork@gmail.com">Email</a>
     </div>
     <div class="footer-copy">
-      <span>© 2025 Ana K.</span>
-      <span>Designed &amp; built by Ana K.</span>
+      <span data-i18n="footer.copy">© 2025 Ana K.</span>
+      <span data-i18n="footer.built">Designed &amp; built by Ana K.</span>
     </div>
   </div>
 </footer>
@@ -217,6 +218,7 @@ mobileMenu.querySelectorAll('.mob-link').forEach(link => {
   });
 });
 </script>
-
+<script src="translations.js"></script>
+<script src="i18n.js"></script>
 </body>
 </html>
