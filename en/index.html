@@ -2,13 +2,14 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<base href="/">
+<link rel="alternate" hreflang="en" href="https://anakrosadesign.com/en/" />
+<link rel="alternate" hreflang="es" href="https://anakrosadesign.com/es/" />
+<link rel="alternate" hreflang="x-default" href="https://anakrosadesign.com/" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="google-site-verification" content="DwFFYqU0tteCNllqP0cPC9XiljYNfaYBpa-RcSEkoRc" />
 <title>Ana K. Rosa — Freelance Web Designer &amp; Developer</title>
 <meta name="description" content="Freelance web designer helping small brands and entrepreneurs build clear, elegant websites. Specializing in Webflow, Framer, and brand identity.">
-<link rel="alternate" hreflang="en" href="https://anakrosadesign.com/en/" />
-<link rel="alternate" hreflang="es" href="https://anakrosadesign.com/es/" />
-<link rel="alternate" hreflang="x-default" href="https://anakrosadesign.com/" />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap" media="print" onload="this.media='all'">
@@ -1271,15 +1272,9 @@
 <meta property="og:title" content="Ana K. Rosa — Freelance Web Designer &amp; Developer">
 <meta property="og:description" content="Freelance web designer helping small businesses build clear, elegant websites. Specializing in Webflow, Framer, and brand identity.">
 <meta property="og:image" content="https://anakrosadesign.com/og-image.jpg">
-<meta property="og:url" content="https://anakrosadesign.com">
+<meta property="og:url" content="https://anakrosadesign.com/en/">
 <meta property="og:type" content="website">
-<script>
-  (function() {
-    // Redirect to language-specific version based on browser preference
-    var lang = (navigator.language || navigator.userLanguage || 'en').substring(0, 2).toLowerCase();
-    window.location.replace(lang === 'es' ? '/es/' : '/en/');
-  })();
-</script>
+<link rel="canonical" href="https://anakrosadesign.com/en/" />
 </head>
 <body>
 
@@ -2051,6 +2046,7 @@
   onScroll();
 
 </script>
+<script>localStorage.setItem("lang","en");</script>
 <script src="translations.js"></script>
 <script src="i18n.js"></script>
 </body>

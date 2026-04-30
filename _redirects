@@ -1,0 +1,3 @@
+# Redirect bare /en and /es to canonical trailing-slash versions
+/en    /en/    301
+/es    /es/    301
