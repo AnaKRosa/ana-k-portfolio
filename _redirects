@@ -1,0 +1,5 @@
+# Redirect old bilingual routes back to canonical root
+/es/   /   301
+/es    /   301
+/en/   /   301
+/en    /   301
