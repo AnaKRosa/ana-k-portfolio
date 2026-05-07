@@ -300,21 +300,21 @@
     </div>
 
     <div class="direct-links fade-up">
-      <a href="mailto:anakrosawork@gmail.com" class="direct-link">
+      <a href="mailto:anakrosawork@gmail.com" class="direct-link" onclick="gtag('event', 'contact_email_click')">
         <div>
           <div class="link-label" data-i18n="contact.emailLabel">Email</div>
           <div class="link-value">anakrosawork@gmail.com</div>
         </div>
         <span class="link-arrow">↗</span>
       </a>
-      <a href="https://instagram.com/anakrosadesign" target="_blank" class="direct-link">
+      <a href="https://instagram.com/anakrosadesign" target="_blank" class="direct-link" onclick="gtag('event', 'social_link_click', {'platform': 'Instagram'})">
         <div>
           <div class="link-label" data-i18n="contact.igLabel">Instagram</div>
           <div class="link-value" data-i18n="contact.igValue">@anakrosadesign</div>
         </div>
         <span class="link-arrow">↗</span>
       </a>
-      <a href="https://www.linkedin.com/in/ana-karina-rosa-rosario-3b407199/?locale=en_US" target="_blank" class="direct-link">
+      <a href="https://www.linkedin.com/in/ana-karina-rosa-rosario-3b407199/?locale=en_US" target="_blank" class="direct-link" onclick="gtag('event', 'social_link_click', {'platform': 'LinkedIn'})">
         <div>
           <div class="link-label" data-i18n="contact.liLabel">LinkedIn</div>
           <div class="link-value" data-i18n="contact.liValue">Ana Karina</div>
@@ -360,7 +360,7 @@
 
       <div class="or-divider fade-up" data-i18n="contact.orDivider">or schedule a call</div>
 
-      <a href="https://cal.com/ana-karina-rosa-vwdmwe/30min" target="_blank" class="calendly-row fade-up">
+      <a href="https://cal.com/ana-karina-rosa-vwdmwe/30min" target="_blank" class="calendly-row fade-up" onclick="gtag('event', 'zoom_scheduler_click')">
         <div class="cal-icon">
           <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/>
@@ -419,10 +419,10 @@ mobileMenu.querySelectorAll('.mob-link').forEach(link => {
     </div>
     <div class="footer-nav-group">
       <span class="footer-nav-label" data-i18n="footer.connect">Connect</span>
-      <a href="https://instagram.com/anakrosadesign" target="_blank">Instagram</a>
-      <a href="https://www.linkedin.com/in/ana-karina-rosa-rosario-3b407199/?locale=en_US" target="_blank">LinkedIn</a>
+      <a href="https://instagram.com/anakrosadesign" target="_blank" onclick="gtag('event', 'social_link_click', {'platform': 'Instagram'})">Instagram</a>
+      <a href="https://www.linkedin.com/in/ana-karina-rosa-rosario-3b407199/?locale=en_US" target="_blank" onclick="gtag('event', 'social_link_click', {'platform': 'LinkedIn'})">LinkedIn</a>
       <a href="https://www.behance.net/anarosa3" target="_blank">Behance</a>
-      <a href="mailto:anakrosawork@gmail.com">Email</a>
+      <a href="mailto:anakrosawork@gmail.com" onclick="gtag('event', 'contact_email_click')">Email</a>
     </div>
     <div class="footer-copy">
       <span data-i18n="footer.copy">© 2025 Ana K.</span>
