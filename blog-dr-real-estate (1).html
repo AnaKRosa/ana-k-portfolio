@@ -1,0 +1,792 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Why Every DR Rental Property Needs Its Own Website (2026) · Ana K.</title>
+<meta name="description" content="The Dominican Republic real estate market hit record numbers in 2025. But most property owners lose thousands yearly by relying only on Airbnb. Here's the fix.">
+<meta property="og:title" content="Why Every DR Rental Property Needs Its Own Website in 2026">
+<meta property="og:description" content="11.8M tourists. $5B in foreign investment. 15% Airbnb fees eating your profits. A professional website changes the equation.">
+<meta property="og:type" content="article">
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --cream: #F2EEE7;
+    --cream-alt: #EDEAE4;
+    --black: #0e0e0e;
+    --lavender: #C3C3FA;
+    --lime: #EAF58D;
+    --serif: 'Instrument Serif', Georgia, serif;
+    --sans: 'DM Sans', sans-serif;
+  }
+  html { scroll-behavior: smooth; }
+  body { font-family: var(--sans); background: var(--cream); color: var(--black); overflow-x: hidden; -webkit-font-smoothing: antialiased; }
+
+  /* PROGRESS BAR */
+  .progress-bar {
+    position: fixed; top: 0; left: 0; z-index: 200;
+    height: 2px; background: var(--lavender);
+    width: 0%; transition: width 0.1s linear;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: var(--cream); border-bottom: 1px solid rgba(0,0,0,0.07);
+    padding: 0 48px;
+  }
+  .nav-inner {
+    max-width: 1200px; margin: 0 auto;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 18px 0;
+  }
+  .logo { text-decoration: none; display: flex; align-items: center; }
+  .nav-links { display: flex; gap: 28px; list-style: none; }
+  .nav-links a { font-size: 0.8rem; text-decoration: none; color: var(--black); opacity: 0.55; letter-spacing: 0.04em; transition: opacity 0.2s; }
+  .nav-links a:hover, .nav-links a.active { opacity: 1; }
+
+  /* WRAP */
+  .wrap { max-width: 1200px; margin: 0 auto; padding: 0 48px; }
+
+  /* HEADER */
+  .post-header {
+    padding: 120px 0 40px;
+    max-width: 760px;
+    margin: 0 auto;
+    text-align: center;
+  }
+  .post-tag {
+    display: inline-block; font-size: 0.7rem; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--lavender); font-weight: 500;
+    margin-bottom: 20px;
+  }
+  .post-header h1 {
+    font-family: var(--serif); font-weight: 400;
+    font-size: 2.8rem; line-height: 1.15; margin-bottom: 20px;
+    letter-spacing: -0.01em;
+  }
+  .post-excerpt {
+    font-family: var(--serif); font-style: italic;
+    font-size: 1.15rem; line-height: 1.6; opacity: 0.6;
+    max-width: 580px; margin: 0 auto 24px;
+  }
+  .post-meta-top {
+    display: flex; justify-content: center; gap: 20px;
+    font-size: 0.75rem; opacity: 0.45; letter-spacing: 0.04em;
+  }
+  .meta-sep { opacity: 0.3; }
+
+  /* HERO IMAGE */
+  .hero-img {
+    width: 100%; max-width: 1100px; margin: 0 auto 56px;
+    border-radius: 12px; overflow: hidden;
+    aspect-ratio: 16/7;
+    background: var(--cream-alt);
+    position: relative;
+  }
+  .hero-img img {
+    width: 100%; height: 100%; object-fit: cover;
+  }
+  .img-placeholder {
+    width: 100%; height: 100%;
+    display: flex; align-items: center; justify-content: center;
+    flex-direction: column; gap: 8px;
+    color: var(--black); opacity: 0.25; font-size: 0.75rem;
+    letter-spacing: 0.06em;
+  }
+  .img-placeholder svg { opacity: 0.4; }
+
+  /* 3-COL LAYOUT */
+  .post-layout {
+    display: grid;
+    grid-template-columns: 200px 1fr 80px;
+    gap: 48px;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding-bottom: 80px;
+  }
+
+  /* TOC */
+  .toc {
+    position: sticky; top: 90px; align-self: start;
+  }
+  .toc-label {
+    font-size: 0.65rem; letter-spacing: 0.14em;
+    text-transform: uppercase; opacity: 0.35;
+    margin-bottom: 16px; font-weight: 500;
+  }
+  .toc-item {
+    display: block; font-size: 0.78rem; line-height: 1.5;
+    color: var(--black); text-decoration: none;
+    opacity: 0.35; padding: 6px 0; transition: all 0.25s;
+    border-left: 2px solid transparent; padding-left: 12px;
+  }
+  .toc-item:hover { opacity: 0.7; }
+  .toc-item.active {
+    opacity: 1; border-left-color: var(--lavender);
+  }
+
+  /* ARTICLE */
+  .article { max-width: 680px; }
+  .article h2 {
+    font-family: var(--serif); font-weight: 400;
+    font-size: 1.75rem; line-height: 1.25;
+    margin: 56px 0 20px; letter-spacing: -0.01em;
+  }
+  .article h3 {
+    font-family: var(--sans); font-weight: 600;
+    font-size: 1rem; line-height: 1.4;
+    margin: 36px 0 12px; letter-spacing: 0.01em;
+  }
+  .article p {
+    font-size: 0.95rem; line-height: 1.85;
+    margin-bottom: 20px; opacity: 0.82;
+  }
+  .article a {
+    color: var(--black); text-decoration: underline;
+    text-decoration-color: var(--lavender);
+    text-underline-offset: 3px; transition: text-decoration-color 0.2s;
+  }
+  .article a:hover { text-decoration-color: var(--black); }
+  .article strong { font-weight: 600; opacity: 1; }
+  .article ul, .article ol {
+    margin: 0 0 24px 0; padding-left: 20px;
+  }
+  .article li {
+    font-size: 0.95rem; line-height: 1.85;
+    margin-bottom: 10px; opacity: 0.82;
+  }
+  .article blockquote {
+    border-left: 3px solid var(--lavender);
+    padding: 20px 24px;
+    margin: 28px 0;
+    background: rgba(195,195,250,0.08);
+    border-radius: 0 8px 8px 0;
+  }
+  .article blockquote p {
+    font-family: var(--serif); font-style: italic;
+    font-size: 1.05rem; opacity: 0.75; margin-bottom: 0;
+  }
+
+  /* DATA CALLOUT */
+  .data-callout {
+    background: var(--black); color: #fff;
+    border-radius: 12px; padding: 36px 32px;
+    margin: 40px 0; display: grid;
+    grid-template-columns: repeat(3, 1fr); gap: 24px;
+    text-align: center;
+  }
+  .data-callout .stat-num {
+    font-family: var(--serif); font-size: 2rem;
+    color: var(--lime); margin-bottom: 6px;
+  }
+  .data-callout .stat-label {
+    font-size: 0.72rem; letter-spacing: 0.06em;
+    opacity: 0.55; line-height: 1.5;
+  }
+
+  /* INLINE IMAGES */
+  .inline-img {
+    width: 100%; border-radius: 10px;
+    margin: 32px 0; overflow: hidden;
+    background: var(--cream-alt);
+  }
+  .inline-img img {
+    width: 100%; height: auto; display: block;
+  }
+  .inline-img.two-col {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 12px;
+    background: none;
+  }
+  .inline-img.two-col > div {
+    border-radius: 10px; overflow: hidden;
+    background: var(--cream-alt); aspect-ratio: 4/3;
+  }
+  .inline-img.two-col img { width: 100%; height: 100%; object-fit: cover; }
+  .img-caption {
+    font-size: 0.72rem; opacity: 0.4; margin-top: 10px;
+    text-align: center; letter-spacing: 0.03em;
+  }
+
+  /* FEATURE LIST */
+  .feature-list {
+    margin: 24px 0 32px;
+    display: flex; flex-direction: column; gap: 16px;
+  }
+  .feature-item {
+    display: flex; gap: 14px; align-items: flex-start;
+  }
+  .feature-icon {
+    width: 28px; height: 28px; min-width: 28px;
+    border-radius: 50%; background: rgba(195,195,250,0.2);
+    display: flex; align-items: center; justify-content: center;
+    margin-top: 2px;
+  }
+  .feature-icon svg { width: 14px; height: 14px; stroke: var(--lavender); }
+  .feature-text { font-size: 0.92rem; line-height: 1.7; opacity: 0.82; }
+  .feature-text strong { opacity: 1; }
+
+  /* SHARE */
+  .share {
+    position: sticky; top: 90px; align-self: start;
+    display: flex; flex-direction: column; gap: 16px;
+    align-items: center;
+  }
+  .share-label {
+    font-size: 0.6rem; letter-spacing: 0.14em;
+    text-transform: uppercase; opacity: 0.3;
+    writing-mode: vertical-rl; transform: rotate(180deg);
+    margin-bottom: 8px;
+  }
+  .share a {
+    width: 36px; height: 36px; border-radius: 50%;
+    border: 1px solid rgba(0,0,0,0.1);
+    display: flex; align-items: center; justify-content: center;
+    transition: all 0.2s; text-decoration: none;
+  }
+  .share a:hover { border-color: var(--lavender); background: rgba(195,195,250,0.1); }
+  .share a svg { width: 15px; height: 15px; stroke: var(--black); opacity: 0.5; }
+
+  /* CTA SECTION */
+  .cta-section {
+    background: var(--black); color: #fff;
+    border-radius: 16px; padding: 20px 48px 56px;
+    margin: 56px 0 40px; text-align: center;
+  }
+  .cta-section h2 {
+    font-family: var(--serif); font-weight: 400;
+    font-size: 1.8rem; margin-bottom: 16px; color: #fff;
+  }
+  .cta-section p {
+    font-size: 0.9rem; line-height: 1.8;
+    opacity: 0.6; max-width: 520px; margin: 0 auto 28px;
+  }
+  .cta-buttons { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+  .btn {
+    display: inline-block; padding: 14px 28px;
+    border-radius: 8px; font-size: 0.82rem; font-weight: 500;
+    text-decoration: none !important; letter-spacing: 0.03em;
+    transition: all 0.2s;
+  }
+  .btn-lime { background: var(--lime); color: var(--black) !important; }
+  .btn-lime:hover { filter: brightness(0.95); transform: translateY(-1px); }
+  .btn-outline { border: 1px solid rgba(255,255,255,0.35); color: #fff !important; }
+  .btn-outline:hover { border-color: rgba(255,255,255,0.7); background: rgba(255,255,255,0.08); }
+
+  /* SOURCES */
+  .sources {
+    font-size: 0.72rem; opacity: 0.35; line-height: 1.7;
+    margin: 32px 0 56px; padding-top: 24px;
+    border-top: 1px solid rgba(0,0,0,0.08);
+  }
+
+  /* RELATED POSTS */
+  .related {
+    border-top: 1px solid rgba(0,0,0,0.08);
+    padding: 64px 0 80px;
+  }
+  .related-title {
+    font-family: var(--serif); font-size: 1.4rem;
+    margin-bottom: 36px; font-weight: 400;
+  }
+  .related-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;
+  }
+  .related-card {
+    text-decoration: none; color: var(--black);
+    transition: transform 0.3s;
+  }
+  .related-card:hover { transform: translateY(-4px); }
+  .related-card-img {
+    aspect-ratio: 3/2; border-radius: 10px;
+    background: var(--cream-alt); margin-bottom: 16px;
+    overflow: hidden;
+  }
+  .related-card-img img { width: 100%; height: 100%; object-fit: cover; }
+  .related-card-tag {
+    font-size: 0.65rem; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--lavender);
+    font-weight: 500; margin-bottom: 8px;
+  }
+  .related-card-title {
+    font-family: var(--serif); font-size: 1.1rem;
+    line-height: 1.35; margin-bottom: 8px;
+  }
+  .related-card-excerpt {
+    font-size: 0.78rem; opacity: 0.5; line-height: 1.6;
+  }
+
+  /* WATERMARK */
+  .watermark {
+    position: fixed; bottom: 20px; right: 24px;
+    font-family: var(--serif); font-style: italic;
+    font-size: 14px; opacity: 0.12;
+    pointer-events: none; z-index: 50;
+  }
+  .watermark .wdot { color: var(--lavender); opacity: 0.9; }
+
+  /* FADE */
+  .fade-up { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease, transform 0.6s ease; }
+  .fade-up.visible { opacity: 1; transform: translateY(0); }
+
+  /* HAMBURGER */
+  .hamburger {
+    display: none; flex-direction: column; gap: 5px;
+    background: none; border: none; cursor: pointer; padding: 4px;
+  }
+  .hamburger span {
+    display: block; width: 22px; height: 1.5px; background: var(--black);
+    transition: transform 0.3s ease, opacity 0.3s ease;
+  }
+  .hamburger.open span:first-child { transform: translateY(7px) rotate(45deg); }
+  .hamburger.open span:nth-child(2) { opacity: 0; }
+  .hamburger.open span:last-child { transform: translateY(-7px) rotate(-45deg); }
+
+  /* MOBILE MENU */
+  .mobile-menu {
+    display: none; flex-direction: column; align-items: center; justify-content: center;
+    gap: 32px; position: fixed; inset: 0; background: var(--cream); z-index: 99;
+  }
+  .mobile-menu.open { display: flex; }
+  .mob-link {
+    font-family: var(--serif); font-size: 2rem; text-decoration: none;
+    color: var(--black); opacity: 0; transform: translateY(12px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+  }
+  .mobile-menu.open .mob-link { opacity: 1; transform: translateY(0); }
+  .mobile-menu.open .mob-link:nth-child(1) { transition-delay: 0.06s; }
+  .mobile-menu.open .mob-link:nth-child(2) { transition-delay: 0.12s; }
+  .mobile-menu.open .mob-link:nth-child(3) { transition-delay: 0.18s; }
+  .mobile-menu.open .mob-link:nth-child(4) { transition-delay: 0.24s; }
+
+  /* FOOTER */
+  .footer-editorial { background: var(--black); color: white; padding: 72px 48px 48px; }
+  .footer-top-bar { display: flex; justify-content: space-between; align-items: center; max-width: 1200px; margin: 0 auto 80px; }
+  .footer-logo { font-family: var(--serif); font-size: 1.65rem; letter-spacing: 0.06em; opacity: 0.5; }
+  .footer-cta-link { font-size: 0.85rem; font-weight: 500; color: var(--lime); text-decoration: none; letter-spacing: 0.02em; display: flex; align-items: center; gap: 8px; transition: gap 0.2s ease; }
+  .footer-cta-link:hover { gap: 14px; }
+  .footer-big-phrase { max-width: 1200px; margin: 0 auto 80px; }
+  .footer-big-phrase h2 { font-family: var(--serif); font-size: clamp(3.5rem, 8vw, 7rem); line-height: 1.0; color: white; font-weight: 400; margin: 0; }
+  .footer-big-phrase h2 em { color: var(--lavender); font-style: italic; }
+  .footer-divider { margin: 0 0 48px; height: 1px; background: rgba(255,255,255,0.1); }
+  .footer-bottom-row { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(3, 1fr) auto; gap: 48px; align-items: start; }
+  .footer-nav-group { display: flex; flex-direction: column; gap: 12px; }
+  .footer-nav-label { font-size: 0.68rem; letter-spacing: 0.14em; text-transform: uppercase; opacity: 0.3; margin-bottom: 4px; }
+  .footer-nav-group a { font-size: 0.85rem; color: white; text-decoration: none; opacity: 0.5; transition: opacity 0.2s; }
+  .footer-nav-group a:hover { opacity: 1; }
+  .footer-copy { display: flex; flex-direction: column; gap: 6px; font-size: 0.72rem; opacity: 0.25; text-align: right; align-self: end; }
+
+  /* RESPONSIVE */
+  @media (max-width: 900px) {
+    nav { padding: 0 24px; }
+    .wrap { padding: 0 24px; }
+    .post-header { padding: 100px 0 32px; }
+    .post-header h1 { font-size: 2rem; }
+    .post-layout { grid-template-columns: 1fr; gap: 0; }
+    .toc, .share { display: none; }
+    .data-callout { grid-template-columns: 1fr; gap: 16px; padding: 28px 24px; }
+    .related-grid { grid-template-columns: 1fr; }
+    .cta-section { padding: 40px 24px; }
+    .inline-img.two-col { grid-template-columns: 1fr; }
+    .footer-editorial { padding: 48px 24px 32px; }
+    .footer-bottom-row { grid-template-columns: 1fr 1fr; gap: 32px; }
+    .footer-copy { text-align: left; }
+    .hamburger { display: flex; }
+    .nav-links { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<div class="progress-bar" id="progress"></div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <a href="index.html" class="logo"><img src="Ana K. Logo-dark.svg" alt="Ana K." style="height:26px;display:block;" loading="lazy"></a>
+    <ul class="nav-links">
+      <li><a href="index.html#about">About</a></li>
+      <li><a href="index.html#work">Work</a></li>
+      <li><a href="blog.html" class="active">Blog</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+    <button class="hamburger" id="hamburger" aria-label="Open menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<div class="mobile-menu" id="mobile-menu">
+  <a href="index.html#about" class="mob-link">About</a>
+  <a href="index.html#work" class="mob-link">Work</a>
+  <a href="blog.html" class="mob-link">Blog</a>
+  <a href="contact.html" class="mob-link">Contact</a>
+</div>
+
+<!-- HEADER -->
+<div class="wrap">
+  <div class="post-header fade-up">
+    <span class="post-tag">Strategy · Real Estate</span>
+    <h1>Why Every Dominican Republic Rental Property Needs Its Own Website in 2026</h1>
+    <p class="post-excerpt">The DR real estate market just hit record numbers. But most property owners are still leaving thousands on the table by relying only on Airbnb.</p>
+    <div class="post-meta-top">
+      <span>Ana K. Rosa</span>
+      <span class="meta-sep">·</span>
+      <span>May 2026</span>
+      <span class="meta-sep">·</span>
+      <span>8 min read</span>
+    </div>
+  </div>
+</div>
+
+<!-- HERO IMAGE -->
+<div class="wrap">
+  <div class="hero-img fade-up">
+    <img src="blog/images/hero-dr-coastline.jpg" alt="Aerial view of the Dominican Republic coastline showing turquoise water and white sand beaches in Punta Cana" style="width:100%;height:100%;object-fit:cover;display:block;" loading="lazy">
+  </div>
+  <p class="img-caption" style="max-width:1100px;margin:8px auto 48px;">Photo: [Photographer Name] / <a href="https://unsplash.com" target="_blank">Unsplash</a></p>
+</div>
+
+<!-- POST LAYOUT -->
+<div class="wrap">
+  <div class="post-layout">
+
+    <!-- TOC -->
+    <aside class="toc">
+      <div class="toc-label">Contents</div>
+      <a href="#market-data" class="toc-item active">The market right now</a>
+      <a href="#airbnb-trap" class="toc-item">The Airbnb trap</a>
+      <a href="#direct-booking" class="toc-item">Direct booking advantage</a>
+      <a href="#great-vs-bad" class="toc-item">Great vs. bad websites</a>
+      <a href="#nomad-factor" class="toc-item">The digital nomad factor</a>
+      <a href="#real-cost" class="toc-item">The real cost</a>
+      <a href="#modern-property" class="toc-item">What it looks like</a>
+    </aside>
+
+    <!-- ARTICLE -->
+    <article class="article">
+
+      <!-- SECTION: MARKET DATA -->
+      <h2 id="market-data">The Dominican Republic is Having a Moment</h2>
+
+      <p>The numbers don't lie. The Dominican Republic just closed one of its strongest years in history — and 2026 is on track to break those records again.</p>
+
+      <div class="data-callout fade-up">
+        <div>
+          <div class="stat-num">11.8M</div>
+          <div class="stat-label">Tourists in 2025<br>Record for the Caribbean</div>
+        </div>
+        <div>
+          <div class="stat-num">$5.03B</div>
+          <div class="stat-label">Foreign Direct Investment<br>97% increase YoY</div>
+        </div>
+        <div>
+          <div class="stat-num">7–12%</div>
+          <div class="stat-label">Rental Yields<br>In prime coastal areas</div>
+        </div>
+      </div>
+
+      <p>In 2025, the country welcomed a record <a href="https://thelatinvestor.com/blogs/news/dominican-price-forecasts" target="_blank">11.8 million tourists</a>, making it the most visited destination in the Caribbean. Foreign Direct Investment hit <a href="https://realestatelasterrenas.com/investment-in-dominican-republic/" target="_blank">$5.03 billion</a> — with tourism attracting 26.3% of those funds and real estate close behind at 15.7%.</p>
+
+      <p>Property prices have risen over 10% in the past year. Short-term rental yields in areas like Punta Cana, Cabarete, and Las Terrenas are hitting <a href="https://thelatinvestor.com/blogs/news/dominican-which-area" target="_blank">7% to 12% annually</a>. And the government's <a href="https://realestatelasterrenas.com/investment-in-dominican-republic/" target="_blank">CONFOTUR tax incentive program</a> offers up to 15 years of property tax exemptions for qualifying tourism developments.</p>
+
+      <p>Investors from the US, Canada, and Europe are pouring money into Dominican real estate. But here's the problem most of them don't see coming.</p>
+
+      <!-- IMAGE: Luxury property in DR -->
+      <div class="inline-img fade-up">
+        <img src="blog/images/villa-luxury-puntacana.jpg" alt="Luxury beachfront villa with infinity pool in Punta Cana, Dominican Republic" style="width:100%;height:auto;display:block;" loading="lazy">
+      </div>
+      <p class="img-caption">The Dominican Republic offers some of the Caribbean's best-priced luxury real estate — but most owners rely on Airbnb alone. Photo: [Photographer Name] / <a href="https://unsplash.com" target="_blank">Unsplash</a></p>
+
+
+      <!-- SECTION: AIRBNB TRAP -->
+      <h2 id="airbnb-trap">The Airbnb Dependency Trap</h2>
+
+      <p>Most property owners in the DR list their rental on Airbnb, maybe Booking.com, and call it a day. On the surface, that makes sense — these platforms bring traffic. But the math tells a different story.</p>
+
+      <p>Airbnb charges a <a href="https://thelatinvestor.com/blogs/news/airbnb-dominican-republic" target="_blank">15% service fee on gross bookings</a>. On a property generating $2,500/month in Punta Cana (which is realistic for a well-managed two-bedroom), that's <strong>$375/month going straight to the platform</strong>. That's $4,500 per year — enough to pay for a professional website, a booking system, and a year of hosting, with money left over.</p>
+
+      <blockquote>
+        <p>You're one listing among nearly 5,000 active properties in the Punta Cana region alone. When a guest searches, Airbnb's algorithm decides who gets seen — not you.</p>
+      </blockquote>
+
+      <!-- IMAGE: Airbnb saturated search results -->
+      <div class="inline-img fade-up">
+        <img src="blog/images/airbnb-puntacana-saturation.png" alt="Airbnb search results showing over 1,000 saturated listings in Punta Cana, Dominican Republic" style="width:100%;height:auto;display:block;" loading="lazy">
+      </div>
+      <p class="img-caption">Over 1,000 active listings compete for the same guest in Punta Cana alone. Source: <a href="https://www.airbnb.com" target="_blank">Airbnb.com</a>, May 2026.</p>
+
+
+      <!-- SECTION: DIRECT BOOKING -->
+      <h2 id="direct-booking">What a Direct Booking Website Actually Does for You</h2>
+
+      <p>Having your own website doesn't mean abandoning Airbnb. It means building a channel you <em>own</em> — one that works alongside the platforms but gives you control over your brand, your pricing, and your guest relationships.</p>
+
+      <div class="feature-list">
+        <div class="feature-item fade-up">
+          <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
+          <div class="feature-text"><strong>Direct bookings without platform fees.</strong> Every booking through your site instead of Airbnb saves you 15%. Over a year, that adds up to thousands — especially in high-demand zones like Cap Cana, Los Corales, or Las Terrenas.</div>
+        </div>
+        <div class="feature-item fade-up">
+          <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+          <div class="feature-text"><strong>Brand credibility that earns trust.</strong> A dedicated website signals professionalism. A Cap Cana villa at $400+/night needs more than a platform listing to justify the price.</div>
+        </div>
+        <div class="feature-item fade-up">
+          <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 21l-6-6m2-5a7 7 0 1 1-14 0 7 7 0 0 1 14 0z"/></svg></div>
+          <div class="feature-text"><strong>SEO traffic that compounds over time.</strong> When someone Googles "beachfront vacation rental Punta Cana," your website can show up — for free, forever. Every location page and local guide is a new entry point.</div>
+        </div>
+        <div class="feature-item fade-up">
+          <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg></div>
+          <div class="feature-text"><strong>A home for your story.</strong> Platforms give you a template. Your site gives you cinematic video tours, neighborhood guides, testimonials, and the lifestyle your property represents.</div>
+        </div>
+      </div>
+
+
+      <!-- SECTION: GREAT VS BAD -->
+      <h2 id="great-vs-bad">What Separates a Great Real Estate Website from a Bad One</h2>
+
+      <p>Not all websites are created equal. A poorly designed site can hurt you more than having no site at all. Here's what the <a href="https://azurodigital.com/real-estate-website-examples/" target="_blank">best real estate websites in 2026</a> are doing right:</p>
+
+      <h3>1. Visual-First Design That Sells the Lifestyle</h3>
+
+      <p>The top-performing real estate sites lead with full-bleed photography and video — not text walls. <a href="https://www.luxurypresence.com/best-real-estate-agent-websites/" target="_blank">Luxury Presence</a>, which powers sites for agents with billions in career sales, uses cinematic hero sections, warm color palettes, and generous whitespace.</p>
+
+      <p>For a Dominican Republic rental, this means drone footage of the coastline, interior photography that captures morning light, and imagery that sells the <em>feeling</em> of being there — not just a floor plan.</p>
+
+      <!-- IMAGE: Professional property website example — Casalty -->
+      <div class="inline-img fade-up">
+        <img src="blog/images/casalty-comparison.png" alt="Casalty Caribbean real estate website designed by Ana K. Rosa, built in Framer" style="width:100%;height:auto;display:block;" loading="lazy">
+      </div>
+      <p class="img-caption">Casalty, a Caribbean real estate website built in Framer — designed by Ana K. Rosa.</p>
+
+      <h3>2. Intuitive Search and Booking Flow</h3>
+
+      <p>According to <a href="https://www.housingwire.com/articles/real-estate-website-design/" target="_blank">HousingWire's 2026 analysis</a>, the best real estate websites function as "search tools that rival portals in speed and usability." For a vacation rental, this means clear availability calendars, instant booking, transparent pricing, and frictionless checkout.</p>
+
+      <h3>3. Mobile-First Is Non-Negotiable</h3>
+
+      <p>Over <a href="https://datareportal.com/reports/digital-2026-dominican-republic" target="_blank">85% of the Dominican Republic's population</a> lives in urban areas with dominant mobile internet usage. Your international guests are also browsing on phones — usually from an airport or hotel room. If your site doesn't load fast and look perfect on mobile, you're losing bookings.</p>
+
+      <h3>4. Trust Signals That Convert</h3>
+
+      <p>Guest reviews, professional photography, location maps, area guides, security features, and clear contact information. <a href="https://azurodigital.com/real-estate-website-examples/" target="_blank">Azuro Digital</a> highlights that the best sites weave "stats, awards, and success indicators" into the homepage to create a "boutique-yet-serious impression."</p>
+
+      <h3>5. SEO Built Into the Foundation</h3>
+
+      <p>A beautiful website that nobody finds is just an expensive business card. The structure needs to be right from the start: semantic HTML headings, optimized meta titles and descriptions, alt text on every image, fast load times, clean URLs, and schema markup for vacation rental listings. This is where most template sites fail — they look decent but have zero SEO architecture underneath.</p>
+
+
+
+
+      <!-- SECTION: DIGITAL NOMAD FACTOR -->
+      <h2 id="nomad-factor">The Digital Nomad Factor: A Growing Audience You're Missing</h2>
+
+      <p>Here's a trend that makes this even more urgent.</p>
+
+      <p>Digital nomads are reshaping the Dominican Republic's rental market. Remote workers from the US, Europe, and Latin America are choosing towns like <a href="https://international.connect.ca/how-the-digital-nomad-movement-is-shaping-real-estate-demand-in-the-dominican-republic/" target="_blank">Las Terrenas, Cabarete, and the Zona Colonial in Santo Domingo</a> as their base — not for two-week vacations, but for months at a time.</p>
+
+      <p>The <a href="https://www.digitalnomadsummit.co/" target="_blank">Digital Nomad Summit 2026</a> is being held in Santo Domingo this August, positioning the DR as a rising Caribbean innovation hub. And <a href="https://dominicantoday.com/dr/digital-nomad/2026/03/19/googles-big-bet-on-the-dominican-republic-but-is-the-country-ready-to-win/" target="_blank">Google is building a digital hub</a> in the country, with new submarine cables connecting the DR directly into global data flows.</p>
+
+      <!-- IMAGE: Digital nomad / remote work in DR -->
+      <div class="inline-img fade-up">
+        <img src="blog/images/nomad-working-tropical.jpg" alt="Digital nomad working remotely from a tropical setting in the Dominican Republic" style="width:100%;height:auto;display:block;" loading="lazy">
+      </div>
+      <p class="img-caption">Digital nomads search Google for "monthly rental Cabarete with wifi" — not Airbnb. Photo: [Photographer Name] / <a href="https://unsplash.com" target="_blank">Unsplash</a></p>
+
+      <blockquote>
+        <p>These nomads don't book through Airbnb the same way tourists do. They search Google. They read blog posts. They compare. They look for properties with their own website, clear monthly rates, internet speed specs, and workspace photos.</p>
+      </blockquote>
+
+
+      <!-- SECTION: REAL COST -->
+      <h2 id="real-cost">The Real Cost: What Happens When You Don't Invest</h2>
+
+      <p>Let's put real numbers on this.</p>
+
+      <p>A well-managed two-bedroom condo in Bavaro generates approximately <a href="https://thelatinvestor.com/blogs/news/airbnb-dominican-republic" target="_blank">$1,037 to $2,989 per month</a> through Airbnb, depending on location and season. At the higher end, Airbnb's 15% fee costs roughly <strong>$5,400 per year</strong>.</p>
+
+      <p>A professionally designed website with a direct booking system costs between $3,000 and $6,000 to build (one-time), plus around $200–$500/year for hosting and maintenance. If that website generates even 20% of your bookings directly instead of through Airbnb, you've paid for the entire site in the first year — and every year after is pure savings.</p>
+
+      <p>And that's just the fee savings. Add in the SEO traffic that grows over time, the brand authority that lets you charge higher rates, and the email list of past guests you can market to directly, and the ROI becomes obvious.</p>
+
+
+      <!-- SECTION: MODERN PROPERTY -->
+      <h2 id="modern-property">What a Modern Property Website Looks Like (Built Right)</h2>
+
+      <p>The best property websites in 2026 aren't built on bloated WordPress templates. They're built on fast, modern platforms like <a href="https://www.framer.com/" target="_blank">Framer</a> or <a href="https://webflow.com/" target="_blank">Webflow</a> that prioritize speed, design quality, and SEO performance out of the box.</p>
+
+      <p>Here's what a properly built property website includes:</p>
+
+      <ul>
+        <li><strong>A cinematic hero section</strong> with professional photography or video of the property and surrounding area</li>
+        <li><strong>Property detail pages</strong> with high-quality image galleries, amenities, floor plans, and neighborhood information</li>
+        <li><strong>An integrated booking system</strong> — platforms like <a href="https://www.lodgify.com/" target="_blank">Lodgify</a>, Hospitable, or Hostaway embed directly into your site, giving guests real-time availability and secure payment without ever leaving your domain</li>
+        <li><strong>Location and area guides</strong> — these double as SEO content that attracts organic traffic (think: "Best restaurants near Bavaro Beach" or "Things to do in Cap Cana")</li>
+        <li><strong>Guest testimonials and reviews</strong> pulled from Airbnb/Google and displayed prominently</li>
+        <li><strong>A blog section</strong> for ongoing content that builds authority</li>
+        <li><strong>Mobile-responsive design</strong> that loads in under 3 seconds</li>
+        <li><strong>Schema markup</strong> for vacation rental, local business, and review structured data</li>
+        <li><strong>WhatsApp integration</strong> — critical for the Dominican market, where <a href="https://paymentscmi.com/insights/dominican-republic-e-commerce-market/" target="_blank">82% of online shoppers</a> use WhatsApp as their primary digital access point</li>
+      </ul>
+
+      <!-- IMAGE: Example property website mockup or Casalty -->
+      <div class="inline-img fade-up">
+        <img src="blog/images/casalty-framer-project.png" alt="Casalty property website project built in Framer — fast, SEO-optimized, and designed by Ana K. Rosa" style="width:100%;height:auto;display:block;" loading="lazy">
+      </div>
+      <p class="img-caption">A property website built on Framer — fast, visually stunning, and SEO-optimized from the ground up.</p>
+
+
+      <!-- CTA -->
+      <div class="cta-section fade-up">
+        <h2>Ready to Build Your Property's Digital Presence?</h2>
+        <p>I'm a web designer based in Santo Domingo specializing in modern, high-performance websites. I design property sites that look like luxury brands and perform like lead-generation machines: fast, SEO-optimized, mobile-first, and built to convert visitors into direct bookings.</p>
+        <div class="cta-buttons">
+          <a href="https://anakrosadesign.com" class="btn btn-lime">View My Work</a>
+          <a href="https://anakrosadesign.com/contact" class="btn btn-outline">Get in Touch</a>
+        </div>
+      </div>
+
+      <!-- SOURCES -->
+      <div class="sources">
+        <strong>Sources:</strong> TheLatinvestor, Atlantique Sud / Real Estate Las Terrenas, Blue Sail Realty, DataReportal Digital 2026, PCMI E-Commerce Data Library, Dominican Today, Digital Nomad Summit, Azuro Digital, HousingWire, Luxury Presence. All data cited as of Q1–Q2 2026.
+      </div>
+
+    </article>
+
+    <!-- SHARE -->
+    <aside class="share">
+      <span class="share-label">Share</span>
+      <a href="#" title="Share on X">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4l11.733 16h4.267l-11.733 -16h-4.267zm6.267 0l9.733 16m-16-16l9.733 16"/></svg>
+      </a>
+      <a href="#" title="Share on LinkedIn">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+      </a>
+      <a href="#" title="Copy link">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+      </a>
+    </aside>
+
+  </div>
+</div>
+
+<!-- RELATED POSTS -->
+<div class="wrap">
+  <div class="related">
+    <h2 class="related-title">Keep reading</h2>
+    <div class="related-grid">
+      <a href="why-most-luxury-brands-fail-at-digital.html" class="related-card fade-up">
+        <div class="related-card-img">
+          <img src="Portafolio images/Blog Images/Blog image article.webp" alt="Why most luxury brands fail at digital" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;">
+        </div>
+        <span class="related-card-tag">Brand Identity</span>
+        <h3 class="related-card-title">Why most luxury brands fail at digital</h3>
+        <p class="related-card-excerpt">Premium positioning isn't about being expensive. It's about precision, restraint, and knowing what to leave out.</p>
+      </a>
+      <a href="how-to-brief-a-designer.html" class="related-card fade-up" style="transition-delay:0.06s">
+        <div class="related-card-img">
+          <img src="Portafolio images/Blog Images/blog3 image-home.webp" alt="How to brief a designer" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;">
+        </div>
+        <span class="related-card-tag">Strategy</span>
+        <h3 class="related-card-title">How to brief a designer (even if you've never done it)</h3>
+        <p class="related-card-excerpt">Here's what separates the briefs that get great results from the ones that get endless revisions.</p>
+      </a>
+      <a href="the-truth-about-ai-and-design.html" class="related-card fade-up" style="transition-delay:0.12s">
+        <div class="related-card-img">
+          <img src="Portafolio images/Blog Images/blog2 image-home.webp" alt="The truth about AI and design" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;">
+        </div>
+        <span class="related-card-tag">Perspective</span>
+        <h3 class="related-card-title">The truth about AI and design</h3>
+        <p class="related-card-excerpt">Should you use AI tools or hire a designer? An honest breakdown with actual numbers.</p>
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- WATERMARK -->
+<div class="watermark">ak<span class="wdot">.</span></div>
+
+<script>
+  // Progress bar
+  window.addEventListener('scroll', () => {
+    const h = document.documentElement;
+    const pct = (h.scrollTop / (h.scrollHeight - h.clientHeight)) * 100;
+    document.getElementById('progress').style.width = pct + '%';
+  });
+
+  // Active TOC
+  const sections = document.querySelectorAll('.article h2[id]');
+  const tocItems = document.querySelectorAll('.toc-item');
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        tocItems.forEach(t => t.classList.remove('active'));
+        const active = document.querySelector(`.toc-item[href="#${e.target.id}"]`);
+        if (active) active.classList.add('active');
+      }
+    });
+  }, { rootMargin: '-20% 0px -70% 0px' });
+  sections.forEach(s => observer.observe(s));
+
+  // Fade in
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.06 });
+  document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
+  window.addEventListener('load', () => {
+    document.querySelectorAll('.fade-up').forEach(el => {
+      if (el.getBoundingClientRect().top < window.innerHeight) el.classList.add('visible');
+    });
+  });
+
+  // Hamburger menu
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobile-menu');
+  hamburger.addEventListener('click', () => {
+    const isOpen = hamburger.classList.toggle('open');
+    mobileMenu.classList.toggle('open', isOpen);
+    document.body.style.overflow = isOpen ? 'hidden' : '';
+  });
+  mobileMenu.querySelectorAll('.mob-link').forEach(link => {
+    link.addEventListener('click', () => {
+      hamburger.classList.remove('open');
+      mobileMenu.classList.remove('open');
+      document.body.style.overflow = '';
+    });
+  });
+</script>
+
+<footer class="footer-editorial">
+  <div class="footer-top-bar">
+    <span class="footer-logo"><img src="Ana K. Logo.svg" alt="Ana K." style="height:24px;display:block;" loading="lazy"></span>
+    <a href="contact.html" class="footer-cta-link">Start working together <span>→</span></a>
+  </div>
+  <div class="footer-big-phrase">
+    <h2>Good design changes<br><em>everything.</em></h2>
+  </div>
+  <div class="footer-divider"></div>
+  <div class="footer-bottom-row">
+    <div class="footer-nav-group">
+      <span class="footer-nav-label">Pages</span>
+      <a href="index.html#about">About</a>
+      <a href="index.html#work">Work</a>
+      <a href="blog.html">Blog</a>
+      <a href="contact.html">Contact</a>
+    </div>
+    <div class="footer-nav-group">
+      <span class="footer-nav-label">Connect</span>
+      <a href="#">Instagram</a>
+      <a href="https://www.linkedin.com/in/ana-karina-rosa-rosario-3b407199/?locale=en_US" target="_blank">LinkedIn</a>
+      <a href="https://www.behance.net/anarosa3" target="_blank">Behance</a>
+      <a href="mailto:anakrosawork@gmail.com">Email</a>
+    </div>
+    <div class="footer-copy">
+      <span>© 2026 Ana K.</span>
+      <span>Designed &amp; built by Ana K.</span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
