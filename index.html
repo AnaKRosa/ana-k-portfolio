@@ -2103,16 +2103,15 @@
       .from('#hero-sub',   { y: 60, opacity: 0, duration: 1,   ease: 'power3.out' }, 0.3)
       .from('#hero-btn',   { scale: 0, opacity: 0, duration: 0.6, ease: 'back.out(1.5)' }, 0.5);
 
-    // How it works section — ScrollTrigger
-    gsap.from('#pricing-title', {
-      y: 60, opacity: 0, duration: 1, ease: 'power3.out',
-      scrollTrigger: { trigger: '#pricing-title', start: 'top 85%' }
-    });
-
-    gsap.from(['#pricing-card-1', '#pricing-card-2'], {
+    // How it works — stagger ALL direct children of the inner wrapper
+    const pricingEls = gsap.utils.toArray('#pricing > div > *');
+    gsap.from(pricingEls, {
       y: 60, opacity: 0, duration: 0.8, ease: 'power3.out',
       stagger: 0.15,
-      scrollTrigger: { trigger: '#pricing-card-1', start: 'top 85%' }
+      scrollTrigger: {
+        trigger: '#pricing',
+        start: 'top 80%'
+      }
     });
   });
 </script>
