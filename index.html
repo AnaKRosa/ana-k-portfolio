@@ -2090,13 +2090,15 @@
 
 <!-- GSAP -->
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
-<script>console.log('GSAP loaded');</script>
 <script>
-  console.log('GSAP timeline starting');
-  gsap.timeline()
-    .from('#hero-title', { y: 60, opacity: 0, duration: 1,   ease: 'power3.out' })
-    .from('#hero-sub',   { y: 60, opacity: 0, duration: 1,   ease: 'power3.out' }, 0.3)
-    .from('#hero-btn',   { scale: 0, opacity: 0, duration: 0.6, ease: 'back.out(1.5)' }, 0.5);
+  console.log('GSAP loaded');
+  document.addEventListener('DOMContentLoaded', () => {
+    console.log('GSAP timeline starting');
+    gsap.timeline()
+      .from('#hero-title', { y: 60, opacity: 0, duration: 1,   ease: 'power3.out' })
+      .from('#hero-sub',   { y: 60, opacity: 0, duration: 1,   ease: 'power3.out' }, 0.3)
+      .from('#hero-btn',   { scale: 0, opacity: 0, duration: 0.6, ease: 'back.out(1.5)' }, 0.5);
+  });
 </script>
 </body>
 </html>
