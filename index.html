@@ -1315,13 +1315,13 @@
   <div class="avatar-wrapper fade-up">
     <img src="Portafolio images/Ana K image.png" alt="Ana K." loading="lazy">
   </div>
-  <h1 class="fade-up" data-i18n="index.heroHeadline">
+  <h1 id="hero-title" data-i18n="index.heroHeadline">
   I design and build websites that actually <em>convert.</em>
   </h1>
-  <p class="hero-sub fade-up" data-i18n="index.heroSub">
+  <p id="hero-sub" class="hero-sub" data-i18n="index.heroSub">
   I’m Ana Karina — a Framer &amp; Webflow designer handling everything from strategy to launch. No agencies, no middlemen, no endless handoffs.
   </p>
-  <a href="https://cal.com/ana-karina-rosa-vwdmwe/30min" target="_blank" class="btn-primary fade-up" data-i18n="index.heroBtn" onclick="gtag('event', 'zoom_scheduler_click')">Book a free call <span class="arrow">→</span></a>
+  <a id="hero-btn" href="https://cal.com/ana-karina-rosa-vwdmwe/30min" target="_blank" class="btn-primary" data-i18n="index.heroBtn" onclick="gtag(‘event’, ‘zoom_scheduler_click’)">Book a free call <span class="arrow">→</span></a>
 </section>
 <div class="hero-grain"></div>
 </div>
@@ -2087,5 +2087,14 @@
 </script>
 <script src="translations.js"></script>
 <script src="i18n.js"></script>
+
+<!-- GSAP -->
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script>
+  gsap.timeline({ delay: 0.1 })
+    .from('#hero-title', { opacity: 0, y: 40, duration: 0.7, ease: 'power2.out' })
+    .from('#hero-sub',   { opacity: 0, y: 30, duration: 0.7, ease: 'power2.out' }, 0.3)
+    .from('#hero-btn',   { opacity: 0, scale: 0, duration: 0.5, ease: 'back.out(1.4)' }, 0.55);
+</script>
 </body>
 </html>
