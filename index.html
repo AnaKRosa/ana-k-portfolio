@@ -2113,6 +2113,19 @@
         start: 'top 80%'
       }
     });
+
+    // Selected Work — clip-path reveal on each project image
+    const workImgs = gsap.utils.toArray('.work-card img');
+    gsap.from(workImgs, {
+      clipPath: 'inset(100% 0 0 0)',
+      duration: 1.2,
+      ease: 'power4.out',
+      stagger: 0.15,
+      scrollTrigger: {
+        trigger: '.work-section',
+        start: 'top 75%'
+      }
+    });
   });
 </script>
 </body>
