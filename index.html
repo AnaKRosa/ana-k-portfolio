@@ -2114,17 +2114,17 @@
       }
     });
 
-    // Selected Work — clip-path reveal on each project image
-    const workImgs = gsap.utils.toArray('.work-card img');
-    gsap.from(workImgs, {
-      clipPath: 'inset(100% 0 0 0)',
-      duration: 1.2,
-      ease: 'power4.out',
-      stagger: 0.15,
-      scrollTrigger: {
-        trigger: '.work-section',
-        start: 'top 75%'
-      }
+    // Selected Work — clip-path reveal, each image triggers independently
+    gsap.utils.toArray('.work-card img').forEach(img => {
+      gsap.from(img, {
+        clipPath: 'inset(100% 0 0 0)',
+        duration: 1.2,
+        ease: 'power4.out',
+        scrollTrigger: {
+          trigger: img,
+          start: 'top 85%'
+        }
+      });
     });
   });
 </script>
