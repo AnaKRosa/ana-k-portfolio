@@ -2123,6 +2123,9 @@
   });
 </script>
 
+<!-- Floating preview image — must exist in DOM before the script below runs -->
+<img class="work-preview" alt="" aria-hidden="true">
+
 <!-- Work section: cursor-follow preview -->
 <script>
   (function () {
@@ -2132,7 +2135,7 @@
 
     const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-    gsap.set(preview, { xPercent: -50, yPercent: -50 });
+    gsap.set(preview, { xPercent: -50, yPercent: -50, scale: 0.85 });
 
     const xTo = gsap.quickTo(preview, 'left', { duration: 0.55, ease: 'power3' });
     const yTo = gsap.quickTo(preview, 'top',  { duration: 0.55, ease: 'power3' });
@@ -2162,7 +2165,5 @@
   })();
 </script>
 
-<!-- Floating preview image (follows cursor) — must be outside any overflow:hidden container -->
-<img class="work-preview" alt="" aria-hidden="true">
 </body>
 </html>
