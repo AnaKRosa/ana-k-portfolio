@@ -2130,15 +2130,14 @@
 <script>
   (function () {
     const preview = document.querySelector('.work-preview');
-    const items = gsap.utils.toArray('.work-item');
+    const items   = document.querySelectorAll('.work-item');
     if (!preview || !items.length) return;
 
-    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    // keep image centred on cursor via transform offset
+    gsap.set(preview, { xPercent: -50, yPercent: -50, scale: 0.9, opacity: 0 });
 
-    gsap.set(preview, { xPercent: -50, yPercent: -50, scale: 0.85 });
-
-    const xTo = gsap.quickTo(preview, 'left', { duration: 0.55, ease: 'power3' });
-    const yTo = gsap.quickTo(preview, 'top',  { duration: 0.55, ease: 'power3' });
+    const xTo = gsap.quickTo(preview, 'left', { duration: 0.5, ease: 'power3' });
+    const yTo = gsap.quickTo(preview, 'top',  { duration: 0.5, ease: 'power3' });
 
     window.addEventListener('mousemove', (e) => {
       xTo(e.clientX);
@@ -2146,20 +2145,17 @@
     });
 
     items.forEach((item) => {
-      const src = item.getAttribute('data-preview');
-
       item.addEventListener('mouseenter', () => {
-        if (reduce) return;
-        preview.src = src;
-        gsap.killTweensOf(preview, 'opacity,scale');
-        gsap.to(preview, { opacity: 1, scale: 1, duration: 0.45, ease: 'power3.out' });
-        items.forEach((o) => { if (o !== item) gsap.to(o, { opacity: 0.35, duration: 0.35 }); });
+        preview.src = item.dataset.preview;
+        gsap.killTweensOf(preview);
+        gsap.to(preview, { opacity: 1, scale: 1, duration: 0.4, ease: 'power3.out' });
+        items.forEach((o) => { if (o !== item) gsap.to(o, { opacity: 0.3, duration: 0.3 }); });
       });
 
       item.addEventListener('mouseleave', () => {
-        if (reduce) return;
-        gsap.to(preview, { opacity: 0, scale: 0.85, duration: 0.3, ease: 'power3.out' });
-        gsap.to(items, { opacity: 1, duration: 0.35 });
+        gsap.killTweensOf(preview);
+        gsap.to(preview, { opacity: 0, scale: 0.9, duration: 0.3, ease: 'power3.in' });
+        items.forEach((o) => gsap.to(o, { opacity: 1, duration: 0.3 }));
       });
     });
   })();
