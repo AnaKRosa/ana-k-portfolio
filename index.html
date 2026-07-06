@@ -274,90 +274,85 @@
 
   /* WORK SECTION */
   .work-section {
-    padding: 120px 6vw;
-    min-height: 100vh;
-    position: relative;
-  }
-  .work-section .section-head {
-    max-width: 1200px;
-    margin: 0 auto 70px;
+    background: var(--black);
+    padding: 80px 48px 120px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
   .work-section h2 {
     font-family: var(--serif);
+    font-size: 2.2rem;
     font-weight: 400;
-    font-size: clamp(1.8rem, 3.5vw, 2.8rem);
-    line-height: 1;
-    letter-spacing: -0.01em;
-  }
-  .work-section h2 em { font-style: italic; color: var(--italic-color); }
-  .work-section .sub {
-    color: rgba(14,14,14,0.5);
-    font-size: 1rem;
-    margin-top: 18px;
-    max-width: 460px;
-  }
-  .work-list {
+    color: white;
+    margin-bottom: 40px;
+    width: 100%;
     max-width: 1200px;
-    margin: 0 auto;
-    border-top: 1px solid rgba(14,14,14,0.15);
   }
-  .work-item {
+  .work-section h2 em { font-style: italic; color: var(--lime); }
+
+  .work-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    max-width: 1200px;
+    width: 100%;
+  }
+  .work-card {
+    background: #1a1a1a;
+    border-radius: 40px;
+    overflow: hidden;
+    height: 420px;
     position: relative;
-    display: block;
-    text-decoration: none;
-    color: var(--black);
-    border-bottom: 1px solid rgba(14,14,14,0.15);
-    padding: 34px 10px;
-    transition: opacity 0.4s ease;
-    z-index: 1;
+    cursor: pointer;
+    border: 1px solid transparent;
+    transition: background 0.2s, border-color 0.2s;
   }
-  .work-item .row {
+  .work-card:hover { border-color: rgba(255,255,255,0.12); }
+  .work-card img {
+    width: 100%; height: 100%; object-fit: cover; display: block;
+    border-radius: 0 !important;
+    transition: opacity 0.45s ease;
+  }
+  .work-card:hover img { opacity: 0; }
+
+  .work-card-overlay {
+    position: absolute;
+    inset: 0;
+    padding: 36px;
     display: flex;
-    align-items: baseline;
-    justify-content: space-between;
-    gap: 24px;
-    position: relative;
-    z-index: 2;
-  }
-  .work-item .title {
-    font-family: var(--serif);
-    font-weight: 400;
-    font-size: clamp(2.2rem, 6.5vw, 5.5rem);
-    line-height: 0.95;
-    letter-spacing: -0.02em;
-    transition: transform 0.5s cubic-bezier(0.22,1,0.36,1);
-    will-change: transform;
-  }
-  .work-item .title .dot { color: var(--lavender); }
-  .work-item .tag {
-    font-family: var(--sans);
-    font-weight: 400;
-    font-size: 0.78rem;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    color: rgba(14,14,14,0.5);
-    white-space: nowrap;
-    transition: color 0.4s ease;
-  }
-  @media (hover: hover) {
-    .work-item:hover .title { transform: translateX(28px); }
-    .work-item:hover .tag { color: var(--italic-color); }
-  }
-  .work-preview {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 380px;
-    height: 280px;
-    object-fit: cover;
-    border-radius: 8px;
-    pointer-events: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 200px;
+    text-align: left;
     opacity: 0;
-    z-index: 50;
-    box-shadow: 0 20px 60px rgba(14,14,14,0.25);
-    will-change: transform, opacity;
+    transition: opacity 0.45s ease;
+    pointer-events: none;
   }
-  .work-item .inline-thumb { display: none; }
+  .work-card:hover .work-card-overlay { opacity: 1; }
+  .work-card-overlay p {
+    font-family: var(--serif);
+    font-size: 1.45rem;
+    line-height: 1.55;
+  }
+  .work-card-overlay .work-tag {
+    font-size: 0.68rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    opacity: 0.45;
+  }
+  .work-card-inner {
+    padding: 28px;
+    height: 100%;
+    display: flex; flex-direction: column; justify-content: flex-end;
+  }
+  .work-card-inner span {
+    font-size: 0.75rem;
+    color: rgba(255,255,255,0.4);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
 
   /* PROCESS SECTION */
   .process-section {
@@ -1068,9 +1063,9 @@
     .services-section, .work-section, .process-section { padding: 80px 24px; }
     .cards-grid { grid-template-columns: 1fr; }
     .pricing-cards-grid { grid-template-columns: 1fr !important; }
-    .work-preview { display: none; }
-    .work-item .row { flex-direction: column; align-items: flex-start; gap: 14px; }
-    .work-item .inline-thumb { display: block; width: 100%; height: 200px; object-fit: cover; border-radius: 6px; margin-top: 8px; }
+    .work-grid { grid-template-columns: 1fr; }
+    .work-card { height: 260px; }
+    .work-card:last-child { grid-column: auto; }
     .process-steps::before { display: none; }
     .blog-grid { grid-template-columns: 1fr; }
     .faq-grid { grid-template-columns: 1fr; }
@@ -1403,50 +1398,43 @@
 
 <!-- WORK -->
 <section class="work-section" id="work">
-  <div class="section-head">
-    <h2 data-i18n="index.workHeading">Selected <em>work</em></h2>
-    <p class="sub" data-i18n="index.workSub">Selected projects focused on clarity, simplicity, and impact.</p>
-  </div>
-
-  <div class="work-list">
-    <a href="casalty-case-study-2.html" class="work-item" data-preview="Casalty-thumbnail-home.webp">
-      <div class="row">
-        <span class="title">Casalty Website<span class="dot">.</span></span>
-        <span class="tag" data-i18n="index.work2Tag">Website Design</span>
+  <h2 class="fade-up" data-i18n="index.workHeading">Selected <em>work</em></h2>
+  <p class="fade-up" style="color:rgba(255,255,255,0.45);font-size:1rem;margin:0 0 40px;transition-delay:0.1s;text-align:left;width:100%;max-width:1200px;" data-i18n="index.workSub">Selected projects focused on clarity, simplicity, and impact.</p>
+  <div class="work-grid">
+    <a href="casalty-case-study-2.html" class="work-card fade-up" style="background:#1e1e1e; text-decoration:none; display:block;">
+      <img src="Casalty-thumbnail-home.webp" alt="Casalty Website" style="width:100%;height:100%;object-fit:cover;display:block;" loading="lazy">
+      <div class="work-card-overlay" style="color:#f5f5f0;">
+        <p data-i18n="index.work2Desc">Built a conversion-focused luxury real estate website structured around destination funnels, elevating brand perception while guiding high-end buyers through a curated Caribbean property journey.</p>
+        <span class="work-tag" data-i18n="index.work2Tag">Website design</span>
       </div>
-      <img class="inline-thumb" src="Casalty-thumbnail-home.webp" alt="Casalty Website" loading="lazy">
     </a>
-
-    <a href="vero-rosa-case-study.html" class="work-item" data-preview="Vero Rosa/Vero-rosa-thumbnail.png">
-      <div class="row">
-        <span class="title">Vero Rosa<span class="dot">.</span></span>
-        <span class="tag" data-i18n="index.work3Tag">Branding · Web Design</span>
+    <a href="vero-rosa-case-study.html" class="work-card fade-up" style="transition-delay:0.1s; background:#1e1e1e; text-decoration:none; display:block;">
+      <img src="Vero Rosa/Vero-rosa-thumbnail.png" alt="Vero Rosa Wellness" style="width:100%;height:100%;object-fit:cover;display:block;" loading="lazy">
+      <div class="work-card-overlay" style="color:#f5f5f0;">
+        <p data-i18n="index.work3Desc">A full website, brand identity, and content strategy for a Dominican Republic-based wellness coach — designed and developed end-to-end in Webflow.</p>
+        <span class="work-tag" data-i18n="index.work3Tag">Branding · Web Design</span>
       </div>
-      <img class="inline-thumb" src="Vero Rosa/Vero-rosa-thumbnail.png" alt="Vero Rosa Wellness" loading="lazy">
     </a>
-
-    <a href="viviana-pastore-case-study.html" class="work-item" data-preview="Viviana Pastore/Viviana.webp">
-      <div class="row">
-        <span class="title">Viviana Pastore<span class="dot">.</span></span>
-        <span class="tag" data-i18n="index.work4Tag">Web Design · Framer</span>
+    <a href="viviana-pastore-case-study.html" class="work-card fade-up" style="transition-delay:0.2s; background:#1e1e1e; text-decoration:none; display:block;">
+      <img src="Viviana Pastore/Viviana.webp" alt="Viviana Pastore Portfolio" style="width:100%;height:100%;object-fit:cover;display:block;" loading="lazy">
+      <div class="work-card-overlay" style="color:#f5f5f0;">
+        <p data-i18n="index.work4Desc">A portfolio website for a Barcelona-based fashion designer — built in Framer to help her land her next role.</p>
+        <span class="work-tag" data-i18n="index.work4Tag">Web Design · Framer</span>
       </div>
-      <img class="inline-thumb" src="Viviana Pastore/Viviana.webp" alt="Viviana Pastore Portfolio" loading="lazy">
     </a>
-
-    <a href="casalty-case-study.html" class="work-item" data-preview="Portafolio images/Collateral.webp">
-      <div class="row">
-        <span class="title">Casalty Branding<span class="dot">.</span></span>
-        <span class="tag" data-i18n="index.work1Tag">Branding</span>
+    <a href="casalty-case-study.html" class="work-card fade-up" style="transition-delay:0.3s; background:#1e1e1e; text-decoration:none; display:block;">
+      <img src="Portafolio images/Collateral.webp" alt="Casalty Branding" style="width:100%;height:100%;object-fit:cover;display:block;" loading="lazy">
+      <div class="work-card-overlay" style="color:#f5f5f0;">
+        <p data-i18n="index.work1Desc">Built a luxury brand identity from the ground up for a high-end real estate developer in the Dominican Republic, translating their vision into a cohesive visual language.</p>
+        <span class="work-tag" data-i18n="index.work1Tag">Branding</span>
       </div>
-      <img class="inline-thumb" src="Portafolio images/Collateral.webp" alt="Casalty Branding" loading="lazy">
     </a>
-
-    <a href="arepa-stand-case-study.html" class="work-item" data-preview="The arepa Stand/TAS-01.webp">
-      <div class="row">
-        <span class="title">The Arepa Stand<span class="dot">.</span></span>
-        <span class="tag" data-i18n="index.work6Tag">Branding · Logo · Web Design</span>
+    <a href="arepa-stand-case-study.html" class="work-card fade-up" style="transition-delay:0.4s; background:#1e1e1e; text-decoration:none; display:block;">
+      <img src="The arepa Stand/TAS-01.webp" alt="The Arepa Stand" style="width:100%;height:100%;object-fit:cover;display:block;" loading="lazy">
+      <div class="work-card-overlay" style="color:#f5f5f0;">
+        <p data-i18n="index.work6Desc">A complete brand identity and digital presence for a Venezuelan popup food shop — from logo to website to market-day signage.</p>
+        <span class="work-tag" data-i18n="index.work6Tag">Branding · Logo Design · Web Design</span>
       </div>
-      <img class="inline-thumb" src="The arepa Stand/TAS-01.webp" alt="The Arepa Stand" loading="lazy">
     </a>
   </div>
 </section>
@@ -2120,46 +2108,22 @@
       }
     });
 
+    // Selected Work — clip-path reveal, each image triggers independently
+    gsap.utils.toArray('.work-card img').forEach(img => {
+      gsap.from(img, {
+        clipPath: 'inset(100% 0 0 0)',
+        duration: 1.2,
+        ease: 'power4.out',
+        scrollTrigger: {
+          trigger: img,
+          start: 'top 85%'
+        }
+      });
+    });
+
   });
 </script>
 
-<!-- Floating preview image — must exist in DOM before the script below runs -->
-<img class="work-preview" alt="" aria-hidden="true">
-
-<!-- Work section: cursor-follow preview -->
-<script>
-  (function () {
-    const preview = document.querySelector('.work-preview');
-    const items   = document.querySelectorAll('.work-item');
-    if (!preview || !items.length) return;
-
-    // keep image centred on cursor via transform offset
-    gsap.set(preview, { xPercent: -50, yPercent: -50, scale: 0.9, opacity: 0 });
-
-    const xTo = gsap.quickTo(preview, 'left', { duration: 0.5, ease: 'power3' });
-    const yTo = gsap.quickTo(preview, 'top',  { duration: 0.5, ease: 'power3' });
-
-    window.addEventListener('mousemove', (e) => {
-      xTo(e.clientX);
-      yTo(e.clientY);
-    });
-
-    items.forEach((item) => {
-      item.addEventListener('mouseenter', () => {
-        preview.src = item.dataset.preview;
-        gsap.killTweensOf(preview);
-        gsap.to(preview, { opacity: 1, scale: 1, duration: 0.4, ease: 'power3.out' });
-        items.forEach((o) => { if (o !== item) gsap.to(o, { opacity: 0.3, duration: 0.3 }); });
-      });
-
-      item.addEventListener('mouseleave', () => {
-        gsap.killTweensOf(preview);
-        gsap.to(preview, { opacity: 0, scale: 0.9, duration: 0.3, ease: 'power3.in' });
-        items.forEach((o) => gsap.to(o, { opacity: 1, duration: 0.3 }));
-      });
-    });
-  })();
-</script>
 
 </body>
 </html>
