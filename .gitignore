@@ -1,0 +1,13 @@
+# Personal files — not part of the website
+*.pdf
+*.zip
+*.csv
+*.mp4
+Proyectos Personales/
+Portfolio Header/
+Portafolio 2026*/
+full-portfolio.html
+domain_portfolio_sample.csv
+
+# System
+.DS_Store
