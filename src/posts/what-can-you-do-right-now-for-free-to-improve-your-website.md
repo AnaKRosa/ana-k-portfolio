@@ -9,6 +9,7 @@ excerpt: You don't need a redesign or a new budget to start moving the needle â€
 heroImage: /Portafolio images/Blog Images/checklist-blog-hero-image.jpg
 heroImageAlt: What Can You Do Right Now, for Free, to Improve Your Website?
 ogImage: /Portafolio images/Blog Images/checklist-blog-hero-image.jpg
+homeThumbnail: /Portafolio images/Blog Images/checklist-blog-home-thumbnail.jpg
 toc:
   - id: s1
     label: Define what you want it to do

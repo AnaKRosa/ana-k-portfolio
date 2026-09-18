@@ -46,12 +46,8 @@
     border-radius: 100px;
     box-shadow: 0 10px 34px rgba(17, 17, 17, 0.10), inset 0 1px 0 rgba(255, 255, 255, 0.45);
   }
-  .nav-id { display: flex; align-items: center; gap: 9px; padding: 0 4px 0 4px; flex-shrink: 0; }
-  .nav-logo { height: 20px; width: auto; display: block; }
-  .nav-name {
-    font-family: var(--sans); font-weight: 600; font-size: 0.88rem;
-    color: var(--black); white-space: nowrap; letter-spacing: -0.01em;
-  }
+  .nav-id { display: flex; align-items: center; flex-shrink: 0; text-decoration: none; padding: 2px; border-radius: 50%; }
+  .nav-logo { height: 30px; width: 30px; border-radius: 50%; object-fit: cover; display: block; }
   .nav-links {
     display: flex; align-items: center; gap: 2px;
     max-width: 0; overflow: hidden; opacity: 0;
@@ -93,16 +89,23 @@
     0%, 100% { transform: scale(1);    opacity: 0.4; }
     50%      { transform: scale(1.45); opacity: 0.8; }
   }
+  .nav-collapsed-contact { display: none; }
   @media (min-width: 769px) {
-    .nav-toggle span { animation: navDotPulse 1.9s ease-in-out infinite; }
-    .nav-toggle span:nth-child(2) { animation-delay: 0.22s; }
-    .nav-toggle span:nth-child(3) { animation-delay: 0.44s; }
-    nav.at-top .nav-toggle span,
-    .nav-pill:hover .nav-toggle span { animation-play-state: paused; }
+    .nav-toggle { display: none; }
+    .nav-collapsed-contact {
+      display: inline-flex; align-items: center; justify-content: center;
+      font-family: var(--sans); font-size: 0.82rem; font-weight: 600;
+      color: var(--cream); background: var(--black);
+      padding: 9px 18px; border-radius: 100px; text-decoration: none;
+      white-space: nowrap; flex-shrink: 0; overflow: hidden;
+      max-width: 160px; opacity: 1; margin-left: 6px;
+      transition: max-width 0.5s cubic-bezier(0.62, 0.05, 0.3, 1),
+                  opacity 0.3s ease, padding 0.5s ease, margin 0.5s ease;
+    }
     nav.at-top .nav-links,
     .nav-pill:hover .nav-links { max-width: 430px; opacity: 1; transform: translateX(0); }
-    nav.at-top .nav-toggle,
-    .nav-pill:hover .nav-toggle { width: 0; opacity: 0; margin-left: -6px; }
+    nav.at-top .nav-collapsed-contact,
+    .nav-pill:hover .nav-collapsed-contact { max-width: 0; opacity: 0; padding: 0; margin: 0; }
   }
   @media (prefers-reduced-motion: reduce) {
     .nav-toggle span { animation: none !important; }
@@ -287,10 +290,11 @@
 <!-- NAV -->
 <nav>
   <div class="nav-pill">
-    <div class="nav-id">
-      <img class="nav-logo" src="Ana K. Logo-dark.svg" alt="Ana K." loading="lazy">
-      <span class="nav-name">Ana Karina</span>
-    </div>
+    <a href="index.html" class="nav-id">
+      <img class="nav-logo" src="Favicon (1).png" alt="Ana K." loading="lazy">
+    </a>
+
+    <a href="contact.html" class="nav-collapsed-contact">Contact</a>
     <div class="nav-links">
       <a href="index.html#work" data-i18n="nav.work">Work</a>
       <a href="index.html#services" data-i18n="nav.services">Services</a>
