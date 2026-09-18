@@ -31,22 +31,85 @@
   html { scroll-behavior: smooth; }
   body { font-family: var(--sans); background: var(--cream); color: var(--black); overflow-x: hidden; }
 
-  /* NAV */
+  /* NAV — floating glass pill */
   nav {
-    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-    background: var(--cream); border-bottom: 1px solid rgba(0,0,0,0.07);
-    padding: 0 48px; display: flex; justify-content: center;
+    position: fixed; top: 16px; left: 0; right: 0; z-index: 100;
+    display: flex; justify-content: center;
+    padding: 0 16px;
+    pointer-events: none;
   }
-  .nav-inner {
-    width: 100%; max-width: 1200px;
-    display: flex; justify-content: space-between; align-items: center;
-    padding: 18px 0;
+  .nav-pill {
+    pointer-events: auto;
+    display: flex; align-items: center; gap: 6px;
+    padding: 6px 8px;
+    background: rgba(243, 242, 238, 0.72);
+    -webkit-backdrop-filter: blur(18px) saturate(1.6);
+    backdrop-filter: blur(18px) saturate(1.6);
+    border: 1px solid rgba(255, 255, 255, 0.55);
+    border-radius: 100px;
+    box-shadow: 0 10px 34px rgba(17, 17, 17, 0.10), inset 0 1px 0 rgba(255, 255, 255, 0.45);
   }
-  .logo { font-family: var(--serif); font-size: 1.1rem; letter-spacing: 0.04em; text-decoration: none; color: var(--black); }
-  .logo .dot { color: var(--lavender); }
-  .nav-links { display: flex; gap: 28px; list-style: none; }
-  .nav-links a { font-size: 0.8rem; text-decoration: none; color: var(--black); opacity: 0.55; letter-spacing: 0.04em; transition: opacity 0.2s; }
-  .nav-links a:hover { opacity: 1; }
+  .nav-id { display: flex; align-items: center; gap: 9px; padding: 0 4px 0 4px; flex-shrink: 0; }
+  .nav-logo { height: 20px; width: auto; display: block; }
+  .nav-name {
+    font-family: var(--sans); font-weight: 600; font-size: 0.88rem;
+    color: var(--black); white-space: nowrap; letter-spacing: -0.01em;
+  }
+  .nav-links {
+    display: flex; align-items: center; gap: 2px;
+    max-width: 0; overflow: hidden; opacity: 0;
+    transform: translateX(10px);
+    transition: max-width 0.65s cubic-bezier(0.62, 0.05, 0.3, 1),
+                transform 0.65s cubic-bezier(0.62, 0.05, 0.3, 1),
+                opacity 0.5s ease;
+  }
+  .nav-links a, .nav-links button {
+    font-family: var(--sans); font-size: 0.82rem; font-weight: 500;
+    color: var(--black); text-decoration: none; white-space: nowrap;
+    padding: 8px 13px; border-radius: 100px; opacity: 0.72;
+    background: none; border: none; cursor: pointer; letter-spacing: 0.01em;
+    transition: opacity 0.2s ease, background 0.2s ease;
+  }
+  .nav-links a:hover, .nav-links button:hover { opacity: 1; background: rgba(17, 17, 17, 0.06); }
+  .nav-links a.active { opacity: 1; }
+  .nav-links .nav-lang { font-size: 0.72rem; font-weight: 700; opacity: 0.5; letter-spacing: 0.06em; }
+  .nav-links .nav-contact {
+    background: var(--black); color: var(--cream); opacity: 1;
+    font-weight: 600; padding: 9px 18px; margin-left: 4px;
+  }
+  .nav-links .nav-contact:hover { background: #000; opacity: 1; }
+  .nav-toggle {
+    display: flex; align-items: center; justify-content: center; gap: 3px;
+    width: 34px; height: 34px; flex-shrink: 0; overflow: hidden;
+    background: none; border: none; cursor: pointer; padding: 0; border-radius: 50%;
+    transition: width 0.6s cubic-bezier(0.62, 0.05, 0.3, 1),
+                margin 0.6s cubic-bezier(0.62, 0.05, 0.3, 1),
+                opacity 0.4s ease, background 0.2s ease;
+  }
+  .nav-toggle:hover { background: rgba(17, 17, 17, 0.06); }
+  .nav-toggle span {
+    display: block; width: 3.5px; height: 3.5px; border-radius: 50%;
+    background: var(--black); opacity: 0.5;
+    transition: transform 0.3s ease, opacity 0.3s ease, width 0.3s ease, height 0.3s ease, border-radius 0.3s ease;
+  }
+  @keyframes navDotPulse {
+    0%, 100% { transform: scale(1);    opacity: 0.4; }
+    50%      { transform: scale(1.45); opacity: 0.8; }
+  }
+  @media (min-width: 769px) {
+    .nav-toggle span { animation: navDotPulse 1.9s ease-in-out infinite; }
+    .nav-toggle span:nth-child(2) { animation-delay: 0.22s; }
+    .nav-toggle span:nth-child(3) { animation-delay: 0.44s; }
+    nav.at-top .nav-toggle span,
+    .nav-pill:hover .nav-toggle span { animation-play-state: paused; }
+    nav.at-top .nav-links,
+    .nav-pill:hover .nav-links { max-width: 430px; opacity: 1; transform: translateX(0); }
+    nav.at-top .nav-toggle,
+    .nav-pill:hover .nav-toggle { width: 0; opacity: 0; margin-left: -6px; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .nav-toggle span { animation: none !important; }
+  }
 
   /* HERO */
   .hero-text { padding: 140px 48px 48px; text-align: center; max-width: 1200px; margin: 0 auto; }
@@ -192,35 +255,33 @@
   }
   .fade-up.visible { opacity: 1; transform: translateY(0); }
 
-  /* HAMBURGER & MOBILE MENU */
-  .hamburger {
-    display: none; flex-direction: column; justify-content: center; gap: 5px;
-    background: none; border: none; cursor: pointer; padding: 4px; position: relative;
-  }
-  .hamburger span {
-    display: block; width: 22px; height: 2px; background: var(--black);
-    border-radius: 2px; transition: transform 0.3s ease, opacity 0.3s ease; transform-origin: center;
-  }
-  .hamburger.open span:first-child { transform: translateY(7px) rotate(45deg); }
-  .hamburger.open span:nth-child(2) { opacity: 0; }
-  .hamburger.open span:last-child { transform: translateY(-7px) rotate(-45deg); }
+  /* MOBILE MENU OVERLAY */
   .mobile-menu {
-    display: none; position: fixed; inset: 0; background: var(--cream); z-index: 99;
-    flex-direction: column; align-items: center; justify-content: center; gap: 8px;
+    display: none; position: fixed; inset: 0; z-index: 99;
+    background: rgba(243, 242, 238, 0.94);
+    -webkit-backdrop-filter: blur(22px); backdrop-filter: blur(22px);
+    flex-direction: column; align-items: center; justify-content: center; gap: 6px;
   }
   .mobile-menu.open { display: flex; }
   .mob-link {
-    font-family: var(--serif); font-size: 2.8rem; color: var(--black);
-    text-decoration: none; font-weight: 400; line-height: 1.4;
+    font-family: var(--serif); font-size: 2.6rem; color: var(--black);
+    text-decoration: none; font-weight: 400; line-height: 1.35;
     opacity: 0; transform: translateY(16px);
     transition: opacity 0.35s ease, transform 0.35s ease; letter-spacing: -0.01em;
+    background: none; border: none; cursor: pointer;
   }
   .mobile-menu.open .mob-link { opacity: 1; transform: translateY(0); }
-  .mobile-menu.open .mob-link:nth-child(1) { transition-delay: 0.06s; }
-  .mobile-menu.open .mob-link:nth-child(2) { transition-delay: 0.12s; }
-  .mobile-menu.open .mob-link:nth-child(3) { transition-delay: 0.18s; }
-  .mobile-menu.open .mob-link:nth-child(4) { transition-delay: 0.24s; }
+  .mobile-menu.open .mob-link:nth-child(1) { transition-delay: 0.05s; }
+  .mobile-menu.open .mob-link:nth-child(2) { transition-delay: 0.10s; }
+  .mobile-menu.open .mob-link:nth-child(3) { transition-delay: 0.15s; }
+  .mobile-menu.open .mob-link:nth-child(4) { transition-delay: 0.20s; }
+  .mobile-menu.open .mob-link:nth-child(5) { transition-delay: 0.25s; }
   .mob-link:hover { color: var(--lavender); }
+  .mob-link.mob-lang {
+    margin-top: 24px; font-family: var(--sans); font-size: 0.85rem;
+    font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+  }
+  .mobile-menu.open .mob-link.mob-lang { opacity: 0.55; transition-delay: 0.3s; }
 
   /* FOOTER */
   .footer-editorial { background: var(--black); color: white; padding: 72px 48px 48px; }
@@ -241,9 +302,13 @@
 
   /* MOBILE */
   @media (max-width: 768px) {
-    nav { padding: 0 24px; }
-    .hamburger { display: flex; }
+    nav { top: 12px; padding: 0 12px; }
     .nav-links { display: none; }
+    .nav-toggle { width: 40px; height: 40px; flex-direction: column; gap: 4px; }
+    .nav-toggle span { width: 17px; height: 2px; border-radius: 2px; opacity: 0.9; }
+    .nav-toggle.open span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+    .nav-toggle.open span:nth-child(2) { opacity: 0; }
+    .nav-toggle.open span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
     .hero-text { padding: 120px 24px 36px; }
     .section, .outcome { padding: 0 24px; }
     .card { padding: 0 24px; }
@@ -263,7 +328,6 @@
     footer { padding: 24px; }
     .footer-inner { flex-direction: column; gap: 12px; }
   }
-  @media (max-width: 768px) { #lang-toggle { margin-left: auto; } }
 </style>
 <meta property="og:title" content="Kiwi Searches — UI/UX Case Study | Ana K. Rosa">
 <meta property="og:description" content="Full product redesign of Kiwi Searches — from brand identity to payment flow — built to increase conversions.">
@@ -275,26 +339,32 @@
 
   <!-- NAV -->
   <nav>
-    <div class="nav-inner">
-      <a href="index.html" class="logo"><img src="Ana K. Logo-dark.svg" alt="Ana K." style="height:26px;display:block;" loading="lazy"></a>
-      <ul class="nav-links">
-        <li><a href="index.html#about">About</a></li>
-        <li><a href="index.html#work">Work</a></li>
-        <li><a href="blog.html">Blog</a></li>
-        <li><a href="contact.html">Contact</a></li>
-      </ul>
-      <button id="lang-toggle" style="background:none;border:1px solid rgba(0,0,0,0.15);border-radius:20px;padding:4px 12px;font-size:0.75rem;cursor:pointer;letter-spacing:0.04em;font-family:var(--sans);color:var(--black);transition:opacity 0.2s;" onmouseover="this.style.opacity='0.6'" onmouseout="this.style.opacity='1'">ES</button>
-      <button class="hamburger" id="hamburger" aria-label="Open menu">
+    <div class="nav-pill">
+      <div class="nav-id">
+        <img class="nav-logo" src="Ana K. Logo-dark.svg" alt="Ana K." loading="lazy">
+        <span class="nav-name">Ana Karina</span>
+      </div>
+      <div class="nav-links">
+        <a href="index.html#work" data-i18n="nav.work">Work</a>
+        <a href="index.html#services" data-i18n="nav.services">Services</a>
+        <a href="index.html#pricing" data-i18n="nav.pricing">Pricing</a>
+        <a href="blog.html" data-i18n="nav.blog">Blog</a>
+        <button id="lang-toggle" class="nav-lang">ES</button>
+        <a href="contact.html" class="nav-contact" data-i18n="nav.contact">Contact</a>
+      </div>
+      <button class="nav-toggle" id="navToggle" aria-label="Open menu">
         <span></span><span></span><span></span>
       </button>
     </div>
   </nav>
 
   <div class="mobile-menu" id="mobile-menu">
-    <a href="index.html#about" class="mob-link">About</a>
-    <a href="index.html#work" class="mob-link">Work</a>
-    <a href="blog.html" class="mob-link">Blog</a>
-    <a href="contact.html" class="mob-link">Contact</a>
+    <a href="index.html#work" class="mob-link" data-i18n="nav.work">Work</a>
+    <a href="index.html#services" class="mob-link" data-i18n="nav.services">Services</a>
+    <a href="index.html#pricing" class="mob-link" data-i18n="nav.pricing">Pricing</a>
+    <a href="blog.html" class="mob-link" data-i18n="nav.blog">Blog</a>
+    <a href="contact.html" class="mob-link" data-i18n="nav.contact">Contact</a>
+    <button class="mob-link mob-lang" id="lang-toggle-m">Español</button>
   </div>
 
   <!-- HERO -->
@@ -475,21 +545,34 @@
     }, { threshold: 0.15 });
     document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
 
-    const hamburger = document.getElementById('hamburger');
+    const navToggle = document.getElementById('navToggle');
     const mobileMenu = document.getElementById('mobile-menu');
-    hamburger.addEventListener('click', () => {
-      const isOpen = hamburger.classList.toggle('open');
-      mobileMenu.classList.toggle('open', isOpen);
-      hamburger.setAttribute('aria-label', isOpen ? 'Close menu' : 'Open menu');
-      document.body.style.overflow = isOpen ? 'hidden' : '';
+    const navEl = document.querySelector('nav');
+    const syncNavTop = () => navEl.classList.toggle('at-top', window.scrollY < 60);
+    window.addEventListener('scroll', syncNavTop, { passive: true });
+    syncNavTop();
+    const isMobileNav = () => window.matchMedia('(max-width: 768px)').matches;
+    const setMenu = (open) => {
+      navToggle.classList.toggle('open', open);
+      mobileMenu.classList.toggle('open', open);
+      navToggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+      document.body.style.overflow = open ? 'hidden' : '';
+    };
+    navToggle.addEventListener('click', () => {
+      if (!isMobileNav() && !mobileMenu.classList.contains('open')) return;
+      setMenu(!navToggle.classList.contains('open'));
     });
     mobileMenu.querySelectorAll('.mob-link').forEach(link => {
-      link.addEventListener('click', () => {
-        hamburger.classList.remove('open');
-        mobileMenu.classList.remove('open');
-        document.body.style.overflow = '';
-      });
+      if (link.id === 'lang-toggle-m') return;
+      link.addEventListener('click', () => setMenu(false));
     });
+    const langM = document.getElementById('lang-toggle-m');
+    if (langM) langM.addEventListener('click', () => {
+      if (typeof setLang !== 'function' || typeof getLang !== 'function') return;
+      setLang(getLang() === 'en' ? 'es' : 'en');
+      langM.textContent = getLang() === 'en' ? 'Español' : 'English';
+    });
+    window.addEventListener('resize', () => { if (!isMobileNav()) setMenu(false); });
   </script>
 
 <script src="translations.js"></script>
