@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>How to Brief a Designer (Even If You've Never Done It) · Ana K.</title>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --cream: #f4f1eb; --black: #0e0e0e; --forest: #2c4a35;
+    --lavender: #c5bff5; --lime: #EAF58D;
+    --serif: 'Instrument Serif', Georgia, serif;
+    --sans: 'DM Sans', sans-serif;
+  }
+  html { scroll-behavior: smooth; }
+  body { font-family: var(--sans); background: var(--cream); color: var(--black); overflow-x: hidden; }
+  .progress-bar { position: fixed; top: 0; left: 0; z-index: 200; height: 2px; background: var(--lavender); width: 0%; transition: width 0.1s linear; }
+  nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: var(--cream); border-bottom: 1px solid rgba(0,0,0,0.07); padding: 0 48px; }
+  .nav-inner { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 18px 0; }
+  .logo { font-family: var(--serif); font-size: 1.5rem; letter-spacing: 0.04em; text-decoration: none; color: var(--black); }
+  .nav-links { display: flex; gap: 28px; list-style: none; }
+  .nav-links a { font-size: 0.8rem; text-decoration: none; color: var(--black); opacity: 0.55; letter-spacing: 0.04em; transition: opacity 0.2s; }
+  .nav-links a:hover, .nav-links a.active { opacity: 1; }
+  .wrap { max-width: 1200px; margin: 0 auto; padding: 0 48px; }
+  .back-link { display: flex; align-items: center; gap: 8px; font-size: 0.75rem; opacity: 0.4; text-decoration: none; color: var(--black); letter-spacing: 0.04em; padding-top: 108px; margin-bottom: 48px; transition: opacity 0.2s, gap 0.2s; }
+  .back-link:hover { opacity: 0.8; gap: 12px; }
+  .post-hero { padding-bottom: 64px; }
+  .post-meta-top { display: flex; align-items: center; gap: 14px; margin-bottom: 28px; }
+  .post-tag { font-size: 0.62rem; letter-spacing: 0.14em; text-transform: uppercase; background: var(--lavender); color: var(--black); padding: 5px 12px; border-radius: 100px; font-weight: 500; }
+  .post-meta-top .meta-item { font-size: 0.72rem; opacity: 0.4; }
+  .meta-dot { width: 3px; height: 3px; border-radius: 50%; background: var(--black); opacity: 0.2; }
+  .post-title { font-family: var(--serif); font-size: clamp(2.2rem, 4.5vw, 3.8rem); font-weight: 400; line-height: 1.1; letter-spacing: -0.02em; max-width: 820px; margin-bottom: 28px; }
+  .post-excerpt { font-size: 1.05rem; line-height: 1.8; opacity: 0.55; max-width: 640px; font-family: var(--serif); font-style: italic; margin-bottom: 40px; }
+  .author-row { display: flex; align-items: center; gap: 14px; padding: 20px 0; border-top: 1px solid rgba(0,0,0,0.08); border-bottom: 1px solid rgba(0,0,0,0.08); }
+  .author-avatar { width: 36px; height: 36px; border-radius: 50%; background: var(--lavender); flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-family: var(--serif); font-size: 0.9rem; }
+  .author-name { font-size: 0.82rem; font-weight: 500; }
+  .author-role { font-size: 0.72rem; opacity: 0.4; }
+  .hero-img { width: 100%; height: 560px; background: #c0ccc4; border-radius: 12px; overflow: hidden; margin: 48px 0 0; display: flex; align-items: center; justify-content: center; }
+  .hero-img img { width: 100%; height: 100%; object-fit: cover; }
+  .hero-img .ph { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; width: 100%; height: 100%; }
+  .hero-img .ph svg { opacity: 0.2; }
+  .content-layout { display: grid; grid-template-columns: 1fr 680px 1fr; gap: 0; padding: 72px 0 120px; }
+  .sidebar-left { padding-right: 48px; position: sticky; top: 100px; height: fit-content; align-self: start; }
+  .toc-label { font-size: 0.6rem; letter-spacing: 0.16em; text-transform: uppercase; opacity: 0.3; font-weight: 500; margin-bottom: 16px; }
+  .toc { display: flex; flex-direction: column; gap: 2px; }
+  .toc-item { font-size: 0.78rem; line-height: 1.5; opacity: 0.4; text-decoration: none; color: var(--black); padding: 6px 0 6px 12px; border-left: 1px solid rgba(0,0,0,0.12); transition: opacity 0.2s, border-color 0.2s; }
+  .toc-item:hover, .toc-item.active { opacity: 1; border-color: var(--lavender); }
+  .article-body { min-width: 0; }
+  .article-body h2 { font-family: var(--serif); font-size: 1.9rem; font-weight: 400; line-height: 1.2; letter-spacing: -0.01em; margin: 56px 0 20px; color: var(--black); }
+  .article-body h2:first-child { margin-top: 0; }
+  .article-body h3 { font-family: var(--serif); font-size: 1.3rem; font-weight: 400; margin: 36px 0 14px; }
+  .article-body p { font-size: 0.96rem; line-height: 1.9; opacity: 0.75; margin-bottom: 20px; }
+  .article-body ul, .article-body ol { padding-left: 0; margin: 20px 0 28px; display: flex; flex-direction: column; gap: 10px; list-style: none; }
+  .article-body ul li { font-size: 0.94rem; line-height: 1.75; opacity: 0.75; padding-left: 20px; position: relative; }
+  .article-body ul li::before { content: '•'; position: absolute; left: 0; opacity: 0.4; }
+  .article-body ol { counter-reset: ol; }
+  .article-body ol li { font-size: 0.94rem; line-height: 1.75; opacity: 0.75; padding-left: 28px; position: relative; counter-increment: ol; }
+  .article-body ol li::before { content: counter(ol) '.'; position: absolute; left: 0; opacity: 0.35; font-size: 0.85rem; }
+  .article-body blockquote { margin: 36px 0; padding: 28px 36px; background: rgba(197,191,245,0.12); border-left: 3px solid var(--lavender); border-radius: 0 8px 8px 0; }
+  .article-body blockquote p { font-family: var(--serif); font-style: italic; font-size: 1.15rem; line-height: 1.7; opacity: 0.8; margin: 0; }
+  .sidebar-right { padding-left: 48px; position: sticky; top: 100px; height: fit-content; align-self: start; }
+  .share-label { font-size: 0.6rem; letter-spacing: 0.16em; text-transform: uppercase; opacity: 0.3; font-weight: 500; margin-bottom: 16px; }
+  .share-links { display: flex; flex-direction: column; gap: 8px; }
+  .share-link { display: flex; align-items: center; gap: 10px; font-size: 0.78rem; opacity: 0.4; text-decoration: none; color: var(--black); transition: opacity 0.2s; padding: 8px 0; border-bottom: 1px solid rgba(0,0,0,0.07); }
+  .share-link:hover { opacity: 1; }
+  .fade-up { opacity: 0; transform: translateY(20px); transition: opacity 0.65s ease, transform 0.65s ease; }
+  .fade-up.visible { opacity: 1; transform: translateY(0); }
+  .hamburger { display: none; flex-direction: column; justify-content: center; gap: 5px; background: none; border: none; cursor: pointer; padding: 4px; }
+  .hamburger span { display: block; width: 22px; height: 2px; background: var(--black); border-radius: 2px; transition: transform 0.3s ease, opacity 0.3s ease; transform-origin: center; }
+  .hamburger.open span:first-child { transform: translateY(7px) rotate(45deg); }
+  .hamburger.open span:nth-child(2) { opacity: 0; }
+  .hamburger.open span:last-child { transform: translateY(-7px) rotate(-45deg); }
+  .mobile-menu { display: none; position: fixed; inset: 0; background: var(--cream); z-index: 99; flex-direction: column; align-items: center; justify-content: center; gap: 8px; }
+  .mobile-menu.open { display: flex; }
+  .mob-link { font-family: var(--serif); font-size: 2.8rem; color: var(--black); text-decoration: none; font-weight: 400; line-height: 1.4; opacity: 0; transform: translateY(16px); transition: opacity 0.35s ease, transform 0.35s ease; letter-spacing: -0.01em; }
+  .mobile-menu.open .mob-link { opacity: 1; transform: translateY(0); }
+  .mobile-menu.open .mob-link:nth-child(1) { transition-delay: 0.06s; }
+  .mobile-menu.open .mob-link:nth-child(2) { transition-delay: 0.12s; }
+  .mobile-menu.open .mob-link:nth-child(3) { transition-delay: 0.18s; }
+  .mobile-menu.open .mob-link:nth-child(4) { transition-delay: 0.24s; }
+  .mob-link:hover { color: #c5bff5; }
+  @media (max-width: 700px) { .hamburger { display: flex; } .nav-links { display: none; } }
+  @media (max-width: 1024px) { .content-layout { grid-template-columns: 1fr; } .sidebar-left, .sidebar-right { display: none; } }
+  @media (max-width: 700px) { nav { padding: 0 24px; } .wrap { padding: 0 24px; } .post-title { font-size: 2rem; } .hero-img { height: 300px; } }
+  .footer-editorial { background: var(--black); color: white; padding: 72px 48px 48px; }
+  .footer-top-bar { display: flex; justify-content: space-between; align-items: center; max-width: 1200px; margin: 0 auto 80px; }
+  .footer-cta-link { font-size: 0.85rem; font-weight: 500; color: #EAF58D; text-decoration: none; letter-spacing: 0.02em; display: flex; align-items: center; gap: 8px; transition: gap 0.2s ease; }
+  .footer-cta-link:hover { gap: 14px; }
+  .footer-big-phrase { max-width: 1200px; margin: 0 auto 80px; }
+  .footer-big-phrase h2 { font-family: var(--serif); font-size: clamp(3.5rem, 8vw, 7rem); line-height: 1.0; color: white; font-weight: 400; margin: 0; }
+  .footer-big-phrase h2 em { color: #c5bff5; font-style: italic; }
+  .footer-divider { margin: 0 0 48px; height: 1px; background: rgba(255,255,255,0.1); }
+  .footer-bottom-row { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(3, 1fr) auto; gap: 48px; align-items: start; }
+  .footer-nav-group { display: flex; flex-direction: column; gap: 12px; }
+  .footer-nav-label { font-size: 0.68rem; letter-spacing: 0.14em; text-transform: uppercase; opacity: 0.3; margin-bottom: 4px; }
+  .footer-nav-group a { font-size: 0.85rem; color: white; text-decoration: none; opacity: 0.5; transition: opacity 0.2s; }
+  .footer-nav-group a:hover { opacity: 1; }
+  .footer-copy { display: flex; flex-direction: column; gap: 6px; font-size: 0.72rem; opacity: 0.25; text-align: right; align-self: end; }
+</style>
+<link rel="icon" type="image/png" href="Favicon (1).png">
+</head>
+<body>
+
+<div class="progress-bar" id="progress"></div>
+
+<nav>
+  <div class="nav-inner">
+    <a href="index.html" class="logo"><img src="Ana K. Logo-dark.svg" alt="Ana K." style="height:26px;display:block;"></a>
+    <ul class="nav-links">
+      <li><a href="index.html#about">About</a></li>
+      <li><a href="index.html#work">Work</a></li>
+      <li><a href="blog.html" class="active">Blog</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+    <button class="hamburger" id="hamburger" aria-label="Open menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<div class="mobile-menu" id="mobile-menu">
+  <a href="index.html#about" class="mob-link">About</a>
+  <a href="index.html#work" class="mob-link">Work</a>
+  <a href="blog.html" class="mob-link">Blog</a>
+  <a href="contact.html" class="mob-link">Contact</a>
+</div>
+
+<div class="wrap">
+
+  <a href="blog.html" class="back-link fade-up">← Back to blog</a>
+
+  <div class="post-hero fade-up">
+    <div class="post-meta-top">
+      <span class="post-tag">Design</span>
+      <span class="meta-dot"></span>
+      <span class="meta-item"></span>
+      <span class="meta-dot"></span>
+      <span class="meta-item">2 min read</span>
+    </div>
+    <h1 class="post-title">How to Brief a Designer (Even If You've Never Done It)</h1>
+    <p class="post-excerpt">You don't need design experience to give a great brief. You just need</p>
+    <div class="author-row">
+      <div class="author-avatar">A</div>
+      <div>
+        <div class="author-name">Ana Karina</div>
+        <div class="author-role">Brand & Visual Identity Designer</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-img fade-up">
+    <div class="ph"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg><span>Image</span></div>
+  </div>
+
+  <div class="content-layout">
+
+    <div class="sidebar-left fade-up">
+      <p class="toc-label">Contents</p>
+      <nav class="toc">
+        <a href="#s1" class="toc-item active">Start with the problem, not the solution.</a>
+        <a href="#s2" class="toc-item">The five things every brief needs</a>
+        <a href="#s3" class="toc-item">What to leave out.</a>
+        <a href="#s4" class="toc-item">The one question that changes everything.</a>
+      </nav>
+    </div>
+
+    <article class="article-body fade-up">
+      <p>Most people overthink the brief. They either write three paragraphs of vague inspiration, or they send a Pinterest board and hope for the best. Neither works. A good brief isn't about knowing design. It's about knowing your business. Here's exactly what to include.</p>
+
+<h2 id="s1">Start with the problem, not the solution.</h2>
+
+<p>The biggest mistake clients make is leading with what they want instead of why they need it. "I want a logo" tells a designer nothing. "I'm launching a wellness brand targeting women 35+ and I need to look premium without feeling clinical" tells them everything.</p>
+
+<p>Before you write anything, answer this: what problem are you trying to solve?</p>
+
+<h2 id="s2">The five things every brief needs</h2>
+
+<p><strong>1\. Who you are.</strong> One paragraph about your business, what you sell, and who buys it.</p>
+
+<p><strong>2\. Who your audience is.</strong> Be specific. Not "women" — "women in their 30s who shop at Whole Foods and follow interior design accounts."</p>
+
+<p><strong>3\. What you need.</strong> Logo, website, social templates — be clear about the deliverable.</p>
+
+<p><strong>4\. What you like (and don't).</strong> Share 3–5 references and explain why you like them. "I like this because it feels calm" is more useful than just a screenshot.</p>
+
+<p><strong>5\. What success looks like.</strong> How will you know the project worked? More inquiries? A specific feeling when people land on your site?</p>
+
+<h2 id="s3">What to leave out.</h2>
+
+<p>Don't tell your designer how to design. Trust is part of the process. If you've hired someone whose work you like, let them solve the problem their way. Your job is to define the destination — theirs is to figure out the route.</p>
+
+<h2 id="s4">The one question that changes everything.</h2>
+
+<p>Before you send the brief, ask yourself: if a designer read only this document, would they understand my business well enough to make something right? If the answer is no, keep writing. If yes, you're done.</p>
+    </article>
+
+    <div class="sidebar-right fade-up">
+      <p class="share-label">Share</p>
+      <div class="share-links">
+        <a href="#" class="share-link">↗ Twitter / X</a>
+        <a href="https://www.linkedin.com/in/ana-karina-rosa-rosario-3b407199/?locale=en_US" target="_blank" class="share-link">↗ LinkedIn</a>
+        <a href="#" class="share-link">↗ Copy link</a>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+<script>
+  window.addEventListener('scroll', () => {
+    const doc = document.documentElement;
+    const scrolled = doc.scrollTop / (doc.scrollHeight - doc.clientHeight) * 100;
+    document.getElementById('progress').style.width = scrolled + '%';
+  });
+  const sections = document.querySelectorAll('h2[id]');
+  const tocItems = document.querySelectorAll('.toc-item');
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        tocItems.forEach(t => t.classList.remove('active'));
+        const active = document.querySelector('.toc-item[href="#' + e.target.id + '"]');
+        if (active) active.classList.add('active');
+      }
+    });
+  }, { rootMargin: '-20% 0px -70% 0px' });
+  sections.forEach(s => observer.observe(s));
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.06 });
+  document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
+  window.addEventListener('load', () => {
+    document.querySelectorAll('.fade-up').forEach(el => {
+      if (el.getBoundingClientRect().top < window.innerHeight) el.classList.add('visible');
+    });
+  });
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobile-menu');
+  hamburger.addEventListener('click', () => {
+    const isOpen = hamburger.classList.toggle('open');
+    mobileMenu.classList.toggle('open', isOpen);
+    hamburger.setAttribute('aria-label', isOpen ? 'Close menu' : 'Open menu');
+    document.body.style.overflow = isOpen ? 'hidden' : '';
+  });
+  mobileMenu.querySelectorAll('.mob-link').forEach(link => {
+    link.addEventListener('click', () => {
+      hamburger.classList.remove('open');
+      mobileMenu.classList.remove('open');
+      document.body.style.overflow = '';
+    });
+  });
+</script>
+
+<footer class="footer-editorial">
+  <div class="footer-top-bar">
+    <span class="footer-logo"><img src="Ana K. Logo.svg" alt="Ana K." style="height:24px;display:block;"></span>
+    <a href="contact.html" class="footer-cta-link">Start working together <span>→</span></a>
+  </div>
+  <div class="footer-big-phrase">
+    <h2>Good design changes<br><em>everything.</em></h2>
+  </div>
+  <div class="footer-divider"></div>
+  <div class="footer-bottom-row">
+    <div class="footer-nav-group">
+      <span class="footer-nav-label">Pages</span>
+      <a href="index.html#about">About</a>
+      <a href="index.html#work">Work</a>
+      <a href="blog.html">Blog</a>
+      <a href="contact.html">Contact</a>
+    </div>
+    <div class="footer-nav-group">
+      <span class="footer-nav-label">Connect</span>
+      <a href="#">Instagram</a>
+      <a href="https://www.linkedin.com/in/ana-karina-rosa-rosario-3b407199/?locale=en_US" target="_blank">LinkedIn</a>
+      <a href="https://www.behance.net/anarosa3" target="_blank">Behance</a>
+      <a href="mailto:hello@anakdesign.com">Email</a>
+    </div>
+    <div class="footer-copy">
+      <span>© 2026 Ana K.</span>
+      <span>Designed & built by Ana K.</span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

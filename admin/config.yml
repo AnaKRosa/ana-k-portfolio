@@ -1,0 +1,62 @@
+backend:
+  name: github
+  repo: AnaKRosa/ana-k-portfolio # detected from this project's git remote
+  branch: main
+  # Netlify's hosted OAuth proxy — lets the CMS authenticate against GitHub
+  # without Netlify Identity or Git Gateway. The GitHub OAuth app + the
+  # matching env vars on the Netlify site are configured separately (next step).
+  base_url: https://api.netlify.com
+  auth_endpoint: auth
+
+# Where post images live today (Portafolio images/Blog Images/...), so
+# uploads from the CMS land in the same folder your existing posts use.
+media_folder: "Portafolio images/Blog Images"
+public_folder: "/Portafolio images/Blog Images"
+
+publish_mode: simple
+
+collections:
+  - name: "posts"
+    label: "Blog Posts"
+    folder: "src/posts"
+    create: true
+    slug: "{{slug}}"
+    extension: "md"
+    format: "frontmatter"
+    fields:
+      # Always post.html — hidden so editors never have to think about it.
+      - { label: "Layout", name: "layout", widget: "hidden", default: "post.html" }
+
+      - { label: "Title", name: "title", widget: "string" }
+
+      # Free text, not a real date field — Eleventy reserves `date` in front
+      # matter for its own publish-date logic, so the layout/this collection
+      # both use `postDate` instead. Keep writing it like "September 2026",
+      # same as the existing posts.
+      - { label: "Date", name: "postDate", widget: "string", hint: 'Free text, e.g. "September 2026" — matches the style already used on the site.' }
+
+      - label: "Category / Tag"
+        name: "tag"
+        widget: "string"
+        hint: 'Existing categories on the site: Process, Business, Brand Identity, Strategy, Design.'
+
+      - label: "Short Description"
+        name: "description"
+        widget: "text"
+        hint: "Used as the page's meta description and the blurb on blog cards."
+
+      - label: "Excerpt"
+        name: "excerpt"
+        widget: "text"
+        required: false
+        hint: "Optional italic teaser line shown under the title on the post page."
+
+      - { label: "Featured Image", name: "heroImage", widget: "image" }
+      - { label: "Featured Image Alt Text", name: "heroImageAlt", widget: "string", required: false }
+
+      - label: "Read Time"
+        name: "readTime"
+        widget: "string"
+        hint: 'e.g. "7 min read"'
+
+      - { label: "Body", name: "body", widget: "markdown" }

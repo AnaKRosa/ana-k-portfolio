@@ -10,10 +10,12 @@ const translations = {
 
     // ── Shared: Nav ──────────────────────────────
     nav: {
-      about:   'About',
-      work:    'Work',
-      blog:    'Blog',
-      contact: 'Contact',
+      about:    'About',
+      work:     'Work',
+      services: 'Services',
+      pricing:  'Pricing',
+      blog:     'Blog',
+      contact:  'Contact',
     },
 
     // ── Shared: Footer ───────────────────────────
@@ -58,6 +60,7 @@ const translations = {
       perk4Body:      'Not pretty for the sake of pretty — every design decision is made to help your business grow.',
       workHeading:    'Selected <em>work</em>',
       workSub:        'Selected projects focused on clarity, simplicity, and impact.',
+      workBrandingLabel: 'Branding',
       work1Desc:      'Built a luxury brand identity from the ground up for a high-end real estate developer in the Dominican Republic, translating their vision into a cohesive visual language.',
       work1Tag:       'Branding',
       work2Desc:      'Built a conversion-focused luxury real estate website structured around destination funnels, elevating brand perception while guiding high-end buyers through a curated Caribbean property journey.',
@@ -70,6 +73,8 @@ const translations = {
       work5Tag:       'UI/UX · Branding · Web Design',
       work6Desc:      'A complete brand identity and digital presence for a Venezuelan popup food shop — from logo to website to market-day signage.',
       work6Tag:       'Branding · Logo Design · Web Design',
+      work7Desc:      'A conversion-focused website for an indoor golf lounge — booking flow, memberships, and food ordering, built to fill every simulator bay.',
+      work7Tag:       'Web Design · Development',
       testimonialsHeading: 'What clients <em>say</em>',
       testimonialsSub:     'Real feedback from real small business owners.',
       t1Name:   'Alexandra Gómez',
@@ -136,7 +141,7 @@ const translations = {
     blog: {
       eyebrow:        'Writing',
       heading:        'Thoughts on design,<br><em>brand &amp; craft</em>',
-      count:          '4 articles',
+      count:          '6 articles',
       featuredLabel:  'Featured',
       readMore:       'Read article →',
       tag1:   'Business',
@@ -462,10 +467,12 @@ const translations = {
 
     // ── Shared: Nav ──────────────────────────────
     nav: {
-      about:   'Sobre mí',
-      work:    'Trabajo',
-      blog:    'Blog',
-      contact: 'Contacto',
+      about:    'Sobre mí',
+      work:     'Trabajo',
+      services: 'Servicios',
+      pricing:  'Precios',
+      blog:     'Blog',
+      contact:  'Contacto',
     },
 
     // ── Shared: Footer ───────────────────────────
@@ -510,6 +517,7 @@ const translations = {
       perk4Body:      'No bonito por ser bonito — cada decisión de diseño se toma pensando en los objetivos de tu negocio.',
       workHeading:    'Trabajo <em>seleccionado</em>',
       workSub:        'Proyectos enfocados en claridad, simplicidad e impacto.',
+      workBrandingLabel: 'Branding',
       work1Desc:      'Creé una identidad de marca de lujo desde cero para un desarrollador inmobiliario de alto nivel en República Dominicana, traduciendo su visión en un lenguaje visual cohesivo.',
       work1Tag:       'Branding',
       work2Desc:      'Diseñé un sitio web de bienes raíces de lujo orientado a la conversión, estructurado en torno a embudos por destino, que eleva la percepción de marca mientras guía a compradores de alto nivel por un viaje inmobiliario caribeño curado.',
@@ -522,6 +530,8 @@ const translations = {
       work5Tag:       'UI/UX · Branding · Diseño Web',
       work6Desc:      'Una identidad de marca completa y presencia digital para un puesto de comida venezolana en los mercados de agricultores — desde el logo hasta el sitio web y la señalética.',
       work6Tag:       'Branding · Diseño de Logo · Diseño Web',
+      work7Desc:      'Un sitio web orientado a conversión para un lounge de golf indoor — flujo de reservas, membresías y pedidos de comida, hecho para llenar cada bahía de simulador.',
+      work7Tag:       'Diseño Web · Desarrollo',
       testimonialsHeading: '¿Qué dicen mis <em>clientes</em>?',
       testimonialsSub:     'Opiniones reales de dueños de pequeños negocios.',
       t1Name:   'Alexandra Gómez',
@@ -588,7 +598,7 @@ const translations = {
     blog: {
       eyebrow:        'Artículos',
       heading:        'Reflexiones sobre diseño,<br><em>marca y oficio</em>',
-      count:          '4 artículos',
+      count:          '6 artículos',
       featuredLabel:  'Destacado',
       readMore:       'Leer artículo →',
       tag1:   'Negocios',

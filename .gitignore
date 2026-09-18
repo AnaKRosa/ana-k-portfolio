@@ -11,3 +11,6 @@ domain_portfolio_sample.csv
 
 # System
 .DS_Store
+
+# Node
+node_modules/

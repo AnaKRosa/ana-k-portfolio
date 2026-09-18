@@ -42,108 +42,255 @@
     overflow-x: hidden;
   }
 
-  /* NAV */
+  /* NAV — floating glass pill */
   nav {
-    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-    display: flex; justify-content: center; align-items: center;
-    background: transparent;
-    backdrop-filter: none;
-    -webkit-backdrop-filter: none;
-    border-bottom: 1px solid transparent;
-    padding: 0 48px;
-    transition: background 0.4s ease, border-color 0.4s ease, backdrop-filter 0.4s ease;
+    position: fixed; top: 16px; left: 0; right: 0; z-index: 100;
+    display: flex; justify-content: center;
+    padding: 0 16px;
+    pointer-events: none;
   }
-  nav.scrolled {
-    background: rgba(244, 241, 235, 0.72);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border-bottom: 1px solid rgba(0,0,0,0.06);
+  .nav-pill {
+    pointer-events: auto;
+    display: flex; align-items: center; gap: 6px;
+    padding: 6px 8px;
+    background: rgba(243, 242, 238, 0.72);
+    -webkit-backdrop-filter: blur(18px) saturate(1.6);
+    backdrop-filter: blur(18px) saturate(1.6);
+    border: 1px solid rgba(255, 255, 255, 0.55);
+    border-radius: 100px;
+    box-shadow: 0 10px 34px rgba(17, 17, 17, 0.10), inset 0 1px 0 rgba(255, 255, 255, 0.45);
   }
-  .nav-inner {
-    width: 100%;
-    max-width: 1440px;
-    display: flex; justify-content: space-between; align-items: center;
-    padding: 20px 0;
+  .nav-id {
+    display: flex; align-items: center; gap: 9px;
+    padding: 0 4px 0 4px; flex-shrink: 0;
   }
-  .logo { font-family: var(--serif); font-size: 1.65rem; letter-spacing: 0.02em; }
-  .nav-links { display: flex; gap: 32px; list-style: none; }
-  .nav-links a { font-size: 0.85rem; text-decoration: none; color: var(--black); letter-spacing: 0.04em; opacity: 0.7; transition: opacity 0.2s; }
-  .nav-links a:hover { opacity: 1; }
+  .nav-photo {
+    width: 32px; height: 32px; border-radius: 50%;
+    object-fit: cover; display: block;
+    box-shadow: 0 1px 5px rgba(17, 17, 17, 0.18);
+  }
+  .nav-name {
+    font-family: var(--sans); font-weight: 600; font-size: 0.88rem;
+    color: var(--black); white-space: nowrap; letter-spacing: -0.01em;
+  }
+
+  /* the part that reveals on hover */
+  .nav-links {
+    display: flex; align-items: center; gap: 2px;
+    max-width: 0; overflow: hidden; opacity: 0;
+    transform: translateX(10px);
+    transition: max-width 0.65s cubic-bezier(0.62, 0.05, 0.3, 1),
+                transform 0.65s cubic-bezier(0.62, 0.05, 0.3, 1),
+                opacity 0.5s ease;
+  }
+  .nav-links a, .nav-links button {
+    font-family: var(--sans); font-size: 0.82rem; font-weight: 500;
+    color: var(--black); text-decoration: none; white-space: nowrap;
+    padding: 8px 13px; border-radius: 100px; opacity: 0.72;
+    background: none; border: none; cursor: pointer; letter-spacing: 0.01em;
+    transition: opacity 0.2s ease, background 0.2s ease;
+  }
+  .nav-links a:hover, .nav-links button:hover { opacity: 1; background: rgba(17, 17, 17, 0.06); }
+  .nav-links .nav-lang {
+    font-size: 0.72rem; font-weight: 700; opacity: 0.5; letter-spacing: 0.06em;
+  }
+  .nav-links .nav-contact {
+    background: var(--black); color: var(--cream); opacity: 1;
+    font-weight: 600; padding: 9px 18px; margin-left: 4px;
+  }
+  .nav-links .nav-contact:hover { background: #000; opacity: 1; }
+
+  /* three-dots (collapsed) / hamburger (mobile) */
+  .nav-toggle {
+    display: flex; align-items: center; justify-content: center; gap: 3px;
+    width: 34px; height: 34px; flex-shrink: 0; overflow: hidden;
+    background: none; border: none; cursor: pointer; padding: 0; border-radius: 50%;
+    transition: width 0.6s cubic-bezier(0.62, 0.05, 0.3, 1),
+                margin 0.6s cubic-bezier(0.62, 0.05, 0.3, 1),
+                opacity 0.4s ease, background 0.2s ease;
+  }
+  .nav-toggle:hover { background: rgba(17, 17, 17, 0.06); }
+  .nav-toggle span {
+    display: block; width: 3.5px; height: 3.5px; border-radius: 50%;
+    background: var(--black); opacity: 0.5;
+    transition: transform 0.3s ease, opacity 0.3s ease, width 0.3s ease, height 0.3s ease, border-radius 0.3s ease;
+  }
+
+  /* soft continuous pulse on the three dots (desktop only) */
+  @keyframes navDotPulse {
+    0%, 100% { transform: scale(1);    opacity: 0.4; }
+    50%      { transform: scale(1.45); opacity: 0.8; }
+  }
+  @media (min-width: 769px) {
+    .nav-toggle span {
+      animation: navDotPulse 1.9s ease-in-out infinite;
+    }
+    .nav-toggle span:nth-child(2) { animation-delay: 0.22s; }
+    .nav-toggle span:nth-child(3) { animation-delay: 0.44s; }
+    /* stop pulsing once the dots are hidden (expanded) */
+    nav.at-top .nav-toggle span,
+    .nav-pill:hover .nav-toggle span { animation-play-state: paused; }
+
+    /* expanded while on the hero, and on hover once scrolled */
+    nav.at-top .nav-links,
+    .nav-pill:hover .nav-links { max-width: 430px; opacity: 1; transform: translateX(0); }
+    nav.at-top .nav-toggle,
+    .nav-pill:hover .nav-toggle { width: 0; opacity: 0; margin-left: -6px; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .nav-toggle span { animation: none !important; }
+  }
 
   /* HERO */
-  .hero {
-    min-height: 80vh;
-    display: flex; flex-direction: column; align-items: center; justify-content: center;
-    text-align: center;
-    padding: 120px 24px 80px;
-    background: transparent;
-    max-width: 1540px;
-    margin: 0 auto;
-    width: 100%;
-    position: relative;
-    z-index: 1;
-    color: var(--cream);
-  }
-  .hero .hero-sub { color: var(--cream); opacity: 0.65; }
-  nav:not(.scrolled) .logo,
-  nav:not(.scrolled) .nav-links a { color: var(--cream); }
-  .logo-dark { display: none; }
-  nav.scrolled .logo-light { display: none !important; }
-  nav.scrolled .logo-dark { display: block; }
-
-  /* full bleed background */
+  /* the smoke canvas spans the hero + Selected Work; both sit above it */
+  .smoke-zone { position: relative; }
   .hero-wrap {
-    background: #0e0e0e;
+    background: transparent;
     width: 100%;
     display: flex; justify-content: center;
     position: relative;
-    isolation: isolate;
+    z-index: 1;
   }
-
-  /* Canvas mesh gradient */
-  #hero-canvas {
+  /* Three.js flowing-smoke backdrop — kept subtle behind the content */
+  #hero-noise {
     position: absolute;
     inset: 0;
     width: 100%;
     height: 100%;
+    display: block;
     z-index: 0;
-    display: block;
-  }
-
-  /* Grain texture overlay — sits above canvas */
-  .hero-grain {
-    position: absolute;
-    inset: 0;
-    z-index: 2;
+    opacity: 0.46;
     pointer-events: none;
-    opacity: 0.055;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='gr'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.80' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23gr)'/%3E%3C/svg%3E");
-    background-repeat: repeat;
-    background-size: 180px 180px;
+    /* full through the hero, then a long gentle fade to plain cream
+       across the Selected Work section */
+    --smoke-fade: linear-gradient(to bottom,
+        #000 0%,
+        #000 30%,
+        rgba(0,0,0,0.80) 48%,
+        rgba(0,0,0,0.50) 64%,
+        rgba(0,0,0,0.24) 80%,
+        rgba(0,0,0,0.08) 91%,
+        rgba(0,0,0,0) 99%);
+    -webkit-mask-image: var(--smoke-fade);
+    mask-image: var(--smoke-fade);
   }
+  .hero {
+    max-width: 1296px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 150px 48px 120px;
+    display: grid;
+    grid-template-columns: 1.05fr 0.95fr;
+    gap: 56px;
+    align-items: center;
+    text-align: left;
+    position: relative;
+    z-index: 1;
+    color: var(--black);
+  }
+  .hero-copy { max-width: 620px; }
+  .hero h1 {
+    font-size: clamp(3rem, 5.6vw, 5rem);
+    line-height: 1.04;
+    letter-spacing: -0.02em;
+    max-width: 14ch;
+    margin-bottom: 0;
+  }
+  .hero h1 em { font-style: italic; color: var(--italic-color); }
+  .hero .hero-sub {
+    color: rgba(14,14,14,0.6);
+    opacity: 1;
+    text-align: left;
+    margin: 22px 0 0;
+    max-width: 44ch;
+  }
+  .hero-cta-row { margin-top: 34px; }
 
-  .avatar-wrapper {
-    position: relative; margin-bottom: 40px;
+
+  /* skills line (replaces the old marquee bar) */
+  .hero-skills {
+    margin-top: 42px;
+    padding-top: 18px;
+    border-top: 1px solid rgba(14,14,14,0.12);
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px 14px;
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(14,14,14,0.5);
   }
-  .avatar-wrapper img {
-    width: 174px; height: 156px;
-    border-radius: 20px; object-fit: cover;
+  .hero-skills .dot { opacity: 0.4; }
+
+  /* stacked project cards */
+  .hero-stack {
+    position: relative;
+    width: 100%;
+    max-width: 486px;
+    height: 442px;
+    justify-self: center;
+    align-self: start;
+    margin-top: -28px;
+  }
+  .stack-card {
+    position: relative;
     display: block;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.12);
-    transition: transform 0.35s ease, box-shadow 0.35s ease;
-    cursor: default;
-    transform: rotate(-5deg);
+    border-radius: 20px;
+    overflow: hidden;
+    background: var(--lavender);
+    box-shadow: 0 26px 50px rgba(14,14,14,0.18);
   }
-  .avatar-wrapper img:hover {
-    transform: rotate(-3deg) translateY(-8px) scale(1.03);
-    box-shadow: 0 12px 32px rgba(0,0,0,0.18);
+  .stack-card img {
+    width: 100%; height: 100%; object-fit: cover; display: block;
+  }
+  .stack-label {
+    position: absolute; left: 14px; bottom: 14px;
+    background: var(--lime); color: var(--black);
+    font-size: 0.72rem; font-weight: 600;
+    padding: 6px 13px; border-radius: 100px;
+    white-space: nowrap;
+  }
+  .hero-stack .stack-card {
+    position: absolute;
+    transition: transform 0.4s cubic-bezier(0.22,1,0.36,1), box-shadow 0.4s ease;
+  }
+  .hero-stack .sc-1 { left: 66px;  top: 52px;  width: 320px; height: 278px; transform: rotate(-3deg); z-index: 5; }
+  .hero-stack .sc-2 { left: 150px; top: 12px;  width: 300px; height: 262px; transform: rotate(6deg);  z-index: 4; }
+  .hero-stack .sc-3 { left: 0;     top: 140px; width: 278px; height: 242px; transform: rotate(-10deg); z-index: 3; }
+  .hero-stack .sc-4 { left: 120px; top: 180px; width: 292px; height: 252px; transform: rotate(8deg);  z-index: 2; }
+  .hero-stack .sc-5 { left: 6px;   top: 8px;   width: 270px; height: 234px; transform: rotate(-15deg); z-index: 1; }
+  .hero-stack .stack-card:hover {
+    transform: translateY(-10px) rotate(0deg);
+    box-shadow: 0 34px 60px rgba(14,14,14,0.26);
+    z-index: 6;
   }
 
-  /* Avatar placeholder */
-  .avatar-placeholder {
-    width: 90px; height: 90px; border-radius: 16px;
-    background: #c8bfb0; display: flex; align-items: center; justify-content: center;
-    font-size: 2rem; color: white;
+  /* scroll-linked: hero cards fly into the Selected Work grid */
+  #fly-layer { position: fixed; inset: 0; z-index: 90; pointer-events: none; }
+  .fly-card {
+    position: absolute; top: 0; left: 0;
+    transform-origin: top left;
+    pointer-events: auto;
+    will-change: transform, width, height;
+  }
+  html.cards-fly .hero-stack .stack-card { visibility: hidden; }
+  /* real grid cards wait fully-formed (opaque) behind the flying ones, hidden only
+     by visibility, so the hand-off is an instant swap with no transparency */
+  html.cards-fly .work-card { visibility: hidden; opacity: 1; }
+
+  @media (max-width: 1160px) {
+    .hero { gap: 32px; }
+    .hero-stack { transform: scale(0.82); transform-origin: top center; }
+  }
+  @media (max-width: 900px) {
+    .hero { grid-template-columns: 1fr; gap: 24px; padding: 128px 24px 64px; }
+    .hero-copy { max-width: 100%; }
+    .hero h1 { max-width: 18ch; }
+    .hero-stack { height: 400px; margin: 8px auto 0; transform: scale(0.88); transform-origin: top center; }
+  }
+  @media (max-width: 520px) {
+    .hero-stack { height: 320px; transform: scale(0.62); }
   }
 
   h1 {
@@ -223,6 +370,9 @@
     padding: 120px 48px;
     text-align: center;
   }
+  /* on desktop JS flips this to a light start, then scrubs bg -> dark on scroll */
+  .services-section.svc-reveal { background: #F3F2EE; color: #1a1a1a; }
+  .svc-inner { position: relative; }
   .services-section h2 {
     font-family: var(--serif);
     font-size: clamp(2rem, 3.5vw, 3rem);
@@ -233,6 +383,7 @@
     text-wrap: balance;
   }
   .services-section h2 em { font-style: italic; color: var(--lime); }
+  .services-section.svc-reveal h2 em { color: #1a1a1a; }
   .services-sub {
     font-size: 0.9rem;
     opacity: 0.6;
@@ -274,23 +425,37 @@
 
   /* WORK SECTION */
   .work-section {
-    background: var(--black);
+    background: transparent;
     padding: 80px 48px 120px;
     display: flex;
     flex-direction: column;
     align-items: center;
+    position: relative;
+    z-index: 1;
   }
   .work-section h2 {
     font-family: var(--serif);
-    font-size: 2.2rem;
+    font-size: clamp(2.3rem, 4.4vw, 3.8rem);
+    line-height: 1.05;
+    letter-spacing: -0.02em;
     font-weight: 400;
-    color: white;
+    color: var(--black);
     margin-bottom: 40px;
     width: 100%;
     max-width: 1200px;
   }
-  .work-section h2 em { font-style: italic; color: var(--lime); }
+  .work-section h2 em { font-style: italic; color: var(--italic-color); }
 
+  .work-group-label {
+    grid-column: 1 / -1;
+    display: block;
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: rgba(14,14,14,0.45);
+    margin: 28px 0 4px;
+  }
   .work-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -299,7 +464,7 @@
     width: 100%;
   }
   .work-card {
-    background: #1a1a1a;
+    background: #e7e3d9;
     border-radius: 40px;
     overflow: hidden;
     height: 420px;
@@ -308,7 +473,8 @@
     border: 1px solid transparent;
     transition: background 0.2s, border-color 0.2s;
   }
-  .work-card:hover { border-color: rgba(255,255,255,0.12); }
+  .work-card:hover { border-color: rgba(14,14,14,0.12); }
+  .work-card-overlay { color: var(--black); }
   .work-card img {
     width: 100%; height: 100%; object-fit: cover; display: block;
     border-radius: 0 !important;
@@ -501,7 +667,7 @@
 
   /* TESTIMONIALS */
   .testimonials-section {
-    background: var(--cream);
+    background: var(--black);
     padding: 120px 0;
   }
   .testimonials-header {
@@ -514,9 +680,10 @@
     font-size: clamp(1.8rem, 3vw, 2.6rem);
     font-weight: 400;
     margin-bottom: 12px;
+    color: var(--cream);
   }
   .testimonials-header h2 em { font-style: italic; color: var(--italic-color); }
-  .testimonials-header p { font-size: 0.9rem; opacity: 0.55; }
+  .testimonials-header p { font-size: 0.9rem; color: var(--cream); opacity: 0.55; }
 
   .carousel-wrapper {
     overflow: hidden;
@@ -530,19 +697,19 @@
     transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1);
   }
   .tcard {
-    background: rgba(255,255,255,0.3);
+    background: rgba(255,255,255,0.05);
     border-radius: 12px;
     padding: 36px 32px;
     display: flex;
     flex-direction: column;
-    border: 1px solid rgba(0,0,0,0.07);
+    border: 1px solid rgba(255,255,255,0.12);
     min-width: 380px;
     max-width: 380px;
     flex-shrink: 0;
     box-sizing: border-box;
     transition: box-shadow 0.25s, background 0.25s;
   }
-  .tcard:hover { box-shadow: 0 8px 32px rgba(0,0,0,0.08); background: rgba(255,255,255,0.45); }
+  .tcard:hover { box-shadow: 0 8px 32px rgba(0,0,0,0.35); background: rgba(255,255,255,0.09); }
   .tcard-avatar {
     width: 64px; height: 64px;
     border-radius: 50%;
@@ -562,16 +729,19 @@
     font-size: 1.3rem;
     font-weight: 400;
     margin-bottom: 4px;
+    color: var(--cream);
   }
   .tcard-role {
     font-size: 0.75rem;
-    opacity: 0.45;
+    color: var(--cream);
+    opacity: 0.5;
     margin-bottom: 20px;
   }
   .tcard-quote {
     font-size: 0.85rem;
     line-height: 1.8;
-    opacity: 0.6;
+    color: var(--cream);
+    opacity: 0.68;
   }
   .carousel-controls {
     display: flex;
@@ -595,7 +765,7 @@
     line-height: 1;
   }
   .carousel-btn:hover:not(:disabled) { background: #c4bbf0; color: white; border-color: #c4bbf0; box-shadow: 0 0 0 4px rgba(196, 187, 240, 0.28); }
-  .carousel-btn:disabled { opacity: 0.25; cursor: default; border-color: rgba(0,0,0,0.15); color: rgba(0,0,0,0.25); background: transparent; }
+  .carousel-btn:disabled { opacity: 0.25; cursor: default; border-color: rgba(255,255,255,0.2); color: rgba(255,255,255,0.3); background: transparent; }
 
     /* ABOUT SECTION */
   .about-section {
@@ -1020,46 +1190,42 @@
     .why-left { max-width: 100%; }
     .why-right { max-width: 100%; }
   }
-  /* HAMBURGER */
-  .hamburger {
-    display: none; flex-direction: column; justify-content: center; gap: 5px;
-    background: none; border: none; cursor: pointer; padding: 4px; position: relative;
-  }
-  .hamburger span {
-    display: block; width: 22px; height: 2px; background: var(--black);
-    border-radius: 2px; transition: transform 0.3s ease, opacity 0.3s ease; transform-origin: center;
-  }
-  nav:not(.scrolled) .hamburger span { background: var(--cream); }
-  .hamburger.open span { background: var(--black) !important; }
-  #lang-toggle { color: var(--black); border-color: rgba(0,0,0,0.15); }
-  nav:not(.scrolled) #lang-toggle { color: var(--cream); border-color: rgba(255,255,255,0.3); }
-  .hamburger.open span:first-child { transform: translateY(7px) rotate(45deg); }
-  .hamburger.open span:nth-child(2) { opacity: 0; }
-  .hamburger.open span:last-child { transform: translateY(-7px) rotate(-45deg); }
-
   /* MOBILE MENU OVERLAY */
   .mobile-menu {
-    display: none; position: fixed; inset: 0; background: var(--cream); z-index: 99;
-    flex-direction: column; align-items: center; justify-content: center; gap: 8px;
+    display: none; position: fixed; inset: 0; z-index: 99;
+    background: rgba(243, 242, 238, 0.94);
+    -webkit-backdrop-filter: blur(22px); backdrop-filter: blur(22px);
+    flex-direction: column; align-items: center; justify-content: center; gap: 6px;
   }
   .mobile-menu.open { display: flex; }
   .mob-link {
-    font-family: var(--serif); font-size: 2.8rem; color: var(--black);
-    text-decoration: none; font-weight: 400; line-height: 1.4;
+    font-family: var(--serif); font-size: 2.6rem; color: var(--black);
+    text-decoration: none; font-weight: 400; line-height: 1.35;
     opacity: 0; transform: translateY(16px);
     transition: opacity 0.35s ease, transform 0.35s ease; letter-spacing: -0.01em;
+    background: none; border: none; cursor: pointer;
   }
   .mobile-menu.open .mob-link { opacity: 1; transform: translateY(0); }
-  .mobile-menu.open .mob-link:nth-child(1) { transition-delay: 0.06s; }
-  .mobile-menu.open .mob-link:nth-child(2) { transition-delay: 0.12s; }
-  .mobile-menu.open .mob-link:nth-child(3) { transition-delay: 0.18s; }
-  .mobile-menu.open .mob-link:nth-child(4) { transition-delay: 0.24s; }
-  .mob-link:hover { color: var(--lavender); }
+  .mobile-menu.open .mob-link:nth-child(1) { transition-delay: 0.05s; }
+  .mobile-menu.open .mob-link:nth-child(2) { transition-delay: 0.10s; }
+  .mobile-menu.open .mob-link:nth-child(3) { transition-delay: 0.15s; }
+  .mobile-menu.open .mob-link:nth-child(4) { transition-delay: 0.20s; }
+  .mobile-menu.open .mob-link:nth-child(5) { transition-delay: 0.25s; }
+  .mob-link:hover { color: var(--italic-color); }
+  .mob-link.mob-lang {
+    margin-top: 24px; font-family: var(--sans); font-size: 0.85rem;
+    font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+  }
+  .mobile-menu.open .mob-link.mob-lang { opacity: 0.55; transition-delay: 0.3s; }
 
   @media (max-width: 768px) {
-    nav { padding: 16px 24px; }
-    .hamburger { display: flex; }
+    nav { top: 12px; padding: 0 12px; }
     .nav-links { display: none; }
+    .nav-toggle { width: 40px; height: 40px; flex-direction: column; gap: 4px; }
+    .nav-toggle span { width: 17px; height: 2px; border-radius: 2px; opacity: 0.9; }
+    .nav-toggle.open span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+    .nav-toggle.open span:nth-child(2) { opacity: 0; }
+    .nav-toggle.open span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
     .services-section, .work-section, .process-section { padding: 80px 24px; }
     .cards-grid { grid-template-columns: 1fr; }
     .pricing-cards-grid { grid-template-columns: 1fr !important; }
@@ -1082,7 +1248,6 @@
     .carousel-wrapper { padding: 0 24px; }
     .carousel-controls { padding: 0 24px; }
   }
-  @media (max-width: 768px) { #lang-toggle { margin-left: auto; } }
 </style>
   <link rel="icon" type="image/png" href="Favicon (1).png">
 
@@ -1284,72 +1449,152 @@
 <body>
 
 <nav>
-  <div class="nav-inner">
-  <div class="logo">
-    <img src="Ana K. Logo.svg" alt="Ana K." class="logo-light" style="height:26px;display:block;" loading="lazy">
-    <img src="Ana K. Logo-dark.svg" alt="Ana K." class="logo-dark" style="height:26px;" loading="lazy">
-  </div>
-  <ul class="nav-links">
-    <li><a href="#about" data-i18n="nav.about">About</a></li>
-    <li><a href="#work" data-i18n="nav.work">Work</a></li>
-    <li><a href="blog.html" data-i18n="nav.blog">Blog</a></li>
-    <li><a href="contact.html" data-i18n="nav.contact">Contact</a></li>
-  </ul>
-  <button id="lang-toggle" style="background:none;border:1px solid rgba(0,0,0,0.15);border-radius:20px;padding:4px 12px;font-size:0.75rem;cursor:pointer;letter-spacing:0.04em;font-family:var(--sans);transition:opacity 0.2s;" onmouseover="this.style.opacity='0.6'" onmouseout="this.style.opacity='1'">ES</button>
-  <button class="hamburger" id="hamburger" aria-label="Open menu">
-    <span></span><span></span><span></span>
-  </button>
+  <div class="nav-pill">
+    <div class="nav-id">
+      <img class="nav-photo" src="Portafolio images/Ana K image.png" alt="Ana Karina" loading="lazy">
+      <span class="nav-name">Ana Karina</span>
+    </div>
+    <div class="nav-links">
+      <a href="#work" data-i18n="nav.work">Work</a>
+      <a href="#services" data-i18n="nav.services">Services</a>
+      <a href="#pricing" data-i18n="nav.pricing">Pricing</a>
+      <a href="blog.html" data-i18n="nav.blog">Blog</a>
+      <button id="lang-toggle" class="nav-lang">ES</button>
+      <a href="contact.html" class="nav-contact" data-i18n="nav.contact">Contact</a>
+    </div>
+    <button class="nav-toggle" id="navToggle" aria-label="Open menu">
+      <span></span><span></span><span></span>
+    </button>
   </div>
 </nav>
 
 <div class="mobile-menu" id="mobile-menu">
-  <a href="#about" class="mob-link" data-i18n="nav.about">About</a>
   <a href="#work" class="mob-link" data-i18n="nav.work">Work</a>
+  <a href="#services" class="mob-link" data-i18n="nav.services">Services</a>
+  <a href="#pricing" class="mob-link" data-i18n="nav.pricing">Pricing</a>
   <a href="blog.html" class="mob-link" data-i18n="nav.blog">Blog</a>
   <a href="contact.html" class="mob-link" data-i18n="nav.contact">Contact</a>
+  <button class="mob-link mob-lang" id="lang-toggle-m">Español</button>
 </div>
 
-<!-- HERO -->
+<!-- HERO + SELECTED WORK share one smoke backdrop -->
+<div class="smoke-zone">
+<canvas id="hero-noise" aria-hidden="true"></canvas>
 <div class="hero-wrap">
-<canvas id="hero-canvas"></canvas>
 <section class="hero" id="hero">
-  <div class="avatar-wrapper fade-up">
-    <img src="Portafolio images/Ana K image.png" alt="Ana K." loading="lazy">
+  <div class="hero-copy">
+    <h1 id="hero-title" data-i18n="index.heroHeadline">
+    I design and build websites that actually <em>convert.</em>
+    </h1>
+    <p id="hero-sub" class="hero-sub" data-i18n="index.heroSub">
+    I’m Ana Karina — a Framer &amp; Webflow designer handling everything from strategy to launch. No agencies, no middlemen, no endless handoffs.
+    </p>
+    <div class="hero-cta-row">
+      <a id="hero-btn" href="https://cal.com/ana-karina-rosa-vwdmwe/30min" target="_blank" class="btn-primary" data-i18n="index.heroBtn" onclick="gtag('event', 'zoom_scheduler_click')">Book a free call <span class="arrow">→</span></a>
+    </div>
+    <div class="hero-skills">
+      <span>5 Years Agency Experience</span><span class="dot">·</span>
+      <span>Web Design</span><span class="dot">·</span>
+      <span>UI/UX Design</span><span class="dot">·</span>
+      <span>Brand Identity</span><span class="dot">·</span>
+      <span>Content Creation</span>
+    </div>
   </div>
-  <h1 id="hero-title" data-i18n="index.heroHeadline">
-  I design and build websites that actually <em>convert.</em>
-  </h1>
-  <p id="hero-sub" class="hero-sub" data-i18n="index.heroSub">
-  I’m Ana Karina — a Framer &amp; Webflow designer handling everything from strategy to launch. No agencies, no middlemen, no endless handoffs.
-  </p>
-  <a id="hero-btn" href="https://cal.com/ana-karina-rosa-vwdmwe/30min" target="_blank" class="btn-primary" data-i18n="index.heroBtn" onclick="gtag(‘event’, ‘zoom_scheduler_click’)">Book a free call <span class="arrow">→</span></a>
+  <div class="hero-stack">
+    <a href="viviana-pastore-case-study.html" class="stack-card sc-1">
+      <img src="Viviana-Pastore/Viviana.webp" alt="Viviana Pastore" loading="lazy">
+      <span class="stack-label">Viviana</span>
+    </a>
+    <a href="casalty-case-study-2.html" class="stack-card sc-2">
+      <img src="Casalty-thumbnail-home.webp" alt="Casalty Website" loading="lazy">
+      <span class="stack-label">Casalty</span>
+    </a>
+    <a href="vero-rosa-case-study.html" class="stack-card sc-3">
+      <img src="Vero Rosa/Vero-rosa-thumbnail.png" alt="Vero Rosa Wellness" loading="lazy">
+      <span class="stack-label">Vero Rosa</span>
+    </a>
+    <a href="arepa-stand-case-study.html" class="stack-card sc-4">
+      <img src="The arepa Stand/TAS-01.webp" alt="The Arepa Stand" loading="lazy">
+      <span class="stack-label">Arepa Stand</span>
+    </a>
+    <a href="https://foreplayindoorgolf.ca" target="_blank" rel="noopener" class="stack-card sc-5">
+      <img src="Foreplay-Indoor-Golf.png" alt="Fore Play Indoor Golf" loading="lazy">
+      <span class="stack-label">Fore Play</span>
+    </a>
+  </div>
 </section>
-<div class="hero-grain"></div>
 </div>
 
-<!-- MARQUEE -->
-<div class="marquee-bar">
-  <div class="marquee-track">
-    <span class="marquee-item">5 YEARS AGENCY EXPERIENCE</span><span class="marquee-dot">·</span><span class="marquee-item">WEB DESIGN</span><span class="marquee-dot">·</span><span class="marquee-item">UI/UX DESIGN</span><span class="marquee-dot">·</span><span class="marquee-item">SOCIAL MEDIA DESIGN</span><span class="marquee-dot">·</span><span class="marquee-item">BRAND IDENTITY</span><span class="marquee-dot">·</span><span class="marquee-item">CONTENT CREATION</span><span class="marquee-dot">·</span><span class="marquee-item">5 YEARS AGENCY EXPERIENCE</span><span class="marquee-dot">·</span><span class="marquee-item">WEB DESIGN</span><span class="marquee-dot">·</span><span class="marquee-item">UI/UX DESIGN</span><span class="marquee-dot">·</span><span class="marquee-item">SOCIAL MEDIA DESIGN</span><span class="marquee-dot">·</span><span class="marquee-item">BRAND IDENTITY</span><span class="marquee-dot">·</span><span class="marquee-item">CONTENT CREATION</span><span class="marquee-dot">·</span><span class="marquee-item">5 YEARS AGENCY EXPERIENCE</span><span class="marquee-dot">·</span><span class="marquee-item">WEB DESIGN</span><span class="marquee-dot">·</span><span class="marquee-item">UI/UX DESIGN</span><span class="marquee-dot">·</span><span class="marquee-item">SOCIAL MEDIA DESIGN</span><span class="marquee-dot">·</span><span class="marquee-item">BRAND IDENTITY</span><span class="marquee-dot">·</span><span class="marquee-item">CONTENT CREATION</span><span class="marquee-dot">·</span><span class="marquee-item">5 YEARS AGENCY EXPERIENCE</span><span class="marquee-dot">·</span><span class="marquee-item">WEB DESIGN</span><span class="marquee-dot">·</span><span class="marquee-item">UI/UX DESIGN</span><span class="marquee-dot">·</span><span class="marquee-item">SOCIAL MEDIA DESIGN</span><span class="marquee-dot">·</span><span class="marquee-item">BRAND IDENTITY</span><span class="marquee-dot">·</span><span class="marquee-item">CONTENT CREATION</span><span class="marquee-dot">·</span>
+<!-- WORK -->
+<section class="work-section" id="work">
+  <h2 class="fade-up" data-i18n="index.workHeading">Selected <em>work</em></h2>
+  <p class="fade-up" style="color:rgba(14,14,14,0.5);font-size:1rem;margin:0 0 40px;transition-delay:0.1s;text-align:left;width:100%;max-width:1200px;" data-i18n="index.workSub">Selected projects focused on clarity, simplicity, and impact.</p>
+  <div class="work-grid">
+    <a href="https://foreplayindoorgolf.ca" target="_blank" rel="noopener" class="work-card fade-up" style="background:#e7e3d9; text-decoration:none; display:block;">
+      <img src="Foreplay-Indoor-Golf.png" alt="Fore Play Indoor Golf" style="width:100%;height:100%;object-fit:cover;display:block;" loading="lazy">
+      <div class="work-card-overlay">
+        <p data-i18n="index.work7Desc">A conversion-focused website for an indoor golf lounge — booking flow, memberships, and food ordering, built to fill every simulator bay.</p>
+        <span class="work-tag" data-i18n="index.work7Tag">Web Design · Development</span>
+      </div>
+    </a>
+    <a href="casalty-case-study-2.html" class="work-card fade-up" style="transition-delay:0.1s; background:#e7e3d9; text-decoration:none; display:block;">
+      <img src="Casalty-thumbnail-home.webp" alt="Casalty Website" style="width:100%;height:100%;object-fit:cover;display:block;" loading="lazy">
+      <div class="work-card-overlay">
+        <p data-i18n="index.work2Desc">Built a conversion-focused luxury real estate website structured around destination funnels, elevating brand perception while guiding high-end buyers through a curated Caribbean property journey.</p>
+        <span class="work-tag" data-i18n="index.work2Tag">Website design</span>
+      </div>
+    </a>
+    <a href="vero-rosa-case-study.html" class="work-card fade-up" style="transition-delay:0.2s; background:#e7e3d9; text-decoration:none; display:block;">
+      <img src="Vero Rosa/Vero-rosa-thumbnail.png" alt="Vero Rosa Wellness" style="width:100%;height:100%;object-fit:cover;display:block;" loading="lazy">
+      <div class="work-card-overlay">
+        <p data-i18n="index.work3Desc">A full website, brand identity, and content strategy for a Dominican Republic-based wellness coach — designed and developed end-to-end in Webflow.</p>
+        <span class="work-tag" data-i18n="index.work3Tag">Branding · Web Design</span>
+      </div>
+    </a>
+    <a href="viviana-pastore-case-study.html" class="work-card fade-up" style="transition-delay:0.3s; background:#e7e3d9; text-decoration:none; display:block;">
+      <img src="Viviana-Pastore/Viviana.webp" alt="Viviana Pastore Portfolio" style="width:100%;height:100%;object-fit:cover;display:block;" loading="lazy">
+      <div class="work-card-overlay">
+        <p data-i18n="index.work4Desc">A portfolio website for a Barcelona-based fashion designer — built in Framer to help her land her next role.</p>
+        <span class="work-tag" data-i18n="index.work4Tag">Web Design · Framer</span>
+      </div>
+    </a>
+    <span class="work-group-label fade-up" data-i18n="index.workBrandingLabel">Branding</span>
+    <a href="casalty-case-study.html" class="work-card fade-up" style="transition-delay:0.4s; background:#e7e3d9; text-decoration:none; display:block;">
+      <img src="Portafolio images/Collateral.webp" alt="Casalty Branding" style="width:100%;height:100%;object-fit:cover;display:block;" loading="lazy">
+      <div class="work-card-overlay">
+        <p data-i18n="index.work1Desc">Built a luxury brand identity from the ground up for a high-end real estate developer in the Dominican Republic, translating their vision into a cohesive visual language.</p>
+        <span class="work-tag" data-i18n="index.work1Tag">Branding</span>
+      </div>
+    </a>
+    <a href="arepa-stand-case-study.html" class="work-card fade-up" style="transition-delay:0.5s; background:#e7e3d9; text-decoration:none; display:block;">
+      <img src="The arepa Stand/TAS-01.webp" alt="The Arepa Stand" style="width:100%;height:100%;object-fit:cover;display:block;" loading="lazy">
+      <div class="work-card-overlay">
+        <p data-i18n="index.work6Desc">A complete brand identity and digital presence for a Venezuelan popup food shop — from logo to website to market-day signage.</p>
+        <span class="work-tag" data-i18n="index.work6Tag">Branding · Logo Design · Web Design</span>
+      </div>
+    </a>
   </div>
-</div>
+</section>
+</div><!-- /smoke-zone -->
 
 <!-- SERVICES -->
 <section class="services-section" id="services">
-  <h2 class="fade-up" data-i18n="index.servicesHeading">Everything you need to launch, grow, and look professional <em>online.</em></h2>
-  <p class="services-sub fade-up" data-i18n="index.servicesSub">From your website to your social media — I handle all your design so you can focus on running your business.</p>
-  <div class="cards-grid">
-    <div class="card fade-up">
-      <h3 data-i18n="index.service1Title">Web & UI</h3>
-      <p data-i18n="index.service1Body">Websites, landing pages, and digital products built to convert. Designed and developed in Framer &amp; Webflow — from wireframe to launch.</p>
-    </div>
-    <div class="card fade-up" style="transition-delay:0.1s">
-      <h3 data-i18n="index.service2Title">Brand & Print</h3>
-      <p data-i18n="index.service2Body">Logo, brand identity, whitepapers, PDFs, and email design — everything that makes your brand look consistent across every touchpoint.</p>
-    </div>
-    <div class="card fade-up" style="transition-delay:0.2s">
-      <h3 data-i18n="index.service3Title">Social & Content</h3>
-      <p data-i18n="index.service3Body">On-brand social media graphics your team can use every week — no brief needed, no starting from scratch.</p>
+  <div class="svc-inner">
+    <h2 class="fade-up" data-i18n="index.servicesHeading">Everything you need to launch, grow, and look professional <em>online.</em></h2>
+    <p class="services-sub fade-up" data-i18n="index.servicesSub">From your website to your social media — I handle all your design so you can focus on running your business.</p>
+    <div class="cards-grid">
+      <div class="card fade-up">
+        <h3 data-i18n="index.service1Title">Web & UI</h3>
+        <p data-i18n="index.service1Body">Websites, landing pages, and digital products built to convert. Designed and developed in Framer &amp; Webflow — from wireframe to launch.</p>
+      </div>
+      <div class="card fade-up" style="transition-delay:0.1s">
+        <h3 data-i18n="index.service2Title">Brand & Print</h3>
+        <p data-i18n="index.service2Body">Logo, brand identity, whitepapers, PDFs, and email design — everything that makes your brand look consistent across every touchpoint.</p>
+      </div>
+      <div class="card fade-up" style="transition-delay:0.2s">
+        <h3 data-i18n="index.service3Title">Social & Content</h3>
+        <p data-i18n="index.service3Body">On-brand social media graphics your team can use every week — no brief needed, no starting from scratch.</p>
+      </div>
     </div>
   </div>
 </section>
@@ -1395,50 +1640,6 @@
   </div>
 </section>
 </div>
-
-<!-- WORK -->
-<section class="work-section" id="work">
-  <h2 class="fade-up" data-i18n="index.workHeading">Selected <em>work</em></h2>
-  <p class="fade-up" style="color:rgba(255,255,255,0.45);font-size:1rem;margin:0 0 40px;transition-delay:0.1s;text-align:left;width:100%;max-width:1200px;" data-i18n="index.workSub">Selected projects focused on clarity, simplicity, and impact.</p>
-  <div class="work-grid">
-    <a href="casalty-case-study-2.html" class="work-card fade-up" style="background:#1e1e1e; text-decoration:none; display:block;">
-      <img src="Casalty-thumbnail-home.webp" alt="Casalty Website" style="width:100%;height:100%;object-fit:cover;display:block;" loading="lazy">
-      <div class="work-card-overlay" style="color:#f5f5f0;">
-        <p data-i18n="index.work2Desc">Built a conversion-focused luxury real estate website structured around destination funnels, elevating brand perception while guiding high-end buyers through a curated Caribbean property journey.</p>
-        <span class="work-tag" data-i18n="index.work2Tag">Website design</span>
-      </div>
-    </a>
-    <a href="vero-rosa-case-study.html" class="work-card fade-up" style="transition-delay:0.1s; background:#1e1e1e; text-decoration:none; display:block;">
-      <img src="Vero Rosa/Vero-rosa-thumbnail.png" alt="Vero Rosa Wellness" style="width:100%;height:100%;object-fit:cover;display:block;" loading="lazy">
-      <div class="work-card-overlay" style="color:#f5f5f0;">
-        <p data-i18n="index.work3Desc">A full website, brand identity, and content strategy for a Dominican Republic-based wellness coach — designed and developed end-to-end in Webflow.</p>
-        <span class="work-tag" data-i18n="index.work3Tag">Branding · Web Design</span>
-      </div>
-    </a>
-    <a href="viviana-pastore-case-study.html" class="work-card fade-up" style="transition-delay:0.2s; background:#1e1e1e; text-decoration:none; display:block;">
-      <img src="Viviana-Pastore/Viviana.webp" alt="Viviana Pastore Portfolio" style="width:100%;height:100%;object-fit:cover;display:block;" loading="lazy">
-      <div class="work-card-overlay" style="color:#f5f5f0;">
-        <p data-i18n="index.work4Desc">A portfolio website for a Barcelona-based fashion designer — built in Framer to help her land her next role.</p>
-        <span class="work-tag" data-i18n="index.work4Tag">Web Design · Framer</span>
-      </div>
-    </a>
-    <a href="casalty-case-study.html" class="work-card fade-up" style="transition-delay:0.3s; background:#1e1e1e; text-decoration:none; display:block;">
-      <img src="Portafolio images/Collateral.webp" alt="Casalty Branding" style="width:100%;height:100%;object-fit:cover;display:block;" loading="lazy">
-      <div class="work-card-overlay" style="color:#f5f5f0;">
-        <p data-i18n="index.work1Desc">Built a luxury brand identity from the ground up for a high-end real estate developer in the Dominican Republic, translating their vision into a cohesive visual language.</p>
-        <span class="work-tag" data-i18n="index.work1Tag">Branding</span>
-      </div>
-    </a>
-    <a href="arepa-stand-case-study.html" class="work-card fade-up" style="transition-delay:0.4s; background:#1e1e1e; text-decoration:none; display:block;">
-      <img src="The arepa Stand/TAS-01.webp" alt="The Arepa Stand" style="width:100%;height:100%;object-fit:cover;display:block;" loading="lazy">
-      <div class="work-card-overlay" style="color:#f5f5f0;">
-        <p data-i18n="index.work6Desc">A complete brand identity and digital presence for a Venezuelan popup food shop — from logo to website to market-day signage.</p>
-        <span class="work-tag" data-i18n="index.work6Tag">Branding · Logo Design · Web Design</span>
-      </div>
-    </a>
-  </div>
-</section>
-
 
 <!-- TESTIMONIALS -->
 <section class="testimonials-section">
@@ -2051,36 +2252,175 @@
   })();
   // ─────────────────────────────────────────────────────────────────────────
 
-  // Hamburger menu
-  const hamburger = document.getElementById('hamburger');
+  // Floating pill nav — the toggle opens the full-screen menu on mobile
+  const navToggle = document.getElementById('navToggle');
   const mobileMenu = document.getElementById('mobile-menu');
-  hamburger.addEventListener('click', () => {
-    const isOpen = hamburger.classList.toggle('open');
-    mobileMenu.classList.toggle('open', isOpen);
-    hamburger.setAttribute('aria-label', isOpen ? 'Close menu' : 'Open menu');
-    document.body.style.overflow = isOpen ? 'hidden' : '';
+  const navEl = document.querySelector('nav');
+
+  // open (expanded) while on the hero, collapse to the pill on scroll
+  const syncNavTop = () => navEl.classList.toggle('at-top', window.scrollY < 60);
+  window.addEventListener('scroll', syncNavTop, { passive: true });
+  syncNavTop();
+  const isMobileNav = () => window.matchMedia('(max-width: 768px)').matches;
+  const setMenu = (open) => {
+    navToggle.classList.toggle('open', open);
+    mobileMenu.classList.toggle('open', open);
+    navToggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+    document.body.style.overflow = open ? 'hidden' : '';
+  };
+  navToggle.addEventListener('click', () => {
+    if (!isMobileNav() && !mobileMenu.classList.contains('open')) return; // desktop uses hover
+    setMenu(!navToggle.classList.contains('open'));
   });
   mobileMenu.querySelectorAll('.mob-link').forEach(link => {
-    link.addEventListener('click', () => {
-      hamburger.classList.remove('open');
-      mobileMenu.classList.remove('open');
-      document.body.style.overflow = '';
-    });
+    if (link.id === 'lang-toggle-m') return;
+    link.addEventListener('click', () => setMenu(false));
   });
-
-  // Nav: transparent on hero, frosted glass on scroll
-  const nav = document.querySelector('nav');
-  const hero = document.querySelector('.hero-wrap');
-  const onScroll = () => {
-    const heroBottom = hero ? hero.getBoundingClientRect().bottom : 0;
-    nav.classList.toggle('scrolled', heroBottom <= 0);
-  };
-  window.addEventListener('scroll', onScroll, { passive: true });
-  onScroll();
+  // keep the mobile language button in sync with the desktop one
+  const langM = document.getElementById('lang-toggle-m');
+  if (langM) langM.addEventListener('click', () => {
+    if (typeof setLang !== 'function' || typeof getLang !== 'function') return;
+    setLang(getLang() === 'en' ? 'es' : 'en');
+    langM.textContent = getLang() === 'en' ? 'Español' : 'English';
+  });
+  window.addEventListener('resize', () => { if (!isMobileNav()) setMenu(false); });
 
 </script>
 <script src="translations.js"></script>
 <script src="i18n.js"></script>
+
+<!-- Three.js — full-bleed animated B&W noise behind the hero (basic setup) -->
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js"
+  }
+}
+</script>
+<script type="module">
+  import * as THREE from 'three';
+
+  const canvas = document.getElementById('hero-noise');
+  const zone = document.querySelector('.smoke-zone');
+  if (canvas && zone) {
+    const renderer = new THREE.WebGLRenderer({ canvas, antialias: false });
+    renderer.setPixelRatio(1); // canvas spans hero + work section — keep the buffer light
+
+    const scene = new THREE.Scene();
+    const camera = new THREE.Camera(); // full-screen quad — matrices unused
+
+    const uniforms = {
+      u_time:       { value: 0 },
+      u_resolution: { value: new THREE.Vector2(1, 1) },
+    };
+
+    const material = new THREE.ShaderMaterial({
+      uniforms,
+      vertexShader: /* glsl */`
+        void main() { gl_Position = vec4(position.xy, 0.0, 1.0); }
+      `,
+      fragmentShader: /* glsl */`
+        uniform float u_time;
+        uniform vec2  u_resolution;
+
+        const vec3 CREAM = vec3(0.9529, 0.9490, 0.9333);  // #F3F2EE
+        const vec3 WHITE = vec3(1.0);
+        const vec3 LAV   = vec3(0.6863, 0.6627, 0.9255);  // #AFA9EC
+
+        float hash(vec2 p) {
+          p = fract(p * vec2(123.34, 456.21));
+          p += dot(p, p + 45.32);
+          return fract(p.x * p.y);
+        }
+
+        // smooth value noise
+        float noise(vec2 p) {
+          vec2 i = floor(p);
+          vec2 f = fract(p);
+          float a = hash(i);
+          float b = hash(i + vec2(1.0, 0.0));
+          float c = hash(i + vec2(0.0, 1.0));
+          float d = hash(i + vec2(1.0, 1.0));
+          vec2 u = f * f * (3.0 - 2.0 * f);
+          return mix(mix(a, b, u.x), mix(c, d, u.x), u.y);
+        }
+
+        float fbm(vec2 p) {
+          float v = 0.0;
+          float amp = 0.5;
+          mat2 rot = mat2(0.80, -0.60, 0.60, 0.80);
+          for (int i = 0; i < 4; i++) {
+            v += amp * noise(p);
+            p = rot * p * 2.0;
+            amp *= 0.5;
+          }
+          return v;
+        }
+
+        void main() {
+          // normalize by the short axis -> square units, no stretching on wide screens
+          float BASE_FREQ = 3.0;   // more = more, smaller blobs (try 2.0 - 4.0)
+          vec2 uv = gl_FragCoord.xy / min(u_resolution.x, u_resolution.y) * BASE_FREQ;
+          float t = u_time * 0.06;             // very slow drift
+
+          // domain warping — noise coords pushed around by more noise
+          vec2 q = vec2(fbm(uv + vec2(0.0, 0.0) + 0.10 * t),
+                        fbm(uv + vec2(5.2, 1.3) - 0.08 * t));
+          vec2 r = vec2(fbm(uv + 2.2 * q + vec2(1.7, 9.2) + 0.13 * t),
+                        fbm(uv + 2.2 * q + vec2(8.3, 2.8) - 0.11 * t));
+          float f = fbm(uv + 2.4 * r);
+          f = clamp((f - 0.12) * 1.9, 0.0, 1.0);
+
+          // cream -> white body
+          vec3 col = mix(CREAM, WHITE, smoothstep(0.12, 0.72, f));
+          // lavender only in the very densest wisps
+          col = mix(col, LAV, smoothstep(0.64, 0.97, f) * 0.42);
+
+          gl_FragColor = vec4(col, 1.0);
+        }
+      `,
+    });
+
+    const quad = new THREE.Mesh(new THREE.PlaneGeometry(2, 2), material);
+    scene.add(quad);
+
+    function resize() {
+      const w = zone.clientWidth;
+      const h = zone.clientHeight;
+      renderer.setSize(w, h, false);
+      const dpr = renderer.getPixelRatio();
+      uniforms.u_resolution.value.set(w * dpr, h * dpr);
+      renderer.render(scene, camera);
+    }
+    window.addEventListener('resize', resize);
+    resize();
+    // the zone's height changes as fonts load / images settle
+    window.addEventListener('load', resize);
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(resize);
+    setTimeout(resize, 600);
+
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const clock = new THREE.Clock();
+    let onScreen = true;
+
+    function tick() {
+      if (!onScreen || document.hidden || reduceMotion) return;
+      uniforms.u_time.value = clock.getElapsedTime();
+      renderer.render(scene, camera);
+      requestAnimationFrame(tick);
+    }
+
+    // don't burn GPU when the smoke zone is scrolled away or the tab is hidden
+    new IntersectionObserver(([entry]) => {
+      onScreen = entry.isIntersecting;
+      if (onScreen) tick();
+    }).observe(zone);
+    document.addEventListener('visibilitychange', () => { if (!document.hidden) tick(); });
+
+    tick();
+    console.log('[hero-noise] three.js r' + THREE.REVISION + ' running');
+  }
+</script>
 
 <!-- GSAP -->
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
@@ -2090,12 +2430,123 @@
   document.addEventListener('DOMContentLoaded', () => {
     gsap.registerPlugin(ScrollTrigger);
 
+    // ── Scroll-linked: hero project cards slide into the Selected Work grid ──
+    // Solid the whole way — the flying card is always fully opaque, and when it
+    // reaches its slot we do an instant visibility swap to the (identical, fully
+    // opaque) real grid card. No opacity crossfade, so no see-through / ghosting.
+    (function () {
+      const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const wide = window.matchMedia('(min-width: 901px)').matches;
+      const stack = document.querySelector('.hero-stack');
+      const workGrid = document.querySelector('.work-grid');
+      if (reduce || !wide || !stack || !workGrid) return;
+
+      const heroCards = Array.from(stack.querySelectorAll('.stack-card'));
+      const workCards = Array.from(workGrid.querySelectorAll('.work-card'));
+      workCards.forEach(w => w.classList.remove('fade-up'));   // this section runs its own reveal
+      const rots = [-3, 6, -10, 8, -15];
+
+      const layer = document.createElement('div');
+      layer.id = 'fly-layer';
+      document.body.appendChild(layer);
+
+      const items = heroCards.map((card, i) => {
+        const href = card.getAttribute('href');
+        const dest = workCards.find(w => w.getAttribute('href') === href) || null;
+        const clone = card.cloneNode(true);
+        clone.classList.add('fly-card');
+        clone.classList.remove('sc-1', 'sc-2', 'sc-3', 'sc-4', 'sc-5');
+        clone.style.zIndex = String(heroCards.length - i);
+        layer.appendChild(clone);
+        return { anchor: card, dest: dest, el: clone, rot: rots[i], label: clone.querySelector('.stack-label') };
+      });
+      const flyDests = items.map(it => it.dest).filter(Boolean);
+      const soloCards = workCards.filter(w => flyDests.indexOf(w) === -1);   // no hero counterpart
+
+      document.documentElement.classList.add('cards-fly');
+
+      const clamp = (v) => v < 0 ? 0 : v > 1 ? 1 : v;
+      const lerp = (a, b, t) => a + (b - a) * t;
+      const easeFn = (t) => t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+
+      const MOTION = 0.62;   // fly happens over the first 62% of the scroll range
+
+      function render(p) {
+        const q = clamp(p / MOTION);
+        // lock exactly onto the slot for the last stretch, then hard-swap
+        const e = q >= 0.88 ? 1 : easeFn(q);
+        const landed = q >= 0.94;
+        items.forEach(it => {
+          const s = it.anchor.getBoundingClientRect();
+          const d = (it.dest || it.anchor).getBoundingClientRect();
+          const st = it.el.style;
+          st.width = lerp(s.width, d.width, e) + 'px';
+          st.height = lerp(s.height, d.height, e) + 'px';
+          st.borderRadius = lerp(20, 40, e) + 'px';
+          st.transform = 'translate(' + lerp(s.left, d.left, e) + 'px,' + lerp(s.top, d.top, e) + 'px) rotate(' + lerp(it.rot, 0, e) + 'deg)';
+          st.visibility = landed ? 'hidden' : 'visible';
+          if (it.label) it.label.style.visibility = q > 0.4 ? 'hidden' : 'visible';
+        });
+        // fly-matched slots: instant swap once the flyer is locked on top
+        flyDests.forEach(w => { w.style.visibility = landed ? 'visible' : 'hidden'; });
+        // slots with no flyer: slide up solid into place (no fade — stays opaque)
+        const t = easeFn(clamp((q - 0.72) / 0.22));
+        soloCards.forEach(w => {
+          w.style.visibility = t > 0 ? 'visible' : 'hidden';
+          w.style.transform = 'translateY(' + lerp(54, 0, t) + 'px)';
+        });
+      }
+
+      const flyDistance = () => Math.round((workGrid.getBoundingClientRect().top + window.scrollY) + 320);
+      ScrollTrigger.create({
+        trigger: '.hero-wrap',
+        start: 'top top',
+        end: () => '+=' + flyDistance(),
+        scrub: 0.25,
+        onUpdate: self => render(self.progress),
+        onRefresh: self => render(self.progress)
+      });
+
+      render(0);
+      window.addEventListener('load', () => ScrollTrigger.refresh());
+    })();
+
     // Hero animation
-    console.log('GSAP timeline starting');
     gsap.timeline()
       .from('#hero-title', { y: 60, opacity: 0, duration: 1,   ease: 'power3.out' })
       .from('#hero-sub',   { y: 60, opacity: 0, duration: 1,   ease: 'power3.out' }, 0.3)
-      .from('#hero-btn',   { scale: 0, opacity: 0, duration: 0.6, ease: 'back.out(1.5)' }, 0.5);
+      .from('#hero-btn',   { scale: 0, opacity: 0, duration: 0.6, ease: 'back.out(1.5)' }, 0.5)
+      .from('.hero-skills', { y: 30, opacity: 0, duration: 0.7, ease: 'power3.out' }, 0.6)
+      .from('.hero-stack .stack-card', { y: 50, opacity: 0, duration: 0.8, ease: 'power3.out', stagger: 0.1 }, 0.35);
+
+    // ── Light -> dark transition: the Services section arrives on cream (dark
+    //    text, all content visible), then as you scroll it darkens straight from
+    //    the cream bg to the dark bg — same two colours, no third colour.
+    //    Scrubbed 1:1 with scroll; content is never hidden.
+    (function () {
+      const svc = document.querySelector('.services-section');
+      const wide = window.matchMedia('(min-width: 901px)').matches;
+      const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (!svc || !wide || reduce) return;   // mobile / reduced-motion: plain dark section
+
+      svc.classList.add('svc-reveal');       // start light
+      const em = svc.querySelector('h2 em');
+
+      gsap.timeline({
+        defaults: { ease: 'none' },
+        scrollTrigger: {
+          trigger: svc,
+          start: 'top 38%',   // section has fully arrived (still cream) before it starts
+          end: 'top -20%',    // darkens as you scroll on through it
+          scrub: true,
+        },
+      })
+        // cream #F3F2EE -> dark #0e0e0e, direct
+        .to(svc, { backgroundColor: '#0e0e0e', duration: 1 }, 0)
+        // text snaps dark -> light near the midpoint so it never sits at low contrast
+        .to(svc, { color: '#F3F2EE', duration: 0.04 }, 0.5)
+        .to(em,  { color: '#EAF58D', duration: 0.04 }, 0.5);
+    })();
 
     // How it works — stagger ALL direct children of the inner wrapper
     const pricingEls = gsap.utils.toArray('#pricing > div > *');
@@ -2106,19 +2557,6 @@
         trigger: '#pricing',
         start: 'top 80%'
       }
-    });
-
-    // Selected Work — clip-path reveal, each image triggers independently
-    gsap.utils.toArray('.work-card img').forEach(img => {
-      gsap.from(img, {
-        clipPath: 'inset(100% 0 0 0)',
-        duration: 1.2,
-        ease: 'power4.out',
-        scrollTrigger: {
-          trigger: img,
-          start: 'top 85%'
-        }
-      });
     });
 
   });
