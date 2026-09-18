@@ -65,4 +65,67 @@ collections:
         widget: "string"
         hint: 'e.g. "7 min read"'
 
+      - label: "Translation Key"
+        name: "translationKey"
+        widget: "string"
+        required: false
+        hint: 'Optional. Give this post and its Spanish translation the exact same Translation Key (e.g. "free-website-checklist") to link them — the language toggle on the post will jump straight to the other version. Leave empty if this post has no translation.'
+
       - { label: "Body", name: "body", widget: "markdown" }
+
+  - name: "posts-es"
+    label: "Blog Posts (Español)"
+    folder: "src/posts-es"
+    create: true
+    slug: "{{slug}}"
+    extension: "md"
+    format: "frontmatter"
+    fields:
+      # Always post.html — hidden so editors never have to think about it.
+      - { label: "Layout", name: "layout", widget: "hidden", default: "post.html" }
+
+      - { label: "Título", name: "title", widget: "string" }
+
+      # Free text, not a real date field — Eleventy reserves `date` in front
+      # matter for its own publish-date logic, so the layout/this collection
+      # both use `postDate` instead. Keep writing it like "septiembre 2026",
+      # same style used by the English posts.
+      - { label: "Fecha", name: "postDate", widget: "string", hint: 'Texto libre, ej. "septiembre 2026".' }
+
+      - label: "Categoría / Etiqueta"
+        name: "tag"
+        widget: "string"
+        hint: 'Categorías existentes en el sitio: Proceso, Negocios, Identidad de Marca, Estrategia, Diseño.'
+
+      - label: "Descripción Corta"
+        name: "description"
+        widget: "text"
+        hint: "Se usa como meta descripción de la página y como texto en las tarjetas del blog."
+
+      - label: "Extracto"
+        name: "excerpt"
+        widget: "text"
+        required: false
+        hint: "Línea en cursiva opcional debajo del título en la página del post."
+
+      - { label: "Imagen Destacada", name: "heroImage", widget: "image" }
+      - { label: "Texto Alternativo de la Imagen Destacada", name: "heroImageAlt", widget: "string", required: false }
+
+      - label: "Miniatura para el Home (opcional)"
+        name: "homeThumbnail"
+        widget: "image"
+        required: false
+        hint: "Opcional — una imagen recortada aparte para la tarjeta de este post donde sea que aparezca listado (home y lista del blog). Si se deja vacío, se reutiliza la Imagen Destacada. La Imagen Destacada en sí no se ve afectada — sigue siendo la imagen principal del post y el og:image."
+
+      - label: "Tiempo de Lectura"
+        name: "readTime"
+        widget: "string"
+        hint: 'ej. "7 min de lectura"'
+
+      - label: "Translation Key"
+        name: "translationKey"
+        widget: "string"
+        required: false
+        hint: 'Opcional. Dale a este post y a su versión en inglés exactamente el mismo Translation Key (ej. "free-website-checklist") para conectarlos — el botón de idioma en el post llevará directo a la otra versión. Déjalo vacío si este post no tiene traducción.'
+
+      - { label: "Cuerpo", name: "body", widget: "markdown" }

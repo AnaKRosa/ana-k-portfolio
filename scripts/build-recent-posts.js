@@ -1,16 +1,21 @@
 #!/usr/bin/env node
 /**
  * Regenerates the auto-owned post-card sections across the site, combining:
- *   - every markdown post in src/posts/ (the CMS/Eleventy pipeline —
- *     picked up automatically, no manual edits needed as new posts
- *     are published through Decap CMS)
- *   - the older hand-written posts listed in legacy-posts.json
+ *   - every markdown post in src/posts/ (English) and src/posts-es/
+ *     (Spanish) — the CMS/Eleventy pipeline, picked up automatically, no
+ *     manual edits needed as new posts are published through Decap CMS
+ *   - the older hand-written English posts listed in legacy-posts.json
+ *     (there is no Spanish equivalent yet — the Spanish grids are driven
+ *     entirely by src/posts-es/)
  *
- * Two sections are regenerated:
- *   1. index.html — the "From the blog" preview: the 3 most recent posts.
- *   2. blog.html  — the full posts-grid: every post EXCEPT whichever one
- *      is marked "featured" (still hand-authored as blog.html's featured
- *      card), most recent first.
+ * Two pages, each with a language-aware pair of blocks (shown/hidden by
+ * i18n.js's applyLangGrids() based on the site's language toggle):
+ *   1. index.html — the "From the blog" preview: the 3 most recent posts
+ *      per language.
+ *   2. blog.html  — the full posts-grid: every post per language EXCEPT
+ *      whichever one is marked "featured" (still hand-authored as
+ *      blog.html's featured card, English-only, untouched by this
+ *      script).
  *
  * Image priority for every card: a post's "Home Thumbnail" (homeThumbnail
  * frontmatter / legacy-posts.json "image") if set, otherwise its Featured
@@ -18,19 +23,18 @@
  * here — it stays the post's own hero/og:image.
  *
  * Runs as part of the Netlify build (see netlify.toml), after Eleventy,
- * so both sections always reflect whatever is newest on every deploy.
+ * so every section always reflects whatever is newest on every deploy.
  *
- * The blocks between the RECENT-POSTS:START/END (index.html) and
- * POSTS-GRID:START/END (blog.html) comments are fully owned by this
- * script — don't hand-edit them, edits will be overwritten on the next
- * build.
+ * The blocks between the RECENT-POSTS:START/END, RECENT-POSTS-ES:START/END
+ * (index.html) and POSTS-GRID:START/END, POSTS-GRID-ES:START/END
+ * (blog.html) comments are fully owned by this script — don't hand-edit
+ * them, edits will be overwritten on the next build.
  */
 const fs = require("fs");
 const path = require("path");
 const matter = require("gray-matter");
 
 const ROOT = path.join(__dirname, "..");
-const POSTS_DIR = path.join(ROOT, "src/posts");
 const LEGACY_PATH = path.join(ROOT, "legacy-posts.json");
 
 function escapeHtml(str) {
@@ -58,14 +62,14 @@ function loadLegacyPosts() {
   }));
 }
 
-function loadMarkdownPosts() {
-  if (!fs.existsSync(POSTS_DIR)) return [];
+function loadMarkdownPosts(dir, urlPrefix) {
+  if (!fs.existsSync(dir)) return [];
   return fs
-    .readdirSync(POSTS_DIR)
+    .readdirSync(dir)
     .filter((f) => f.endsWith(".md"))
     .map((f) => {
       const slug = f.replace(/\.md$/, "");
-      const { data } = matter(fs.readFileSync(path.join(POSTS_DIR, f), "utf8"));
+      const { data } = matter(fs.readFileSync(path.join(dir, f), "utf8"));
       // Home Thumbnail wins when set; otherwise reuse the Featured Image.
       // The Featured Image (heroImage) itself is left untouched elsewhere
       // (post.html layout) as the post's own hero/og:image.
@@ -73,7 +77,7 @@ function loadMarkdownPosts() {
       const dateSort = new Date(data.postDate);
       return {
         title: data.title,
-        url: `posts/${slug}/`,
+        url: `${urlPrefix}${slug}/`,
         tag: data.tag,
         dateDisplay: data.postDate,
         dateSort: isNaN(dateSort) ? new Date() : dateSort,
@@ -86,8 +90,17 @@ function loadMarkdownPosts() {
     });
 }
 
-function loadAllPosts() {
-  return [...loadMarkdownPosts(), ...loadLegacyPosts()].filter((p) => p.title && p.url);
+function loadEnPosts() {
+  return [
+    ...loadMarkdownPosts(path.join(ROOT, "src/posts"), "posts/"),
+    ...loadLegacyPosts(),
+  ].filter((p) => p.title && p.url);
+}
+
+function loadEsPosts() {
+  return loadMarkdownPosts(path.join(ROOT, "src/posts-es"), "es/posts/").filter(
+    (p) => p.title && p.url
+  );
 }
 
 function replaceBlock(filePath, startMarker, endMarker, html, label) {
@@ -97,12 +110,12 @@ function replaceBlock(filePath, startMarker, endMarker, html, label) {
   if (startIdx === -1 || endIdx === -1) {
     throw new Error(`[build-recent-posts] ${label} markers not found in ${filePath} — aborting so nothing is silently skipped.`);
   }
-  const block = `${startMarker}\n${html}\n    ${endMarker}`;
+  const block = html ? `${startMarker}\n${html}\n    ${endMarker}` : `${startMarker}\n    ${endMarker}`;
   const updated = full.slice(0, startIdx) + block + full.slice(endIdx + endMarker.length);
   fs.writeFileSync(filePath, updated);
 }
 
-// --- index.html: top 3 most recent posts, as .blog-card entries ---
+// --- index.html: top 3 most recent posts per language, as .blog-card entries ---
 
 function buildBlogCardHtml(post, index) {
   const delayAttr = index === 0 ? "" : ` style="transition-delay:${(index * 0.1).toFixed(1)}s"`;
@@ -114,22 +127,30 @@ function buildBlogCardHtml(post, index) {
     </a>`;
 }
 
-function buildIndexHome(allPosts) {
-  const INDEX_PATH = path.join(ROOT, "index.html");
-  const START = "<!-- RECENT-POSTS:START — auto-generated by scripts/build-recent-posts.js on every build, do not hand-edit -->";
-  const END = "<!-- RECENT-POSTS:END -->";
+const ES_EMPTY_NOTE = `    <p style="grid-column:1/-1;font-size:0.85rem;opacity:0.45;">Próximamente — artículos en español.</p>`;
 
-  const posts = [...allPosts].sort((a, b) => b.dateSort - a.dateSort).slice(0, 3);
-  if (posts.length === 0) {
-    console.warn("[build-recent-posts] No posts found — leaving index.html blog section untouched.");
-    return;
+function buildIndexHome(enPosts, esPosts) {
+  const INDEX_PATH = path.join(ROOT, "index.html");
+  const START_EN = "<!-- RECENT-POSTS:START — auto-generated by scripts/build-recent-posts.js on every build, do not hand-edit -->";
+  const END_EN = "<!-- RECENT-POSTS:END -->";
+  const START_ES = "<!-- RECENT-POSTS-ES:START — auto-generated by scripts/build-recent-posts.js on every build, do not hand-edit -->";
+  const END_ES = "<!-- RECENT-POSTS-ES:END -->";
+
+  const topEn = [...enPosts].sort((a, b) => b.dateSort - a.dateSort).slice(0, 3);
+  if (topEn.length === 0) {
+    console.warn("[build-recent-posts] No English posts found — leaving index.html EN blog section untouched.");
+  } else {
+    replaceBlock(INDEX_PATH, START_EN, END_EN, topEn.map(buildBlogCardHtml).join("\n"), "RECENT-POSTS");
+    console.log(`[build-recent-posts] index.html (EN) updated with: ${topEn.map((p) => p.title).join(" | ")}`);
   }
-  const html = posts.map(buildBlogCardHtml).join("\n");
-  replaceBlock(INDEX_PATH, START, END, html, "RECENT-POSTS");
-  console.log(`[build-recent-posts] index.html updated with: ${posts.map((p) => p.title).join(" | ")}`);
+
+  const topEs = [...esPosts].sort((a, b) => b.dateSort - a.dateSort).slice(0, 3);
+  const esHtml = topEs.length > 0 ? topEs.map(buildBlogCardHtml).join("\n") : ES_EMPTY_NOTE;
+  replaceBlock(INDEX_PATH, START_ES, END_ES, esHtml, "RECENT-POSTS-ES");
+  console.log(`[build-recent-posts] index.html (ES) updated with ${topEs.length} post(s).`);
 }
 
-// --- blog.html: full posts-grid, every post except the featured one ---
+// --- blog.html: full posts-grid per language, every post except the featured one ---
 
 function buildPostCardHtml(post, index) {
   const delayAttr = index === 0 ? "" : ` style="transition-delay:${(index * 0.08).toFixed(2)}s"`;
@@ -150,27 +171,32 @@ function buildPostCardHtml(post, index) {
     </a>`;
 }
 
-function buildBlogListing(allPosts) {
+function buildBlogListing(enPosts, esPosts) {
   const BLOG_PATH = path.join(ROOT, "blog.html");
-  const START = "<!-- POSTS-GRID:START — auto-generated by scripts/build-recent-posts.js on every build, do not hand-edit. Excludes whichever post is set as \"featured\" above. -->";
-  const END = "<!-- POSTS-GRID:END -->";
+  const START_EN = "<!-- POSTS-GRID:START — auto-generated by scripts/build-recent-posts.js on every build, do not hand-edit. Excludes whichever post is set as \"featured\" above. -->";
+  const END_EN = "<!-- POSTS-GRID:END -->";
+  const START_ES = "<!-- POSTS-GRID-ES:START — auto-generated by scripts/build-recent-posts.js on every build, do not hand-edit. -->";
+  const END_ES = "<!-- POSTS-GRID-ES:END -->";
 
-  const posts = [...allPosts]
-    .filter((p) => !p.featured)
-    .sort((a, b) => b.dateSort - a.dateSort);
-  if (posts.length === 0) {
-    console.warn("[build-recent-posts] No posts found — leaving blog.html posts-grid untouched.");
-    return;
+  const allEn = [...enPosts].filter((p) => !p.featured).sort((a, b) => b.dateSort - a.dateSort);
+  if (allEn.length === 0) {
+    console.warn("[build-recent-posts] No English posts found — leaving blog.html EN posts-grid untouched.");
+  } else {
+    replaceBlock(BLOG_PATH, START_EN, END_EN, allEn.map(buildPostCardHtml).join("\n"), "POSTS-GRID");
+    console.log(`[build-recent-posts] blog.html (EN) updated with ${allEn.length} post(s).`);
   }
-  const html = posts.map(buildPostCardHtml).join("\n");
-  replaceBlock(BLOG_PATH, START, END, html, "POSTS-GRID");
-  console.log(`[build-recent-posts] blog.html updated with ${posts.length} post(s).`);
+
+  const allEs = [...esPosts].filter((p) => !p.featured).sort((a, b) => b.dateSort - a.dateSort);
+  const esHtml = allEs.length > 0 ? allEs.map(buildPostCardHtml).join("\n") : ES_EMPTY_NOTE;
+  replaceBlock(BLOG_PATH, START_ES, END_ES, esHtml, "POSTS-GRID-ES");
+  console.log(`[build-recent-posts] blog.html (ES) updated with ${allEs.length} post(s).`);
 }
 
 function main() {
-  const allPosts = loadAllPosts();
-  buildIndexHome(allPosts);
-  buildBlogListing(allPosts);
+  const enPosts = loadEnPosts();
+  const esPosts = loadEsPosts();
+  buildIndexHome(enPosts, esPosts);
+  buildBlogListing(enPosts, esPosts);
 }
 
 main();

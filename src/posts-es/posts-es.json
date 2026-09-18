@@ -1,0 +1,4 @@
+{
+  "permalink": "es/posts/{{ page.fileSlug }}/index.html",
+  "lang": "es"
+}

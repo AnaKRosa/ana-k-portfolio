@@ -7,6 +7,21 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-S6RTR9MLM6"></script>
 <script>
@@ -20,6 +35,8 @@
 <title>What Can You Do Right Now, for Free, to Improve Your Website? | Ana K. Rosa</title>
 <meta name="description" content="A free, practical self-audit for your website — 13 things you can check and fix today to make it actually convert, no redesign or budget required.">
 <link rel="canonical" href="https://anakrosadesign.com/posts/what-can-you-do-right-now-for-free-to-improve-your-website/" />
+
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap" media="print" onload="this.media='all'">
@@ -445,13 +462,14 @@
       <img class="nav-logo" src="/Favicon (1).png" alt="Ana K." loading="lazy">
     </a>
 
-    <a href="/contact.html" class="nav-collapsed-contact">Contact</a>
+    <a href="/contact.html" class="nav-collapsed-contact" data-i18n="nav.contact">Contact</a>
     <div class="nav-links">
-      <a href="/index.html#work">Work</a>
-      <a href="/index.html#services">Services</a>
-      <a href="/index.html#pricing">Pricing</a>
-      <a href="/blog.html" class="active">Blog</a>
-      <a href="/contact.html" class="nav-contact">Contact</a>
+      <a href="/index.html#work" data-i18n="nav.work">Work</a>
+      <a href="/index.html#services" data-i18n="nav.services">Services</a>
+      <a href="/index.html#pricing" data-i18n="nav.pricing">Pricing</a>
+      <a href="/blog.html" class="active" data-i18n="nav.blog">Blog</a>
+      <button id="lang-toggle" class="nav-lang">ES</button>
+      <a href="/contact.html" class="nav-contact" data-i18n="nav.contact">Contact</a>
     </div>
     <button class="nav-toggle" id="navToggle" aria-label="Open menu">
       <span></span><span></span><span></span>
@@ -460,11 +478,12 @@
 </nav>
 
 <div class="mobile-menu" id="mobile-menu">
-  <a href="/index.html#work" class="mob-link">Work</a>
-  <a href="/index.html#services" class="mob-link">Services</a>
-  <a href="/index.html#pricing" class="mob-link">Pricing</a>
-  <a href="/blog.html" class="mob-link">Blog</a>
-  <a href="/contact.html" class="mob-link">Contact</a>
+  <a href="/index.html#work" class="mob-link" data-i18n="nav.work">Work</a>
+  <a href="/index.html#services" class="mob-link" data-i18n="nav.services">Services</a>
+  <a href="/index.html#pricing" class="mob-link" data-i18n="nav.pricing">Pricing</a>
+  <a href="/blog.html" class="mob-link" data-i18n="nav.blog">Blog</a>
+  <a href="/contact.html" class="mob-link" data-i18n="nav.contact">Contact</a>
+  <button class="mob-link mob-lang" id="lang-toggle-m">Español</button>
 </div>
 
 <div class="wrap">
@@ -702,32 +721,46 @@
 <footer class="footer-editorial">
   <div class="footer-top-bar">
     <span class="footer-logo"><img src="/Ana K. Logo.svg" alt="Ana K." style="height:24px;display:block;" loading="lazy"></span>
-    <a href="/contact.html" class="footer-cta-link">Start working together <span>→</span></a>
+    <a href="/contact.html" class="footer-cta-link" data-i18n="footer.cta">Start working together <span>→</span></a>
   </div>
   <div class="footer-big-phrase">
-    <h2>Good design changes<br><em>everything.</em></h2>
+    <h2 data-i18n="footer.tagline">Good design changes<br><em>everything.</em></h2>
   </div>
   <div class="footer-divider"></div>
   <div class="footer-bottom-row">
     <div class="footer-nav-group">
-      <span class="footer-nav-label">Pages</span>
-      <a href="/index.html#about">About</a>
-      <a href="/index.html#work">Work</a>
-      <a href="/blog.html">Blog</a>
-      <a href="/contact.html">Contact</a>
+      <span class="footer-nav-label" data-i18n="footer.pages">Pages</span>
+      <a href="/index.html#about" data-i18n="footer.about">About</a>
+      <a href="/index.html#work" data-i18n="footer.work">Work</a>
+      <a href="/blog.html" data-i18n="footer.blog">Blog</a>
+      <a href="/contact.html" data-i18n="nav.contact">Contact</a>
     </div>
     <div class="footer-nav-group">
-      <span class="footer-nav-label">Connect</span>
+      <span class="footer-nav-label" data-i18n="footer.connect">Connect</span>
       <a href="#">Instagram</a>
       <a href="https://www.linkedin.com/in/ana-karina-rosa-rosario-3b407199/?locale=en_US" target="_blank" onclick="gtag('event', 'social_link_click', {'platform': 'LinkedIn'})">LinkedIn</a>
       <a href="https://www.behance.net/anarosa3" target="_blank">Behance</a>
       <a href="mailto:anakrosawork@gmail.com" onclick="gtag('event', 'contact_email_click')">Email</a>
     </div>
     <div class="footer-copy">
-      <span>© 2026 Ana K.</span>
-      <span>Designed &amp; built by Ana K.</span>
+      <span data-i18n="footer.copy">© 2026 Ana K.</span>
+      <span data-i18n="footer.built">Designed &amp; built by Ana K.</span>
     </div>
   </div>
 </footer>
+<script src="/translations.js"></script>
+<script src="/i18n.js"></script>
+<script>
+  // Bilingual post navigation: the lang toggle jumps straight to this
+  // post's translation when one exists (Translation Key match), or to
+  // the blog listing (in the target language) when it doesn't.
+  var translatedUrl = "";
+  var fallbackUrl = '/blog.html';
+  document.querySelectorAll('#lang-toggle, #lang-toggle-m').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      window.location.href = translatedUrl || fallbackUrl;
+    });
+  });
+</script>
 </body>
 </html>
