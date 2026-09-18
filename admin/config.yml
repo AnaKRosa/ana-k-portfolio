@@ -54,11 +54,11 @@ collections:
       - { label: "Featured Image", name: "heroImage", widget: "image" }
       - { label: "Featured Image Alt Text", name: "heroImageAlt", widget: "string", required: false }
 
-      - label: "Homepage Thumbnail"
+      - label: "Home Thumbnail (optional)"
         name: "homeThumbnail"
         widget: "image"
         required: false
-        hint: "Optional — a separate cropped image for this post's card on the homepage's 'From the blog' section. If left empty, the Featured Image above is reused. The homepage always shows the 3 most recent posts automatically."
+        hint: "Optional — a separate cropped image used for this post's card wherever it's listed (homepage and the blog list). If left empty, the Featured Image above is reused instead. The Featured Image itself is unaffected — it still shows as the post's hero image and og:image."
 
       - label: "Read Time"
         name: "readTime"

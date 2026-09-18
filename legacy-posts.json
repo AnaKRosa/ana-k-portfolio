@@ -7,7 +7,8 @@
     "dateSort": "2026-05-01",
     "readTime": "8 min read",
     "image": "Portafolio images/Blog Images/blog 5image-home.jpg",
-    "imageAlt": "Why Every DR Rental Property Needs Its Own Website"
+    "imageAlt": "Why Every DR Rental Property Needs Its Own Website",
+    "excerpt": "The DR real estate market just hit record numbers. But most property owners are still leaving thousands on the table by relying only on Airbnb."
   },
   {
     "title": "How Much Does a Framer Website Actually Cost in 2026?",
@@ -17,7 +18,9 @@
     "dateSort": "2026-04-01",
     "readTime": "6 min read",
     "image": "posts/blog-how-much-framer-cost.home.webp",
-    "imageAlt": "How Much Does a Framer Website Cost"
+    "imageAlt": "How Much Does a Framer Website Cost",
+    "excerpt": "A freelance designer's honest breakdown — platform fees, design costs, and what nobody tells you before you start.",
+    "featured": true
   },
   {
     "title": "Why most luxury brands fail at digital — and what great ones do differently",
@@ -27,7 +30,8 @@
     "dateSort": "2026-03-20",
     "readTime": "6 min read",
     "image": "Portafolio images/Blog Images/blog image-home.webp",
-    "imageAlt": "Why most luxury brands fail at digital"
+    "imageAlt": "Why most luxury brands fail at digital",
+    "excerpt": "Premium positioning isn't about being expensive. It's about being precise. Here's what separates brands that feel truly elevated from those that just look expensive."
   },
   {
     "title": "The Truth About AI and Design: Can It Really Replace a Designer?",
@@ -37,7 +41,8 @@
     "dateSort": "2026-03-15",
     "readTime": "5 min read",
     "image": "Portafolio images/Blog Images/blog2 image-home.webp",
-    "imageAlt": "The Truth About AI and Design"
+    "imageAlt": "The Truth About AI and Design",
+    "excerpt": "AI tools are everywhere. But before you cancel your designer, here's what they actually can and can't do — and the real math on cost."
   },
   {
     "title": "How to Brief a Designer (Even If You've Never Done It)",
@@ -47,6 +52,7 @@
     "dateSort": "2026-03-10",
     "readTime": "5 min read",
     "image": "Portafolio images/Blog Images/blog3 image-home.webp",
-    "imageAlt": "How to Brief a Designer"
+    "imageAlt": "How to Brief a Designer",
+    "excerpt": "You don't need design experience to give a great brief. You just need to know what to say — and what to skip."
   }
 ]
