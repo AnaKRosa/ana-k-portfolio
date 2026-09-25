@@ -1,0 +1,722 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-S6RTR9MLM6"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-S6RTR9MLM6');
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HireSouth Website Redesign | Case Study | Ana K. Rosa</title>
+<meta name="description" content="Website redesign and Webflow build for HireSouth, a nearshore staffing agency — grown from 7 to 15 pages with a salary calculator, filtered blog, and talent profiles.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --page-bg:#F4F1EA;
+    --box-bg:#FAF6F3;
+    --black:#000000;
+    --cream:#f4f1eb;
+    --lavender:#C3C3FA;
+    --lime:#EAF58D;
+    --text:#3A3835;
+    --muted:#9C9891;
+    --footer-bg:#0B0B0A;
+    --serif:'Instrument Serif', Georgia, serif;
+    --sans:'DM Sans', sans-serif;
+  }
+  *{ box-sizing:border-box; }
+  body{
+    margin:0;
+    background:var(--page-bg);
+    color:var(--text);
+    font-family:'DM Sans', sans-serif;
+    font-size:16px;
+    line-height:1.65;
+  }
+  h1,h2,h3{
+    font-family:'Instrument Serif', serif;
+    font-weight:400;
+    margin:0;
+    color:var(--black);
+  }
+  em{ font-style:italic; color:var(--lavender); }
+  a{ color:inherit; text-decoration:none; }
+
+  /* NAV — floating glass pill (matches the rest of the site) */
+  nav {
+    position: fixed; top: 16px; left: 0; right: 0; z-index: 100;
+    display: flex; justify-content: center;
+    padding: 0 16px;
+    pointer-events: none;
+  }
+  .nav-pill {
+    pointer-events: auto;
+    display: flex; align-items: center; gap: 6px;
+    padding: 6px 8px;
+    background: rgba(243, 242, 238, 0.72);
+    -webkit-backdrop-filter: blur(18px) saturate(1.6);
+    backdrop-filter: blur(18px) saturate(1.6);
+    border: 1px solid rgba(255, 255, 255, 0.55);
+    border-radius: 100px;
+    box-shadow: 0 10px 34px rgba(17, 17, 17, 0.10), inset 0 1px 0 rgba(255, 255, 255, 0.45);
+  }
+  .nav-id { display: flex; align-items: center; flex-shrink: 0; text-decoration: none; padding: 2px; border-radius: 50%; }
+  .nav-logo { height: 30px; width: 30px; border-radius: 50%; object-fit: cover; display: block; }
+  .nav-links {
+    display: flex; align-items: center; gap: 2px;
+    max-width: 0; overflow: hidden; opacity: 0;
+    transform: translateX(10px);
+    transition: max-width 0.65s cubic-bezier(0.62, 0.05, 0.3, 1),
+                transform 0.65s cubic-bezier(0.62, 0.05, 0.3, 1),
+                opacity 0.5s ease;
+  }
+  .nav-links a, .nav-links button {
+    font-family: var(--sans); font-size: 0.82rem; font-weight: 500;
+    color: var(--black); text-decoration: none; white-space: nowrap;
+    padding: 8px 13px; border-radius: 100px; opacity: 0.72;
+    background: none; border: none; cursor: pointer; letter-spacing: 0.01em;
+    transition: opacity 0.2s ease, background 0.2s ease;
+  }
+  .nav-links a:hover, .nav-links button:hover { opacity: 1; background: rgba(17, 17, 17, 0.06); }
+  .nav-links a.active { opacity: 1; }
+  .nav-links .nav-lang { font-size: 0.72rem; font-weight: 700; opacity: 0.5; letter-spacing: 0.06em; }
+  .nav-links .nav-contact {
+    background: var(--black); color: var(--cream); opacity: 1;
+    font-weight: 600; padding: 9px 18px; margin-left: 4px;
+  }
+  .nav-links .nav-contact:hover { background: #000; opacity: 1; }
+  .nav-toggle {
+    display: flex; align-items: center; justify-content: center; gap: 3px;
+    width: 34px; height: 34px; flex-shrink: 0; overflow: hidden;
+    background: none; border: none; cursor: pointer; padding: 0; border-radius: 50%;
+    transition: width 0.6s cubic-bezier(0.62, 0.05, 0.3, 1),
+                margin 0.6s cubic-bezier(0.62, 0.05, 0.3, 1),
+                opacity 0.4s ease, background 0.2s ease;
+  }
+  .nav-toggle:hover { background: rgba(17, 17, 17, 0.06); }
+  .nav-toggle span {
+    display: block; width: 3.5px; height: 3.5px; border-radius: 50%;
+    background: var(--black); opacity: 0.5;
+    transition: transform 0.3s ease, opacity 0.3s ease, width 0.3s ease, height 0.3s ease, border-radius 0.3s ease;
+  }
+  @keyframes navDotPulse {
+    0%, 100% { transform: scale(1);    opacity: 0.4; }
+    50%      { transform: scale(1.45); opacity: 0.8; }
+  }
+  .nav-collapsed-contact { display: none; }
+  @media (min-width: 769px) {
+    .nav-toggle span { animation: navDotPulse 1.9s ease-in-out infinite; }
+    .nav-toggle span:nth-child(2) { animation-delay: 0.22s; }
+    .nav-toggle span:nth-child(3) { animation-delay: 0.44s; }
+    nav.at-top .nav-toggle span,
+    .nav-pill:hover .nav-toggle span { animation-play-state: paused; }
+    .nav-collapsed-contact {
+      display: inline-flex; align-items: center; justify-content: center;
+      font-family: var(--sans); font-size: 0.82rem; font-weight: 600;
+      color: var(--cream); background: var(--black);
+      padding: 9px 18px; border-radius: 100px; text-decoration: none;
+      white-space: nowrap; flex-shrink: 0; overflow: hidden;
+      max-width: 160px; opacity: 1; margin-left: 6px;
+      transition: max-width 0.5s cubic-bezier(0.62, 0.05, 0.3, 1),
+                  opacity 0.3s ease, padding 0.5s ease, margin 0.5s ease;
+    }
+    nav.at-top .nav-links,
+    .nav-pill:hover .nav-links { max-width: 430px; opacity: 1; transform: translateX(0); }
+    nav.at-top .nav-collapsed-contact,
+    .nav-pill:hover .nav-collapsed-contact { max-width: 0; opacity: 0; padding: 0; margin: 0; }
+    nav.at-top .nav-toggle,
+    .nav-pill:hover .nav-toggle { width: 0; opacity: 0; margin-left: -6px; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .nav-toggle span { animation: none !important; }
+  }
+
+  /* MOBILE MENU OVERLAY */
+  .mobile-menu {
+    display: none; position: fixed; inset: 0; z-index: 99;
+    background: rgba(243, 242, 238, 0.94);
+    -webkit-backdrop-filter: blur(22px); backdrop-filter: blur(22px);
+    flex-direction: column; align-items: center; justify-content: center; gap: 6px;
+  }
+  .mobile-menu.open { display: flex; }
+  .mob-link {
+    font-family: var(--serif); font-size: 2.6rem; color: var(--black);
+    text-decoration: none; font-weight: 400; line-height: 1.35;
+    opacity: 0; transform: translateY(16px);
+    transition: opacity 0.35s ease, transform 0.35s ease; letter-spacing: -0.01em;
+    background: none; border: none; cursor: pointer;
+  }
+  .mobile-menu.open .mob-link { opacity: 1; transform: translateY(0); }
+  .mobile-menu.open .mob-link:nth-child(1) { transition-delay: 0.05s; }
+  .mobile-menu.open .mob-link:nth-child(2) { transition-delay: 0.10s; }
+  .mobile-menu.open .mob-link:nth-child(3) { transition-delay: 0.15s; }
+  .mobile-menu.open .mob-link:nth-child(4) { transition-delay: 0.20s; }
+  .mobile-menu.open .mob-link:nth-child(5) { transition-delay: 0.25s; }
+  .mob-link:hover { color: var(--lavender); }
+  @media (max-width: 768px) {
+    nav { top: 12px; padding: 0 12px; }
+    .nav-links { display: none; }
+    .nav-toggle { width: 40px; height: 40px; flex-direction: column; gap: 4px; }
+    .nav-toggle span { width: 17px; height: 2px; border-radius: 2px; opacity: 0.9; }
+    .nav-toggle.open span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+    .nav-toggle.open span:nth-child(2) { opacity: 0; }
+    .nav-toggle.open span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+  }
+
+  /* Hero */
+  header.hero{
+    text-align:center;
+    padding:140px 24px 40px;
+  }
+  header.hero h1{
+    font-size:42px;
+    line-height:1.2;
+    max-width:660px;
+    margin:0 auto;
+  }
+  header.hero p.sub{
+    max-width:540px;
+    margin:22px auto 0;
+    color:var(--muted);
+    font-size:14px;
+  }
+  .pills{
+    margin-top:26px;
+    display:flex;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:10px;
+  }
+  .pill{
+    border:1px solid rgba(0,0,0,0.15);
+    border-radius:999px;
+    padding:8px 18px;
+    font-size:13px;
+    color:var(--text);
+    display:inline-block;
+  }
+  .btn-primary { display: inline-flex; align-items: center; gap: 8px; background: #eaf58d; color: var(--black); font-family: var(--sans); font-size: 0.85rem; font-weight: 500; padding: 13px 28px; border-radius: 4px; text-decoration: none; border: none; cursor: pointer; transition: background 0.25s ease, box-shadow 0.3s ease; letter-spacing: 0.01em; margin-top:28px; }
+  .btn-primary:hover { background: #f2faaa; box-shadow: 0 0 0 7px rgba(234,245,141,0.35); }
+
+  .showcase{
+    max-width:1100px;
+    margin:0 auto 64px;
+    padding:0 24px;
+  }
+  .showcase-card{
+    background:#fff;
+    border-radius:14px;
+    overflow:hidden;
+    box-shadow:0 20px 50px rgba(0,0,0,0.06);
+  }
+  .showcase-card img{ width:100%; display:block; }
+  .carousel .showcase-card{ box-shadow:none; }
+
+  /* Image placeholder: replace with <img src="images/..."> */
+  .ph{
+    width:100%;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    background:#fff;
+    color:var(--muted);
+    font-size:13px;
+    text-align:center;
+    padding:24px;
+  }
+  .ph strong{ color:var(--text); font-weight:500; font-size:14px; }
+
+  .board-caption{
+    font-size:13px;
+    color:var(--muted);
+    margin-top:14px;
+    text-align:center;
+  }
+
+  section.card{
+    max-width:1152px; /* 1104px box + 24px gutters */
+    margin:0 auto 24px;
+    padding:0 24px;
+  }
+  .box{
+    background:var(--box-bg);
+    border-radius:16px;
+    padding:44px;
+  }
+  .box h2{
+    font-size:26px;
+    margin-bottom:18px;
+  }
+  .box p{
+    margin:0 0 12px;
+    color:var(--text);
+    font-size:15px;
+    max-width:640px;
+  }
+  .label{
+    text-transform:uppercase;
+    letter-spacing:.08em;
+    font-size:11px;
+    color:var(--muted);
+    margin:24px 0 12px;
+  }
+  ul.plain, ol.plain{
+    list-style:none;
+    margin:0; padding:0;
+  }
+  ul.plain li{
+    position:relative;
+    padding:5px 0 5px 16px;
+    font-size:15px;
+    color:var(--text);
+  }
+  ul.plain li::before{
+    content:"•";
+    position:absolute;
+    left:0;
+    color:var(--muted);
+  }
+  ol.plain{ counter-reset:step; }
+  ol.plain li{
+    position:relative;
+    padding:6px 0 6px 30px;
+    font-size:15px;
+    counter-increment:step;
+  }
+  ol.plain li::before{
+    content:counter(step);
+    position:absolute;
+    left:0;
+    top:6px;
+    font-family:'Instrument Serif', serif;
+    font-size:19px;
+    line-height:1.3;
+    color:var(--black);
+  }
+  ol.plain li strong{ color:var(--black); font-weight:500; }
+
+  .cols{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:40px;
+    margin-top:8px;
+  }
+
+  .cols-3{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:40px;
+  }
+  .cols-3 .label{ margin-top:4px; }
+
+  section.wide-title{
+    max-width:720px;
+    margin:80px auto 32px;
+    padding:0 24px;
+    text-align:center;
+  }
+  section.wide-title h2{ font-size:32px; }
+  section.wide-title p{
+    color:var(--muted);
+    font-size:14px;
+    max-width:520px;
+    margin:16px auto 0;
+  }
+  .eyebrow{
+    text-transform:uppercase;
+    letter-spacing:.08em;
+    font-size:11px;
+    color:var(--muted);
+    margin-bottom:12px;
+  }
+
+  .board{
+    max-width:1100px;
+    margin:0 auto 40px;
+    padding:0 24px;
+  }
+  .grid-2{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:20px;
+  }
+
+  section.outcome-wrap{
+    max-width:1152px;
+    margin:0 auto 120px;
+    padding:0 24px;
+  }
+
+  /* ===== Carousel ===== */
+  .carousel{ position:relative; }
+  .carousel .track{
+    display:flex;
+    gap:20px;
+    overflow-x:auto;
+    scroll-snap-type:x mandatory;
+    scroll-behavior:smooth;
+    scrollbar-width:none;
+    -webkit-overflow-scrolling:touch;
+    padding-bottom:40px;      /* room so the card shadow isn't cut */
+    margin-bottom:-40px;
+  }
+  .carousel .track::-webkit-scrollbar{ display:none; }
+  .carousel .slide{
+    flex:0 0 100%;
+    scroll-snap-align:start;
+  }
+  .carousel--half .slide{ flex:0 0 calc(50% - 10px); }
+  .carousel .slide img{ width:100%; display:block; }
+  .carousel .controls{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-top:18px;
+  }
+  .carousel .dots{ display:flex; gap:8px; }
+  .carousel .dot{
+    width:8px; height:8px;
+    border-radius:999px;
+    border:none; padding:0;
+    background:rgba(0,0,0,0.15);
+    cursor:pointer;
+    transition:width .3s ease, background .3s ease;
+  }
+  .carousel .dot.active{ width:24px; background:var(--black); }
+  .carousel .arrows{ display:flex; gap:10px; }
+  .carousel .arrow{
+    width:42px; height:42px;
+    border-radius:999px;
+    border:1px solid rgba(0,0,0,0.15);
+    background:transparent;
+    color:var(--black);
+    font-size:16px;
+    cursor:pointer;
+    transition:background .2s ease, opacity .2s ease;
+  }
+  .carousel .arrow:hover{ background:#fff; }
+  .carousel .arrow:disabled{ opacity:.3; cursor:default; background:transparent; }
+  .carousel .counter{ font-size:13px; color:var(--muted); margin-left:14px; }
+  .carousel .left{ display:flex; align-items:center; }
+
+  @media (max-width:640px){
+    .carousel--half .slide{ flex:0 0 100%; }
+    header.hero h1{ font-size:30px; }
+    section.wide-title h2{ font-size:26px; }
+    .box{ padding:28px 22px; }
+    .cols, .grid-2, .cols-3{ grid-template-columns:1fr; gap:20px; }
+  }
+
+  /* Stat row inside the results */
+  .stats{ display:grid; grid-template-columns:repeat(3,1fr); gap:20px; margin-top:28px; }
+  .stat{ background:#fff; border-radius:12px; padding:22px 24px; }
+  .stat b{ display:block; font-family:'Instrument Serif',serif; font-weight:400; font-size:36px; line-height:1.1; color:var(--black); }
+  .stat span{ font-size:13px; color:var(--muted); }
+  .swatches{ display:flex; gap:10px; flex-wrap:wrap; margin:6px 0 4px; }
+  .sw{ display:flex; align-items:center; gap:8px; font-size:13px; background:#fff; border-radius:999px; padding:5px 12px 5px 6px; }
+  .sw i{ width:18px; height:18px; border-radius:50%; display:block; border:1px solid rgba(0,0,0,.08); }
+  .showcase, .board{ max-width:1152px; }
+  @media (max-width:640px){ .stats{ grid-template-columns:1fr; } }
+  header.hero h1{ max-width:760px; }
+  .carousel--third .slide{ flex:0 0 calc((100% - 40px)/3); }
+  @media (max-width:640px){ .carousel--third .slide{ flex:0 0 75%; } }
+  .box .cols > div > .label:first-child{ margin-top:0; }
+
+  .next-project{
+    text-align:center;
+    padding:70px 24px 90px;
+  }
+  .next-project .label{ text-align:center; margin-bottom:14px; }
+  .next-project h3{ font-size:34px; margin-bottom:22px; }
+  .next-project .pill{ padding:10px 22px; }
+
+  /* FOOTER — matches the rest of the site */
+  .footer-editorial { background: var(--black); color: white; padding: 72px 48px 48px; }
+  .footer-top-bar { display: flex; justify-content: space-between; align-items: center; max-width: 1200px; margin: 0 auto 80px; }
+  .footer-logo { font-family: var(--serif); font-size: 1.65rem; letter-spacing: 0.06em; opacity: 0.5; }
+  .footer-cta-link { font-size: 0.85rem; font-weight: 500; color: var(--lime); text-decoration: none; letter-spacing: 0.02em; display: flex; align-items: center; gap: 8px; transition: gap 0.2s ease; }
+  .footer-cta-link:hover { gap: 14px; }
+  .footer-big-phrase { max-width: 1200px; margin: 0 auto 80px; }
+  .footer-big-phrase h2 { font-family: var(--serif); font-size: clamp(3.5rem, 8vw, 7rem); line-height: 1.0; color: white; font-weight: 400; margin: 0; }
+  .footer-big-phrase h2 em { color: var(--lavender); font-style: italic; }
+  .footer-divider { max-width: 1200px; margin: 0 auto 48px; height: 1px; background: rgba(255,255,255,0.1); }
+  .footer-bottom-row { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(3, 1fr) auto; gap: 48px; align-items: start; }
+  .footer-nav-group { display: flex; flex-direction: column; gap: 12px; }
+  .footer-nav-label { font-size: 0.68rem; letter-spacing: 0.14em; text-transform: uppercase; opacity: 0.3; margin-bottom: 4px; }
+  .footer-nav-group a { font-size: 0.85rem; color: white; text-decoration: none; opacity: 0.5; transition: opacity 0.2s; }
+  .footer-nav-group a:hover { opacity: 1; }
+  .footer-copy { display: flex; flex-direction: column; gap: 6px; font-size: 0.72rem; opacity: 0.25; text-align: right; align-self: end; }
+
+  @media (max-width:640px){
+    .footer-top-bar { flex-direction: column; align-items: flex-start; gap: 20px; margin-bottom: 56px; }
+    .footer-bottom-row { grid-template-columns: 1fr 1fr; }
+    .footer-copy { text-align: left; }
+  }
+</style>
+  <link rel="icon" type="image/png" href="../Favicon (1).png">
+<meta property="og:title" content="HireSouth Website Redesign | Case Study | Ana K. Rosa">
+<meta property="og:description" content="Website redesign and Webflow build for HireSouth, a nearshore staffing agency — grown from 7 to 15 pages with a salary calculator, filtered blog, and talent profiles.">
+<meta property="og:image" content="https://anakrosadesign.com/Hire%20south%20Case%20Study/imagenes/hero.jpg">
+<meta property="og:url" content="https://anakrosadesign.com/Hire%20south%20Case%20Study/hiresouth-case-study.html">
+<meta property="og:type" content="article">
+</head>
+<body>
+
+<nav>
+  <div class="nav-pill">
+    <a href="../index.html" class="nav-id">
+      <img class="nav-logo" src="../Favicon (1).png" alt="Ana K." loading="lazy">
+    </a>
+
+    <a href="../contact.html" class="nav-collapsed-contact">Contact</a>
+    <div class="nav-links">
+      <a href="../index.html#work">Work</a>
+      <a href="../index.html#services">Services</a>
+      <a href="../index.html#pricing">Pricing</a>
+      <a href="../blog.html">Blog</a>
+      <a href="../contact.html" class="nav-contact">Contact</a>
+    </div>
+    <button class="nav-toggle" id="navToggle" aria-label="Open menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<div class="mobile-menu" id="mobile-menu">
+  <a href="../index.html#work" class="mob-link">Work</a>
+  <a href="../index.html#services" class="mob-link">Services</a>
+  <a href="../index.html#pricing" class="mob-link">Pricing</a>
+  <a href="../blog.html" class="mob-link">Blog</a>
+  <a href="../contact.html" class="mob-link">Contact</a>
+</div>
+
+<!-- ============ INTRO ============ -->
+<header class="hero">
+  <h1>HireSouth Website Redesign<br>Built to Help Companies Hire in <em>LATAM</em></h1>
+  <p class="sub">A full redesign and Webflow build for a nearshore staffing agency: 15 pages, designed and developed end to end.</p>
+  <div class="pills">
+    <span class="pill">Website Design</span>
+    <span class="pill">Webflow Development</span>
+    <span class="pill">SEO</span>
+  </div>
+  <div style="margin-top:28px;">
+    <a href="https://www.hiresouth.com/" target="_blank" class="btn-primary" onclick="gtag('event', 'portfolio_project_click', {'project_name': 'hiresouth'})">Live Website <span>→</span></a>
+  </div>
+</header>
+
+<div class="showcase">
+  <div class="showcase-card"><img src="imagenes/hero.jpg" alt="HireSouth homepage shown on desktop, tablet, and mobile"></div>
+</div>
+
+<!-- ============ INTRO TEXT ============ -->
+<section class="card">
+  <div class="box">
+    <div class="cols">
+      <div>
+        <div class="label">The problem</div>
+        <p>Hire South was growing, but its website was not keeping up. The team needed more pages to explain its services, without losing the search traffic the site already had.</p>
+      </div>
+      <div>
+        <div class="label">The solution</div>
+        <p>I redesigned and rebuilt the site in Webflow, growing it from 7 to 15 pages, with a simple structure the founders can edit on their own.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PHOTOS ============ -->
+<div class="board">
+  <div class="showcase-card"><img src="imagenes/home-full.jpg" alt="Full HireSouth homepage, top to bottom"></div>
+  <div class="board-caption">Homepage</div>
+</div>
+<section class="wide-title">
+  <h2>Key <em>Features</em></h2>
+</section>
+<div class="board">
+  <div class="carousel">
+    <div class="track">
+      <div class="slide showcase-card"><img src="imagenes/salary-calculator.jpg" alt="HireSouth LATAM salary calculator"></div>
+      <div class="slide showcase-card"><img src="imagenes/blog.jpg" alt="HireSouth blog with category filters"></div>
+      <div class="slide showcase-card"><img src="imagenes/article.jpg" alt="HireSouth blog article template"></div>
+      <div class="slide showcase-card"><img src="imagenes/talent.jpg" alt="HireSouth talent profiles"></div>
+    </div>
+  </div>
+  <div class="board-caption">Salary calculator, blog, article template, and talent profiles</div>
+</div>
+<section class="wide-title">
+  <h2>Inner <em>Pages</em></h2>
+</section>
+<div class="board">
+  <div class="carousel">
+    <div class="track">
+      <div class="slide showcase-card"><img src="imagenes/why-latam.jpg" alt="HireSouth Why LATAM page"></div>
+      <div class="slide showcase-card"><img src="imagenes/how-we-work.jpg" alt="HireSouth How We Work page"></div>
+      <div class="slide showcase-card"><img src="imagenes/about-us.jpg" alt="HireSouth About Us page"></div>
+      <div class="slide showcase-card"><img src="imagenes/roles.jpg" alt="HireSouth marketing role landing page"></div>
+    </div>
+  </div>
+  <div class="board-caption">Why LATAM, How We Work, About Us, and a marketing role landing page</div>
+</div>
+
+<section class="wide-title">
+  <h2>Design <em>System</em></h2>
+</section>
+<div class="board">
+  <div class="showcase-card"><img src="imagenes/design-system.jpg" alt="HireSouth design system — typography, colors, buttons, and form fields"></div>
+</div>
+
+<!-- ============ CLOSING ============ -->
+<section class="card outcome-wrap" style="margin-top:56px;">
+  <div class="box">
+    <h2>Outcome</h2>
+    <p>I designed and built the new hiresouth.com in Webflow: 7 pages rebuilt and 8 new ones, with a salary calculator, a filtered blog, and talent profiles in the CMS.</p>
+    <p>The founders edit the site on their own, and it launched on the same URLs. The SEO score went up from 92 to 96.</p>
+  </div>
+</section>
+
+<div class="next-project">
+  <div class="label">Next project</div>
+  <h3>Viviana Pastore <em>Portfolio</em></h3>
+  <a href="../viviana-pastore-case-study.html" class="pill">View case study →</a>
+</div>
+
+<script>
+  const navToggle = document.getElementById('navToggle');
+  const mobileMenu = document.getElementById('mobile-menu');
+  const navEl = document.querySelector('nav');
+  const syncNavTop = () => navEl.classList.toggle('at-top', window.scrollY < 60);
+  window.addEventListener('scroll', syncNavTop, { passive: true });
+  syncNavTop();
+  const isMobileNav = () => window.matchMedia('(max-width: 768px)').matches;
+  const setMenu = (open) => {
+    navToggle.classList.toggle('open', open);
+    mobileMenu.classList.toggle('open', open);
+    navToggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+    document.body.style.overflow = open ? 'hidden' : '';
+  };
+  navToggle.addEventListener('click', () => {
+    if (!isMobileNav() && !mobileMenu.classList.contains('open')) return;
+    setMenu(!navToggle.classList.contains('open'));
+  });
+  mobileMenu.querySelectorAll('.mob-link').forEach(link => {
+    link.addEventListener('click', () => setMenu(false));
+  });
+  window.addEventListener('resize', () => { if (!isMobileNav()) setMenu(false); });
+</script>
+
+<script>
+/* Carousel: arrows, dots, counter, swipe (native scroll) and keyboard */
+document.querySelectorAll('.carousel').forEach(function (carousel) {
+  var track = carousel.querySelector('.track');
+  var slides = Array.prototype.slice.call(track.children);
+
+  var controls = document.createElement('div');
+  controls.className = 'controls';
+  controls.innerHTML =
+    '<div class="left"><div class="dots"></div><span class="counter"></span></div>' +
+    '<div class="arrows">' +
+      '<button class="arrow prev" aria-label="Previous">&larr;</button>' +
+      '<button class="arrow next" aria-label="Next">&rarr;</button>' +
+    '</div>';
+  carousel.appendChild(controls);
+
+  var dotsWrap = controls.querySelector('.dots');
+  var counter = controls.querySelector('.counter');
+  var prev = controls.querySelector('.prev');
+  var next = controls.querySelector('.next');
+
+  function step() {
+    var gap = parseFloat(getComputedStyle(track).columnGap) || 0;
+    return slides[0].getBoundingClientRect().width + gap;
+  }
+  function pages() {
+    var visible = Math.max(1, Math.round((track.clientWidth + 1) / step()));
+    return Math.max(1, slides.length - visible + 1);
+  }
+  function current() {
+    return Math.min(pages() - 1, Math.round(track.scrollLeft / step()));
+  }
+  function goTo(i) {
+    track.scrollTo({ left: i * step(), behavior: 'smooth' });
+  }
+
+  function buildDots() {
+    dotsWrap.innerHTML = '';
+    for (var i = 0; i < pages(); i++) {
+      var d = document.createElement('button');
+      d.className = 'dot';
+      d.setAttribute('aria-label', 'Go to slide ' + (i + 1));
+      (function (n) { d.addEventListener('click', function () { goTo(n); }); })(i);
+      dotsWrap.appendChild(d);
+    }
+    update();
+  }
+  function update() {
+    var i = current(), total = pages();
+    dotsWrap.querySelectorAll('.dot').forEach(function (d, n) {
+      d.classList.toggle('active', n === i);
+    });
+    counter.textContent = (i + 1) + ' / ' + total;
+    prev.disabled = i === 0;
+    next.disabled = i >= total - 1;
+    controls.style.display = total > 1 ? 'flex' : 'none';
+  }
+
+  prev.addEventListener('click', function () { goTo(current() - 1); });
+  next.addEventListener('click', function () { goTo(current() + 1); });
+
+  track.setAttribute('tabindex', '0');
+  track.addEventListener('keydown', function (e) {
+    if (e.key === 'ArrowRight') { e.preventDefault(); goTo(current() + 1); }
+    if (e.key === 'ArrowLeft')  { e.preventDefault(); goTo(current() - 1); }
+  });
+
+  var t;
+  track.addEventListener('scroll', function () {
+    clearTimeout(t);
+    t = setTimeout(update, 60);
+  });
+  window.addEventListener('resize', buildDots);
+  buildDots();
+});
+</script>
+
+<footer class="footer-editorial">
+  <div class="footer-top-bar">
+    <span class="footer-logo"><img src="../Ana K. Logo.svg" alt="Ana K." style="height:24px;display:block;" loading="lazy"></span>
+    <a href="../contact.html" class="footer-cta-link">Start working together <span>→</span></a>
+  </div>
+  <div class="footer-big-phrase">
+    <h2>Good design changes<br><em>everything.</em></h2>
+  </div>
+  <div class="footer-divider"></div>
+  <div class="footer-bottom-row">
+    <div class="footer-nav-group">
+      <span class="footer-nav-label">Pages</span>
+      <a href="../index.html#about">About</a>
+      <a href="../index.html#work">Work</a>
+      <a href="../blog.html">Blog</a>
+      <a href="../contact.html">Contact</a>
+    </div>
+    <div class="footer-nav-group">
+      <span class="footer-nav-label">Connect</span>
+      <a href="https://instagram.com/anakrosadesign" target="_blank">Instagram</a>
+      <a href="https://www.linkedin.com/in/ana-karina-rosa-rosario-3b407199/?locale=en_US" target="_blank" onclick="gtag('event', 'social_link_click', {'platform': 'LinkedIn'})">LinkedIn</a>
+      <a href="https://www.behance.net/anarosa3" target="_blank">Behance</a>
+      <a href="mailto:anakrosawork@gmail.com" onclick="gtag('event', 'contact_email_click')">Email</a>
+    </div>
+    <div class="footer-copy">
+      <span>© 2026 Ana K.</span>
+      <span>Designed &amp; built by Ana K.</span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
