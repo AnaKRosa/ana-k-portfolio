@@ -1,0 +1,782 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-S6RTR9MLM6"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-S6RTR9MLM6');
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Social Media Design | Case Study | Ana K. Rosa</title>
+<meta name="description" content="Social content design across four very different brands — B2B fintech, a science conference, a family-building agency, and a PropTech platform.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap"></noscript>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --cream: #f4f1eb;
+    --black: #0e0e0e;
+    --forest: #2c4a35;
+    --lavender: #c5bff5;
+    --lime: #EAF58D;
+    --text: #3A3835;
+    --muted: #9C9891;
+    --serif: 'Instrument Serif', Georgia, serif;
+    --sans: 'DM Sans', sans-serif;
+  }
+  html { scroll-behavior: smooth; }
+  body { font-family: var(--sans); background: var(--cream); color: var(--text); overflow-x: hidden; }
+
+  /* NAV — floating glass pill (same as every other case study) */
+  nav {
+    position: fixed; top: 16px; left: 0; right: 0; z-index: 100;
+    display: flex; justify-content: center;
+    padding: 0 16px;
+    pointer-events: none;
+  }
+  .nav-pill {
+    pointer-events: auto;
+    display: flex; align-items: center; gap: 6px;
+    padding: 6px 8px;
+    background: rgba(243, 242, 238, 0.72);
+    -webkit-backdrop-filter: blur(18px) saturate(1.6);
+    backdrop-filter: blur(18px) saturate(1.6);
+    border: 1px solid rgba(255, 255, 255, 0.55);
+    border-radius: 100px;
+    box-shadow: 0 10px 34px rgba(17, 17, 17, 0.10), inset 0 1px 0 rgba(255, 255, 255, 0.45);
+  }
+  .nav-id { display: flex; align-items: center; flex-shrink: 0; text-decoration: none; padding: 2px; border-radius: 50%; }
+  .nav-logo { height: 30px; width: 30px; border-radius: 50%; object-fit: cover; display: block; }
+  .nav-links {
+    display: flex; align-items: center; gap: 2px;
+    max-width: 0; overflow: hidden; opacity: 0;
+    transform: translateX(10px);
+    transition: max-width 0.65s cubic-bezier(0.62, 0.05, 0.3, 1),
+                transform 0.65s cubic-bezier(0.62, 0.05, 0.3, 1),
+                opacity 0.5s ease;
+  }
+  .nav-links a, .nav-links button {
+    font-family: var(--sans); font-size: 0.82rem; font-weight: 500;
+    color: var(--black); text-decoration: none; white-space: nowrap;
+    padding: 8px 13px; border-radius: 100px; opacity: 0.72;
+    background: none; border: none; cursor: pointer; letter-spacing: 0.01em;
+    transition: opacity 0.2s ease, background 0.2s ease;
+  }
+  .nav-links a:hover, .nav-links button:hover { opacity: 1; background: rgba(17, 17, 17, 0.06); }
+  .nav-links a.active { opacity: 1; }
+  .nav-links .nav-lang { font-size: 0.72rem; font-weight: 700; opacity: 0.5; letter-spacing: 0.06em; }
+  .nav-links .nav-contact {
+    background: var(--black); color: var(--cream); opacity: 1;
+    font-weight: 600; padding: 9px 18px; margin-left: 4px;
+  }
+  .nav-links .nav-contact:hover { background: #000; opacity: 1; }
+  .nav-toggle {
+    display: flex; align-items: center; justify-content: center; gap: 3px;
+    width: 34px; height: 34px; flex-shrink: 0; overflow: hidden;
+    background: none; border: none; cursor: pointer; padding: 0; border-radius: 50%;
+    transition: width 0.6s cubic-bezier(0.62, 0.05, 0.3, 1),
+                margin 0.6s cubic-bezier(0.62, 0.05, 0.3, 1),
+                opacity 0.4s ease, background 0.2s ease;
+  }
+  .nav-toggle:hover { background: rgba(17, 17, 17, 0.06); }
+  .nav-toggle span {
+    display: block; width: 3.5px; height: 3.5px; border-radius: 50%;
+    background: var(--black); opacity: 0.5;
+    transition: transform 0.3s ease, opacity 0.3s ease, width 0.3s ease, height 0.3s ease, border-radius 0.3s ease;
+  }
+  @keyframes navDotPulse {
+    0%, 100% { transform: scale(1);    opacity: 0.4; }
+    50%      { transform: scale(1.45); opacity: 0.8; }
+  }
+  .nav-collapsed-contact { display: none; }
+  @media (min-width: 769px) {
+    .nav-toggle span { animation: navDotPulse 1.9s ease-in-out infinite; }
+    .nav-toggle span:nth-child(2) { animation-delay: 0.22s; }
+    .nav-toggle span:nth-child(3) { animation-delay: 0.44s; }
+    nav.at-top .nav-toggle span,
+    .nav-pill:hover .nav-toggle span { animation-play-state: paused; }
+    .nav-collapsed-contact {
+      display: inline-flex; align-items: center; justify-content: center;
+      font-family: var(--sans); font-size: 0.82rem; font-weight: 600;
+      color: var(--cream); background: var(--black);
+      padding: 9px 18px; border-radius: 100px; text-decoration: none;
+      white-space: nowrap; flex-shrink: 0; overflow: hidden;
+      max-width: 160px; opacity: 1; margin-left: 6px;
+      transition: max-width 0.5s cubic-bezier(0.62, 0.05, 0.3, 1),
+                  opacity 0.3s ease, padding 0.5s ease, margin 0.5s ease;
+    }
+    nav.at-top .nav-links,
+    .nav-pill:hover .nav-links { max-width: 430px; opacity: 1; transform: translateX(0); }
+    nav.at-top .nav-collapsed-contact,
+    .nav-pill:hover .nav-collapsed-contact { max-width: 0; opacity: 0; padding: 0; margin: 0; }
+    nav.at-top .nav-toggle,
+    .nav-pill:hover .nav-toggle { width: 0; opacity: 0; margin-left: -6px; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .nav-toggle span { animation: none !important; }
+  }
+
+  /* MOBILE MENU OVERLAY */
+  .mobile-menu {
+    display: none; position: fixed; inset: 0; z-index: 99;
+    background: rgba(243, 242, 238, 0.94);
+    -webkit-backdrop-filter: blur(22px); backdrop-filter: blur(22px);
+    flex-direction: column; align-items: center; justify-content: center; gap: 6px;
+  }
+  .mobile-menu.open { display: flex; }
+  .mob-link {
+    font-family: var(--serif); font-size: 2.6rem; color: var(--black);
+    text-decoration: none; font-weight: 400; line-height: 1.35;
+    opacity: 0; transform: translateY(16px);
+    transition: opacity 0.35s ease, transform 0.35s ease; letter-spacing: -0.01em;
+    background: none; border: none; cursor: pointer;
+  }
+  .mobile-menu.open .mob-link { opacity: 1; transform: translateY(0); }
+  .mobile-menu.open .mob-link:nth-child(1) { transition-delay: 0.05s; }
+  .mobile-menu.open .mob-link:nth-child(2) { transition-delay: 0.10s; }
+  .mobile-menu.open .mob-link:nth-child(3) { transition-delay: 0.15s; }
+  .mobile-menu.open .mob-link:nth-child(4) { transition-delay: 0.20s; }
+  .mobile-menu.open .mob-link:nth-child(5) { transition-delay: 0.25s; }
+  .mob-link:hover { color: var(--lavender); }
+  .mob-link.mob-lang {
+    margin-top: 24px; font-family: var(--sans); font-size: 0.85rem;
+    font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+  }
+  .mobile-menu.open .mob-link.mob-lang { opacity: 0.55; transition-delay: 0.3s; }
+  @media (max-width: 768px) {
+    nav { top: 12px; padding: 0 12px; }
+    .nav-links { display: none; }
+    .nav-toggle { width: 40px; height: 40px; flex-direction: column; gap: 4px; }
+    .nav-toggle span { width: 17px; height: 2px; border-radius: 2px; opacity: 0.9; }
+    .nav-toggle.open span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+    .nav-toggle.open span:nth-child(2) { opacity: 0; }
+    .nav-toggle.open span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+  }
+
+  /* ============ CASE STUDY CONTENT ============ */
+  /* Content container — 1104px effective width (1200px max-width minus
+     48px side padding), the same formula the site's .wrap already uses. */
+  .wrap { max-width: 1200px; margin: 0 auto; padding: 0 48px; }
+
+  header.hero{
+    text-align:center;
+    padding:140px 24px 40px;
+  }
+  header.hero h1{
+    font-family: var(--serif);
+    font-size:42px;
+    line-height:1.2;
+    max-width:660px;
+    margin:0 auto;
+  }
+  header.hero h1 em { font-style: italic; color: var(--lavender); }
+  header.hero p.sub{
+    max-width:540px;
+    margin:22px auto 0;
+    color:var(--muted);
+    font-size:14px;
+  }
+  .pills{
+    margin-top:26px;
+    display:flex;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:10px;
+  }
+  .pill{
+    border:1px solid rgba(0,0,0,0.15);
+    border-radius:999px;
+    padding:8px 18px;
+    font-size:13px;
+    color:var(--text);
+    display:inline-block;
+  }
+
+  .showcase{ max-width:1200px; margin:0 auto 64px; padding:0 48px; }
+  .showcase-card{
+    background:#fff;
+    border-radius:14px;
+    overflow:hidden;
+    box-shadow:0 20px 50px rgba(0,0,0,0.06);
+  }
+  .showcase-card img{ width:100%; display:block; }
+
+  /* Image placeholder: replace with <img src="images/..."> */
+  .ph{
+    width:100%;
+    height:100%;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    background:#fff;
+    color:var(--muted);
+    font-size:13px;
+    text-align:center;
+    padding:24px;
+    gap: 2px;
+  }
+  .ph strong{ color:var(--text); font-weight:500; font-size:14px; }
+
+  .board-caption{
+    font-size:13px;
+    color:var(--muted);
+    margin-top:14px;
+    text-align:center;
+  }
+
+  section.card{ max-width:1200px; margin:0 auto 24px; padding:0 48px; }
+  .box{
+    background:#FAF6F3;
+    border-radius:16px;
+    padding:44px;
+  }
+  .box h2{ font-family: var(--serif); font-size:26px; margin-bottom:18px; }
+  .box h2 em { font-style: italic; color: var(--lavender); }
+  .box p{
+    margin:0 0 12px;
+    color:var(--text);
+    font-size:15px;
+    max-width:640px;
+  }
+  .label{
+    text-transform:uppercase;
+    letter-spacing:.08em;
+    font-size:11px;
+    color:var(--muted);
+    margin:24px 0 12px;
+  }
+  ul.plain, ol.plain{ list-style:none; margin:0; padding:0; }
+  ul.plain li{
+    position:relative;
+    padding:5px 0 5px 16px;
+    font-size:15px;
+    color:var(--text);
+  }
+  ul.plain li::before{ content:"•"; position:absolute; left:0; color:var(--muted); }
+  ol.plain{ counter-reset:step; }
+  ol.plain li{
+    position:relative;
+    padding:6px 0 6px 30px;
+    font-size:15px;
+    counter-increment:step;
+  }
+  ol.plain li::before{
+    content:counter(step);
+    position:absolute; left:0; top:6px;
+    font-family: var(--serif);
+    font-size:19px; line-height:1.3;
+    color:var(--black);
+  }
+  ol.plain li strong{ color:var(--black); font-weight:500; }
+
+  .cols{ display:grid; grid-template-columns:1fr 1fr; gap:40px; margin-top:8px; }
+  .cols-3{ display:grid; grid-template-columns:1fr 1fr 1fr; gap:40px; margin-top:8px; }
+  .cols-3 p{ max-width:none; }
+
+  section.wide-title{
+    max-width:720px;
+    margin:80px auto 32px;
+    padding:0 24px;
+    text-align:center;
+  }
+  section.wide-title h2{ font-family: var(--serif); font-size:32px; }
+  section.wide-title h2 em { font-style: italic; color: var(--lavender); }
+  section.wide-title p{
+    color:var(--muted);
+    font-size:14px;
+    max-width:520px;
+    margin:16px auto 0;
+  }
+  .eyebrow{
+    text-transform:uppercase;
+    letter-spacing:.08em;
+    font-size:11px;
+    color:var(--muted);
+    margin-bottom:12px;
+  }
+
+  .board{ max-width:1200px; margin:0 auto 40px; padding:0 48px; }
+  .grid-2{ display:grid; grid-template-columns:1fr 1fr; gap:20px; }
+
+  section.outcome-wrap{ max-width:1200px; margin:0 auto 120px; padding:0 48px; }
+
+  /* ============ CAROUSEL ============ */
+  /* Native horizontal scroll + scroll-snap. Behavior lives in carousel.js
+     (reused across case studies) — this file only owns the visuals. */
+  .carousel { position: relative; }
+  .carousel-track {
+    display: flex;
+    gap: 16px;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    /* padding + matching negative margin: gives slide box-shadows room to
+       render without being clipped by overflow-x, with zero effect on
+       the outer layout box */
+    padding: 24px 4px 40px;
+    margin: -24px -4px -40px;
+  }
+  .carousel-track::-webkit-scrollbar { display: none; }
+  .carousel-slide {
+    flex: 0 0 100%;
+    scroll-snap-align: start;
+    background: #fff;
+    border-radius: 14px;
+    overflow: hidden;
+  }
+  .carousel-slide img { width: 100%; height: auto; display: block; }
+  .carousel--half .carousel-slide { flex: 0 0 calc(50% - 8px); }
+  @media (max-width: 640px) {
+    .carousel--half .carousel-slide { flex: 0 0 100%; }
+  }
+  .carousel-arrow {
+    position: absolute; top: 50%; transform: translateY(-50%);
+    width: 40px; height: 40px; border-radius: 50%;
+    background: #fff; border: 1px solid rgba(0,0,0,0.1);
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer; font-size: 18px; font-family: var(--sans); line-height: 1;
+    color: var(--black);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+    transition: opacity 0.2s ease, transform 0.2s ease, background 0.2s ease;
+    z-index: 2;
+  }
+  .carousel-arrow--prev { left: 12px; }
+  .carousel-arrow--next { right: 12px; }
+  .carousel-arrow:hover:not(:disabled) { background: var(--cream); transform: translateY(-50%) scale(1.06); }
+  .carousel-arrow:disabled { opacity: 0.3; cursor: default; }
+  .carousel-footer {
+    display: flex; align-items: center; justify-content: center;
+    gap: 14px; margin-top: 4px;
+  }
+  .carousel-dots { display: flex; align-items: center; gap: 6px; }
+  .carousel-dot {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: rgba(14,14,14,0.15); border: none; padding: 0; cursor: pointer;
+    transition: background 0.2s ease, width 0.2s ease, border-radius 0.2s ease;
+  }
+  .carousel-dot.is-active { background: var(--black); width: 16px; border-radius: 3px; }
+  .carousel-counter {
+    font-size: 12px; color: var(--muted); letter-spacing: 0.02em;
+    font-variant-numeric: tabular-nums;
+  }
+  .carousel.is-single .carousel-arrow,
+  .carousel.is-single .carousel-footer { display: none; }
+  @media (max-width: 640px) {
+    /* Swipe only on small screens — inset arrows have no room to sit
+       cleanly over a full-bleed mobile slide. */
+    .carousel-arrow { display: none; }
+  }
+
+  .fade-up{ opacity:0; transform:translateY(20px); transition:opacity 0.65s ease, transform 0.65s ease; }
+  .fade-up.visible{ opacity:1; transform:translateY(0); }
+
+  @media (max-width: 900px) {
+    .wrap, .showcase, .board, section.card, section.outcome-wrap { padding: 0 24px; }
+  }
+  @media (max-width: 640px){
+    header.hero{ padding-top:120px; }
+    header.hero h1{ font-size:30px; }
+    section.wide-title h2{ font-size:26px; }
+    .box{ padding:28px 22px; }
+    .cols, .cols-3, .grid-2{ grid-template-columns:1fr; gap:20px; }
+  }
+  @media (max-width: 540px) {
+    .wrap, .showcase, .board, section.card, section.outcome-wrap { padding: 0 20px; }
+  }
+
+  /* FOOTER */
+  .footer-editorial { background: var(--black); color: white; padding: 72px 48px 48px; }
+  .footer-top-bar { display: flex; justify-content: space-between; align-items: center; max-width: 1200px; margin: 0 auto 80px; }
+  .footer-logo { font-family: var(--serif); font-size: 1.65rem; letter-spacing: 0.06em; opacity: 0.5; }
+  .footer-cta-link { font-size: 0.85rem; font-weight: 500; color: var(--lime); text-decoration: none; letter-spacing: 0.02em; display: flex; align-items: center; gap: 8px; transition: gap 0.2s ease; }
+  .footer-cta-link:hover { gap: 14px; }
+  .footer-big-phrase { max-width: 1200px; margin: 0 auto 80px; }
+  .footer-big-phrase h2 { font-family: var(--serif); font-size: clamp(3.5rem, 8vw, 7rem); line-height: 1.0; color: white; font-weight: 400; margin: 0; }
+  .footer-big-phrase h2 em { color: var(--lavender); font-style: italic; }
+  .footer-divider { max-width: 1200px; margin: 0 auto 48px; height: 1px; background: rgba(255,255,255,0.1); }
+  .footer-bottom-row { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(3, 1fr) auto; gap: 48px; align-items: start; }
+  .footer-nav-group { display: flex; flex-direction: column; gap: 12px; }
+  .footer-nav-label { font-size: 0.68rem; letter-spacing: 0.14em; text-transform: uppercase; opacity: 0.3; margin-bottom: 4px; }
+  .footer-nav-group a { font-size: 0.85rem; color: white; text-decoration: none; opacity: 0.5; transition: opacity 0.2s; }
+  .footer-nav-group a:hover { opacity: 1; }
+  .footer-copy { display: flex; flex-direction: column; gap: 6px; font-size: 0.72rem; opacity: 0.25; text-align: right; align-self: end; }
+  @media (max-width: 900px) {
+    .footer-top-bar { flex-direction: column; align-items: flex-start; gap: 20px; margin-bottom: 56px; }
+    .footer-bottom-row { grid-template-columns: 1fr 1fr; }
+    .footer-copy { text-align: left; }
+  }
+</style>
+  <link rel="icon" type="image/png" href="../Favicon (1).png">
+<meta property="og:title" content="Social Media Design | Case Study | Ana K. Rosa">
+<meta property="og:description" content="Social content design across four very different brands — B2B fintech, a science conference, a family-building agency, and a PropTech platform.">
+<meta property="og:image" content="https://anakrosadesign.com/Portafolio%20images/Ana%20K%20image.png">
+<meta property="og:url" content="https://anakrosadesign.com/Social-Media-Design/social-media-case-study.html">
+<meta property="og:type" content="article">
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-pill">
+    <a href="../index.html" class="nav-id">
+      <img class="nav-logo" src="../Favicon (1).png" alt="Ana K." loading="lazy">
+    </a>
+
+    <a href="../contact.html" class="nav-collapsed-contact">Contact</a>
+    <div class="nav-links">
+      <a href="../index.html#work" data-i18n="nav.work">Work</a>
+      <a href="../index.html#services" data-i18n="nav.services">Services</a>
+      <a href="../index.html#pricing" data-i18n="nav.pricing">Pricing</a>
+      <a href="../blog.html" data-i18n="nav.blog">Blog</a>
+      <button id="lang-toggle" class="nav-lang">ES</button>
+      <a href="../contact.html" class="nav-contact" data-i18n="nav.contact">Contact</a>
+    </div>
+    <button class="nav-toggle" id="navToggle" aria-label="Open menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<div class="mobile-menu" id="mobile-menu">
+  <a href="../index.html#work" class="mob-link" data-i18n="nav.work">Work</a>
+  <a href="../index.html#services" class="mob-link" data-i18n="nav.services">Services</a>
+  <a href="../index.html#pricing" class="mob-link" data-i18n="nav.pricing">Pricing</a>
+  <a href="../blog.html" class="mob-link" data-i18n="nav.blog">Blog</a>
+  <a href="../contact.html" class="mob-link" data-i18n="nav.contact">Contact</a>
+  <button class="mob-link mob-lang" id="lang-toggle-m">Español</button>
+</div>
+
+<!-- ============ HERO ============ -->
+<header class="hero fade-up">
+  <h1>Social Media Design<br>Across <em>Industries</em></h1>
+  <p class="sub">A look at how I design social content for very different brands: B2B fintech, a science conference, a family-building agency, and a PropTech platform. Different audiences, same process.</p>
+  <div class="pills">
+    <span class="pill">Social Content</span>
+    <span class="pill">Ad Creatives</span>
+    <span class="pill">Template Systems</span>
+  </div>
+</header>
+
+<div class="showcase fade-up">
+  <div class="showcase-card">
+    <img src="images/sm-hero.jpg" alt="Social media collage — pieces from every client">
+  </div>
+</div>
+
+<!-- ============ CHALLENGE / OBJECTIVE / RESULTS ============ -->
+<section class="card fade-up">
+  <div class="box">
+    <h2>Project <em>Overview</em></h2>
+    <div class="cols-3">
+      <div>
+        <div class="label">Challenge</div>
+        <p>Four brands with nothing in common. Each one needed to stand out in the feed and get its message across in seconds.</p>
+      </div>
+      <div>
+        <div class="label">Objective</div>
+        <p>One repeatable process: start from the brand, use templates, and match the tone to each audience.</p>
+      </div>
+      <div>
+        <div class="label">Results</div>
+        <p>Consistent content produced in batches for every brand, plus a new color direction one client adopted for the whole account.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PROCESS ============ -->
+<section class="wide-title fade-up">
+  <h2>One <em>Process</em></h2>
+  <p>The same steps behind every account, no matter the industry.</p>
+</section>
+
+<section class="card fade-up">
+  <div class="box">
+    <h2>How I Work</h2>
+    <ol class="plain">
+      <li><strong>Brand audit.</strong> Review colors, type, tone, and what the brand already posts.</li>
+      <li><strong>Audience and goal.</strong> Define who we are talking to and what each post should do.</li>
+      <li><strong>Template system.</strong> Design a small set of layouts that cover most content types.</li>
+      <li><strong>Batch production.</strong> Create content in groups to keep a steady rhythm.</li>
+      <li><strong>Format adaptation.</strong> Resize and adjust each piece for feed, stories, carousels, and ads.</li>
+    </ol>
+    <p style="margin-top:20px;">This keeps quality high while making it possible to deliver a lot of content on a tight schedule.</p>
+  </div>
+</section>
+
+<!-- ============ CLIENT 01: SYNBIOBETA ============ -->
+<section class="wide-title fade-up">
+  <div class="eyebrow">01 · Science Conference · Paid Social</div>
+  <h2>SynBioBeta <em>Ad Creatives</em></h2>
+  <p>Creatives for the Super Early Bird ticket campaign.</p>
+</section>
+
+<div class="board fade-up">
+  <div class="carousel" data-carousel>
+    <div class="carousel-track" data-track>
+      <div class="carousel-slide">
+        <img src="images/Synbiobeta social.1.jpg" alt="SynBioBeta ad creative — set 1">
+      </div>
+      <div class="carousel-slide">
+        <img src="images/Synbiobeta social.2.jpg" alt="SynBioBeta ad creative — set 2">
+      </div>
+      <div class="carousel-slide">
+        <img src="images/Synbiobeta social.3.jpg" alt="SynBioBeta ad creative — set 3">
+      </div>
+      <div class="carousel-slide">
+        <img src="images/Synbiobeta social.4.jpg" alt="SynBioBeta ad creative — set 4">
+      </div>
+    </div>
+    <button class="carousel-arrow carousel-arrow--prev" data-prev aria-label="Previous slide">‹</button>
+    <button class="carousel-arrow carousel-arrow--next" data-next aria-label="Next slide">›</button>
+    <div class="carousel-footer">
+      <div class="carousel-dots" data-dots></div>
+      <div class="carousel-counter" data-counter>1 / 4</div>
+    </div>
+  </div>
+  <div class="board-caption">Super Early Bird campaign creatives</div>
+</div>
+
+<section class="card fade-up">
+  <div class="box">
+    <h2>SynBioBeta</h2>
+    <p>These were paid ads with one job: sell tickets before the price goes up. So the offer and deadline come first, every ad has a clear call to action, and one clean design adapts to every ad size.</p>
+  </div>
+</section>
+
+<!-- ============ CLIENT 02: PROPEL ============ -->
+<section class="wide-title fade-up">
+  <div class="eyebrow">02 · PropTech · Instagram</div>
+  <h2>Propel <em>Social Content</em></h2>
+  <p>Instagram posts for a building management software.</p>
+</section>
+
+<div class="board fade-up">
+  <div class="carousel" data-carousel>
+    <div class="carousel-track" data-track>
+      <div class="carousel-slide">
+        <img src="images/Propel social.1.jpg" alt="Propel Instagram feed — post 1">
+      </div>
+      <div class="carousel-slide">
+        <img src="images/Propel social.2.jpg" alt="Propel Instagram feed — post 2">
+      </div>
+      <div class="carousel-slide">
+        <img src="images/Propel social.3.jpg" alt="Propel Instagram feed — post 3">
+      </div>
+      <div class="carousel-slide">
+        <img src="images/Propel social.4.jpg" alt="Propel Instagram feed — post 4">
+      </div>
+    </div>
+    <button class="carousel-arrow carousel-arrow--prev" data-prev aria-label="Previous slide">‹</button>
+    <button class="carousel-arrow carousel-arrow--next" data-next aria-label="Next slide">›</button>
+    <div class="carousel-footer">
+      <div class="carousel-dots" data-dots></div>
+      <div class="carousel-counter" data-counter>1 / 4</div>
+    </div>
+  </div>
+  <div class="board-caption">Instagram feed and feature posts in Spanish</div>
+</div>
+
+<section class="card fade-up">
+  <div class="box">
+    <h2>Propel</h2>
+    <p data-lang-grid="en">Building management software is hard to show in a single post. I mixed real product screens with everyday moments, like booking the pool or checking expenses, so owners and managers could see how the app fits into their day. A purple and green system keeps the whole feed consistent.</p>
+    <p data-lang-grid="es" hidden>Un software de administración de edificios es difícil de mostrar en un solo post. Combiné pantallas reales del producto con momentos del día a día, como reservar la piscina o revisar los gastos, para que propietarios y administradores vieran cómo la app encaja en su rutina. Un sistema de morado y verde mantiene todo el feed consistente.</p>
+  </div>
+</section>
+
+<!-- ============ CLIENT 03: SERVANA ============ -->
+<section class="wide-title fade-up">
+  <div class="eyebrow">03 · B2B Fintech · LinkedIn</div>
+  <h2>Servana Financial <em>Socials & Graphics</em></h2>
+  <p>Educational content for a loan servicing platform.</p>
+</section>
+
+<div class="board fade-up">
+  <div class="carousel" data-carousel>
+    <div class="carousel-track" data-track>
+      <div class="carousel-slide">
+        <img src="images/Servana social.1.jpg" alt="Servana LinkedIn carousel — slide 1">
+      </div>
+      <div class="carousel-slide">
+        <img src="images/Servana social.2.jpg" alt="Servana LinkedIn carousel — slide 2">
+      </div>
+      <div class="carousel-slide">
+        <img src="images/Servana social.3.jpg" alt="Servana LinkedIn carousel — slide 3">
+      </div>
+      <div class="carousel-slide">
+        <img src="images/Servana social.4.jpg" alt="Servana LinkedIn carousel — slide 4">
+      </div>
+    </div>
+    <button class="carousel-arrow carousel-arrow--prev" data-prev aria-label="Previous slide">‹</button>
+    <button class="carousel-arrow carousel-arrow--next" data-next aria-label="Next slide">›</button>
+    <div class="carousel-footer">
+      <div class="carousel-dots" data-dots></div>
+      <div class="carousel-counter" data-counter>1 / 4</div>
+    </div>
+  </div>
+  <div class="board-caption">LinkedIn carousels, produced in batches</div>
+</div>
+
+<section class="card fade-up">
+  <div class="box">
+    <h2>Servana</h2>
+    <p>Loan servicing is a technical topic. The carousels needed to explain it in a way a busy professional could follow while scrolling.</p>
+    <div class="label">Key decisions</div>
+    <ul class="plain">
+      <li>One idea per slide, with short headlines</li>
+      <li>A clear cover slide to stop the scroll</li>
+      <li>Consistent layouts so the series feels like one brand</li>
+      <li>Batches delivered together to keep publishing steady</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ============ CLIENT 04: JBABY ============ -->
+<section class="wide-title fade-up">
+  <div class="eyebrow">04 · Family Building · Organic + Ads</div>
+  <h2>JBaby <em>Visual Refresh</em></h2>
+  <p>Created as part of the team at ATAK Interactive, a marketing agency in Los Angeles.</p>
+</section>
+
+<div class="board fade-up">
+  <div class="carousel" data-carousel>
+    <div class="carousel-track" data-track>
+      <div class="carousel-slide">
+        <img src="images/Jbaby social.1.jpg" alt="JBaby social media set — grid 1">
+      </div>
+      <div class="carousel-slide">
+        <img src="images/Jbaby social.2.jpg" alt="JBaby social media set — grid 2">
+      </div>
+      <div class="carousel-slide">
+        <img src="images/Jbaby social.3.jpg" alt="JBaby social media set — grid 3">
+      </div>
+      <div class="carousel-slide">
+        <img src="images/Jbaby social.4.jpg" alt="JBaby social media set — grid 4">
+      </div>
+    </div>
+    <button class="carousel-arrow carousel-arrow--prev" data-prev aria-label="Previous slide">‹</button>
+    <button class="carousel-arrow carousel-arrow--next" data-next aria-label="Next slide">›</button>
+    <div class="carousel-footer">
+      <div class="carousel-dots" data-dots></div>
+      <div class="carousel-counter" data-counter>1 / 4</div>
+    </div>
+  </div>
+  <div class="board-caption">Social ads, organic posts, and landing page visuals</div>
+</div>
+
+<section class="card fade-up">
+  <div class="box">
+    <h2>JBaby</h2>
+    <p>Surrogacy is a sensitive topic. The existing collateral used a muted palette that made the subject feel heavy.</p>
+    <div class="label">Key decisions</div>
+    <ul class="plain">
+      <li>Moved to brighter, warmer colors</li>
+      <li>Chose imagery of young, happy people</li>
+      <li>Framed the journey as hopeful and positive</li>
+      <li>Applied the look across ads, organic posts, and landing pages</li>
+    </ul>
+    <div class="label">Why it matters</div>
+    <ul class="plain">
+      <li>The client adopted this direction for the account going forward</li>
+      <li>It shows how color and imagery change how people feel about a topic</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ============ OUTCOME ============ -->
+<section class="card outcome-wrap fade-up">
+  <div class="box">
+    <h2>Outcome</h2>
+    <p>These four projects look very different on the surface, but they come from the same way of thinking.</p>
+    <p>Each one starts with the brand and the audience, then uses a simple system to produce content that is consistent and easy to understand.</p>
+    <p>Sometimes that means explaining a technical topic in a few slides. Sometimes it means changing how a sensitive subject feels. And sometimes it means giving a small team the tools to do it themselves.</p>
+    <p>Good social design is not only about one beautiful post. It is about a system that keeps working, post after post.</p>
+  </div>
+</section>
+
+<footer class="footer-editorial">
+  <div class="footer-top-bar">
+    <span class="footer-logo"><img src="../Ana K. Logo.svg" alt="Ana K." style="height:24px;display:block;" loading="lazy"></span>
+    <a href="../index.html#contact" class="footer-cta-link">Start working together <span class="arrow">→</span></a>
+  </div>
+  <div class="footer-big-phrase">
+    <h2>Good design changes<br><em>everything.</em></h2>
+  </div>
+  <div class="footer-divider"></div>
+  <div class="footer-bottom-row">
+    <div class="footer-nav-group">
+      <span class="footer-nav-label">Pages</span>
+      <a href="../index.html#about">About</a>
+      <a href="../index.html#work">Work</a>
+      <a href="../blog.html">Blog</a>
+      <a href="../index.html#contact">Contact</a>
+    </div>
+    <div class="footer-nav-group">
+      <span class="footer-nav-label">Connect</span>
+      <a href="#">Instagram</a>
+      <a href="https://www.linkedin.com/in/ana-karina-rosa-rosario-3b407199/?locale=en_US" target="_blank" onclick="gtag('event', 'social_link_click', {'platform': 'LinkedIn'})">LinkedIn</a>
+      <a href="https://www.behance.net/anarosa3" target="_blank">Behance</a>
+      <a href="mailto:anakrosawork@gmail.com" onclick="gtag('event', 'contact_email_click')">Email</a>
+    </div>
+    <div class="footer-copy">
+      <span>© 2026 Ana K.</span>
+      <span>Designed &amp; built by Ana K.</span>
+    </div>
+  </div>
+</footer>
+
+<script src="../carousel.js"></script>
+<script src="../translations.js"></script>
+<script src="../i18n.js"></script>
+<script>
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.06 });
+  document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
+  window.addEventListener('load', () => {
+    document.querySelectorAll('.fade-up').forEach(el => {
+      if (el.getBoundingClientRect().top < window.innerHeight) el.classList.add('visible');
+    });
+  });
+
+  const navToggle = document.getElementById('navToggle');
+  const mobileMenu = document.getElementById('mobile-menu');
+  const navEl = document.querySelector('nav');
+  const syncNavTop = () => navEl.classList.toggle('at-top', window.scrollY < 60);
+  window.addEventListener('scroll', syncNavTop, { passive: true });
+  syncNavTop();
+  const isMobileNav = () => window.matchMedia('(max-width: 768px)').matches;
+  const setMenu = (open) => {
+    navToggle.classList.toggle('open', open);
+    mobileMenu.classList.toggle('open', open);
+    navToggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+    document.body.style.overflow = open ? 'hidden' : '';
+  };
+  navToggle.addEventListener('click', () => {
+    if (!isMobileNav() && !mobileMenu.classList.contains('open')) return;
+    setMenu(!navToggle.classList.contains('open'));
+  });
+  mobileMenu.querySelectorAll('.mob-link').forEach(link => {
+    if (link.id === 'lang-toggle-m') return;
+    link.addEventListener('click', () => setMenu(false));
+  });
+  const langM = document.getElementById('lang-toggle-m');
+  if (langM) langM.addEventListener('click', () => {
+    if (typeof setLang !== 'function' || typeof getLang !== 'function') return;
+    setLang(getLang() === 'en' ? 'es' : 'en');
+    langM.textContent = getLang() === 'en' ? 'Español' : 'English';
+  });
+  window.addEventListener('resize', () => { if (!isMobileNav()) setMenu(false); });
+</script>
+</body>
+</html>
