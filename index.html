@@ -1517,10 +1517,6 @@
       <img src="Propel Case Study/imagenes/hero.jpg" alt="Propel Property Management App" loading="lazy">
       <span class="stack-label">Propel</span>
     </a>
-    <a href="arepa-stand-case-study.html" class="stack-card sc-4">
-      <img src="The arepa Stand/TAS-01.webp" alt="The Arepa Stand" loading="lazy">
-      <span class="stack-label">Arepa Stand</span>
-    </a>
     <a href="Foreplay Case Study/foreplay-case-study.html" class="stack-card sc-5">
       <img src="Foreplay-Indoor-Golf.png" alt="Fore Play Indoor Golf" loading="lazy">
       <span class="stack-label">Fore Play</span>
@@ -2351,7 +2347,7 @@
       const heroCards = Array.from(stack.querySelectorAll('.stack-card'));
       const workCards = Array.from(workGrid.querySelectorAll('.work-card'));
       workCards.forEach(w => w.classList.remove('fade-up'));   // this section runs its own reveal
-      const rots = [-3, 6, -10, 8, -15];
+      const rots = [-3, 6, -10, -15];
 
       const layer = document.createElement('div');
       layer.id = 'fly-layer';
