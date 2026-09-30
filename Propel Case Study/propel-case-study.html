@@ -672,6 +672,34 @@ document.querySelectorAll('.carousel').forEach(function (carousel) {
   });
   window.addEventListener('resize', buildDots);
   buildDots();
+
+  /* Autoplay: advance every 3s, pause on hover, stop for good once the
+     visitor navigates manually, and only run while scrolled into view. */
+  var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (!reduceMotion) {
+    var autoplayTimer = null, stoppedForGood = false, isVisible = false;
+    function autoplayTick() {
+      if (stoppedForGood || !isVisible) return;
+      var i = current();
+      goTo(i >= pages() - 1 ? 0 : i + 1);
+    }
+    function playAutoplay() { if (!autoplayTimer && !stoppedForGood) autoplayTimer = setInterval(autoplayTick, 3000); }
+    function pauseAutoplay() { clearInterval(autoplayTimer); autoplayTimer = null; }
+    function stopAutoplayForGood() { stoppedForGood = true; pauseAutoplay(); }
+
+    carousel.addEventListener('mouseenter', pauseAutoplay);
+    carousel.addEventListener('mouseleave', function () { if (!stoppedForGood) playAutoplay(); });
+    carousel.addEventListener('pointerdown', stopAutoplayForGood);
+    track.addEventListener('keydown', stopAutoplayForGood);
+
+    var autoplayObserver = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        isVisible = entry.isIntersecting;
+        if (isVisible) playAutoplay(); else pauseAutoplay();
+      });
+    }, { threshold: 0.4 });
+    autoplayObserver.observe(carousel);
+  }
 });
 </script>
 

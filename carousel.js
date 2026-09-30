@@ -112,6 +112,37 @@
 
     update();
     window.addEventListener('load', update);
+
+    // Autoplay: advance every 3s, pause on hover, stop for good once the
+    // visitor navigates manually, and only run while scrolled into view.
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (!reduceMotion) {
+      let autoplayTimer = null;
+      let stoppedForGood = false;
+      let isVisible = false;
+
+      function autoplayTick() {
+        if (stoppedForGood || !isVisible) return;
+        const idx = currentIndex();
+        scrollToIndex(idx >= maxIndex() ? 0 : idx + 1);
+      }
+      function playAutoplay() { if (!autoplayTimer && !stoppedForGood) autoplayTimer = setInterval(autoplayTick, 3000); }
+      function pauseAutoplay() { clearInterval(autoplayTimer); autoplayTimer = null; }
+      function stopAutoplayForGood() { stoppedForGood = true; pauseAutoplay(); }
+
+      root.addEventListener('mouseenter', pauseAutoplay);
+      root.addEventListener('mouseleave', () => { if (!stoppedForGood) playAutoplay(); });
+      root.addEventListener('pointerdown', stopAutoplayForGood);
+      root.addEventListener('keydown', stopAutoplayForGood);
+
+      const autoplayObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          isVisible = entry.isIntersecting;
+          if (isVisible) playAutoplay(); else pauseAutoplay();
+        });
+      }, { threshold: 0.4 });
+      autoplayObserver.observe(root);
+    }
   }
 
   document.addEventListener('DOMContentLoaded', () => {
